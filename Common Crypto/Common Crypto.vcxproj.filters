@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{b9208b57-760e-40cf-97b7-ce9d54e897c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\4D Plugin API">
+      <UniqueIdentifier>{1cb6cb33-de92-4bdc-a593-58f36c930438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\4D Plugin API\Classes">
+      <UniqueIdentifier>{5e6d5ed8-cfc6-4079-b1de-3e5fd40016dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\4D Plugin API\Classes\C">
+      <UniqueIdentifier>{7ea33cea-9ba6-48ee-8a97-ce664d29d873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\4D Plugin API\Classes\ARRAY">
+      <UniqueIdentifier>{0541d9d1-d460-4505-9457-2c4f5ae17826}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="4DPlugin.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\4DPluginAPI.c">
+      <Filter>Source\4D Plugin API</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_TIME.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_BLOB.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_DATE.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_INTEGER.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_LONGINT.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_PICTURE.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_POINTER.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_REAL.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\C_TEXT.cpp">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\ARRAY_BOOLEAN.cpp">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\ARRAY_DATE.cpp">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\ARRAY_INTEGER.cpp">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\ARRAY_LONGINT.cpp">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\ARRAY_REAL.cpp">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\ARRAY_TEXT.cpp">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClCompile>
+    <ClCompile Include="4D Plugin API\Classes\ARRAY_TIME.cpp">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="4DPlugin.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\4DPluginAPI.h">
+      <Filter>Source\4D Plugin API</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\EntryPoints.h">
+      <Filter>Source\4D Plugin API</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Flags.h">
+      <Filter>Source\4D Plugin API</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\PrivateTypes.h">
+      <Filter>Source\4D Plugin API</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\PublicTypes.h">
+      <Filter>Source\4D Plugin API</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_TEXT.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_TIME.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_BLOB.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_DATE.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_INTEGER.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_LONGINT.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_PICTURE.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_POINTER.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\C_REAL.h">
+      <Filter>Source\4D Plugin API\Classes\C</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\ARRAY_BOOLEAN.h">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\ARRAY_DATE.h">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\ARRAY_INTEGER.h">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\ARRAY_LONGINT.h">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\ARRAY_REAL.h">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\ARRAY_TEXT.h">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Classes\ARRAY_TIME.h">
+      <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="4D Plugin API\4DPluginAPI.def">
+      <Filter>Source\4D Plugin API</Filter>
+    </None>
+  </ItemGroup>
+</Project>
