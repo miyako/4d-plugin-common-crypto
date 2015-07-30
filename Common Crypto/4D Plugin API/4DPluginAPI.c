@@ -131,8 +131,11 @@ PA_long32 PA_GetHandleSize( PA_Handle handle )
 
 	Call4D( EX_HANDLE_MANAGER, &eb );
 	sErrorCode = (PA_ErrorCode) eb.fError;
-
+#if PA_64BITS_ARCHITECTURE
+	return (PA_long32)eb.fParam3;
+#else
 	return (PA_long32)eb.fParam2;
+#endif    
 }
 
 
