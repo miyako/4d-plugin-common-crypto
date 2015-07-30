@@ -49,11 +49,17 @@ void CC_SHA384(const void *data, uint32_t len, unsigned char *md)
 }
 #endif
 
-void OnCloseProcess(){
+bool IsProcessOnExit(){    
     C_TEXT name;
     PA_long32 state, time;
-    PA_GetProcessInfo(PA_GetCurrentProcessNumber(), name, &state, &time);    
-    if(!PA_CompareUnichars((PA_Unichar *)name.getUTF16StringPtr(), (PA_Unichar *)"$\0x\0x\0", 1, 0)){
+    PA_GetProcessInfo(PA_GetCurrentProcessNumber(), name, &state, &time);
+    CUTF16String procName(name.getUTF16StringPtr());
+    CUTF16String exitProcName((PA_Unichar *)"$\0x\0x\0");
+    return (!procName.compare(exitProcName));
+}
+
+void OnCloseProcess(){  
+    if(IsProcessOnExit()){
         EVP_cleanup();    
     }
 }

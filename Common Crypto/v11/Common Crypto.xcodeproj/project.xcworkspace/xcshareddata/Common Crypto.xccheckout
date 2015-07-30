@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>73273D65-3C48-43BC-8BBC-4BF70754D6CD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Common Crypto</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>49E72C71FA2B6A3F289B20416FAB27B61BC89166</key>
+		<string>https://github.com/miyako/4d-plugin-common-crypto.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Common Crypto/v11/Common Crypto.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>49E72C71FA2B6A3F289B20416FAB27B61BC89166</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/miyako/4d-plugin-common-crypto.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>49E72C71FA2B6A3F289B20416FAB27B61BC89166</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>49E72C71FA2B6A3F289B20416FAB27B61BC89166</string>
+			<key>IDESourceControlWCCName</key>
+			<string>4d-plugin-common-crypto</string>
+		</dict>
+	</array>
+</dict>
+</plist>

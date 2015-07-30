@@ -329,7 +329,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 			};
 			buildConfigurationList = 42D60B430A9DDBC8002ABB42 /* Build configuration list for PBXProject "Common Crypto" */;
 			compatibilityVersion = "Xcode 3.2";
