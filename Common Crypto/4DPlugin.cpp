@@ -49,20 +49,28 @@ void CC_SHA384(const void *data, uint32_t len, unsigned char *md)
 }
 #endif
 
+#pragma mark -
+
 bool IsProcessOnExit(){    
     C_TEXT name;
     PA_long32 state, time;
     PA_GetProcessInfo(PA_GetCurrentProcessNumber(), name, &state, &time);
     CUTF16String procName(name.getUTF16StringPtr());
-    CUTF16String exitProcName((PA_Unichar *)"$\0x\0x\0");
+    CUTF16String exitProcName((PA_Unichar *)"$\0x\0x\0\0\0");
     return (!procName.compare(exitProcName));
 }
 
-void OnCloseProcess(){  
+void OnStartup(){
+    OpenSSL_add_all_algorithms();//for PEM_From_P12
+}
+
+void OnCloseProcess(){
     if(IsProcessOnExit()){
         EVP_cleanup();    
     }
 }
+
+#pragma mark -
 
 void PluginMain(PA_long32 selector, PA_PluginParameters params)
 {
@@ -86,7 +94,7 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 	{
         case kInitPlugin :
         case kServerInitPlugin :            
-            OpenSSL_add_all_algorithms();//for PEM_From_P12
+            OnStartup();
             break;    
 
         case kCloseProcess :            
