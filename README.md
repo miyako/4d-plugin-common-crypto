@@ -14,6 +14,35 @@ Collection of common hash algorithms.
 * RSASHA1
 * RSASHA256
 
+##Platform
+
+| carbon | cocoa | win32 | win64 |
+|:------:|:-----:|:---------:|:---------:|
+|🆗|🆗|🆗|🆗|
+
+Commands
+---
+
+```c
+// --- Common Crypto
+PEM_From_P12
+Get_timestamp
+Get_timestring
+Get_unixtime
+RSASHA256
+HMACMD5
+HMACSHA1
+HMACSHA256
+HMACSHA384
+HMACSHA512
+SHA384
+SHA512
+MD5
+SHA1
+SHA256
+RSASHA1
+```
+
 Examples
 ---
 
