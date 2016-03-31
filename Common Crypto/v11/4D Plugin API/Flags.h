@@ -25,7 +25,8 @@
 	#define VERSIONMAC 0
 	#define PA_SMALLENDIAN 1
 	#define PA_BIGENDIAN 0
-	#if defined (_WIN64)//this may not be defined if using VS Express Edition; defined as preprocessor definition
+	#if defined (WIN64) || defined (_WIN64)
+        //_WIN64 may not be defined if using VS Express Edition; WIN64 is defined as preprocessor definition
 		#undef PA_64BITS_ARCHITECTURE
 		#define PA_64BITS_ARCHITECTURE 1
 	#endif

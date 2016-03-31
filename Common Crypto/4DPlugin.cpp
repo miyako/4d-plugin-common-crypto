@@ -23,9 +23,9 @@ void CC_EVP(const EVP_MD *evp, uint32_t mlen, const void *data, uint32_t len, un
 	EVP_MD_CTX_destroy(c);			
 }
 
-void CC_SHA256(const void *data, uint32_t len, unsigned char *md)
+void CC_MD5(const void *data, uint32_t len, unsigned char *md)
 {
-	CC_EVP(EVP_sha256(), 32, data, len, md);
+	CC_EVP(EVP_md5(), 16, data, len, md);		
 }
 
 void CC_SHA1(const void *data, uint32_t len, unsigned char *md)
@@ -33,9 +33,15 @@ void CC_SHA1(const void *data, uint32_t len, unsigned char *md)
 	CC_EVP(EVP_sha1(), 20, data, len, md);		
 }
 
-void CC_MD5(const void *data, uint32_t len, unsigned char *md)
+
+void CC_SHA256(const void *data, uint32_t len, unsigned char *md)
 {
-	CC_EVP(EVP_md5(), 16, data, len, md);		
+	CC_EVP(EVP_sha256(), 32, data, len, md);
+}
+
+void CC_SHA384(const void *data, uint32_t len, unsigned char *md)
+{
+	CC_EVP(EVP_sha384(), 48, data, len, md);		
 }
 
 void CC_SHA512(const void *data, uint32_t len, unsigned char *md)
@@ -43,10 +49,6 @@ void CC_SHA512(const void *data, uint32_t len, unsigned char *md)
 	CC_EVP(EVP_sha512(), 64, data, len, md);			
 }
 
-void CC_SHA384(const void *data, uint32_t len, unsigned char *md)
-{
-	CC_EVP(EVP_sha384(), 48, data, len, md);		
-}
 #endif
 
 #pragma mark -
@@ -167,10 +169,316 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 			RSASHA1(pResult, pParams);
 			break;
 
+		case 17 :
+			AES128(pResult, pParams);
+			break;
+
+		case 18 :
+			AES192(pResult, pParams);
+			break;
+
+		case 19 :
+			AES256(pResult, pParams);
+			break;
 	}
 }
 
 // --------------------------------- Common Crypto --------------------------------
+
+#pragma mark -
+
+void AES128(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_BLOB Param2;
+	C_LONGINT Param3;
+	C_LONGINT Param4;
+	C_LONGINT Param5;
+	C_TEXT returnValue;
+
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	Param3.fromParamAtIndex(pParams, 3);
+	Param4.fromParamAtIndex(pParams, 4);
+	Param5.fromParamAtIndex(pParams, 5);
+
+	EVP_CIPHER_CTX ctx;
+	EVP_CIPHER_CTX_init(&ctx);
+
+	unsigned char key[EVP_MAX_KEY_LENGTH], iv[EVP_MAX_IV_LENGTH];
+	
+	const EVP_CIPHER *cipher;
+	
+	switch (Param4.getIntValue())
+	{
+		case 0:
+			cipher = EVP_aes_128_ecb();
+		break;
+		case 1:
+			cipher = EVP_aes_128_cbc();
+		break;
+		case 2:
+			cipher = EVP_aes_128_cfb1();
+		break;
+		case 3:
+			cipher = EVP_aes_128_cfb8();
+		break;
+		case 4:
+			cipher = EVP_aes_128_cfb128();
+		break;
+		case 5:
+			cipher = EVP_aes_128_ofb();
+		break;
+		case 6:
+			cipher = EVP_aes_128_ctr();
+		break;
+		case 7:
+			cipher = EVP_aes_128_gcm();
+		break;
+		case 8:
+			cipher = EVP_aes_128_ccm();
+		break;
+		case 9:
+			cipher = EVP_aes_128_xts();
+		break;
+		default:
+			cipher = EVP_aes_128_ecb();
+		break;
+	}
+
+	const unsigned char *source = (const unsigned char *)Param1.getBytesPtr();
+	int source_len = Param1.getBytesLength();
+	int crypted_len, tail_len;
+	
+	// passphrase -> key, iv
+  if (EVP_BytesToKey(cipher, EVP_md5(), NULL,
+		Param2.getBytesPtr(), Param2.getBytesLength(),
+		2048, key, iv) > 0) {
+		if(EVP_CipherInit(&ctx, cipher, key, iv, 0 == Param3.getIntValue()))
+		{
+			size_t buf_size = source_len + EVP_MAX_BLOCK_LENGTH;
+			unsigned char *buf = (unsigned char *)calloc(buf_size, sizeof(unsigned char));
+			if(EVP_CipherUpdate(&ctx, buf, &crypted_len, source, source_len))
+			{
+				if(EVP_CipherFinal(&ctx, (buf + crypted_len), &tail_len))
+				{
+					crypted_len += tail_len;
+					C_BLOB temp;
+					temp.setBytes((const uint8_t *)buf, crypted_len);
+					
+					switch (Param5.getIntValue())
+					{
+						case 1:
+							temp.toB64Text(&returnValue);	
+							break;
+						default:
+							temp.toHexText(&returnValue);	
+							break;
+					}
+				}
+			}
+			free(buf);
+		}
+		EVP_CIPHER_CTX_cleanup(&ctx);
+  }
+
+	returnValue.setReturn(pResult);
+}
+
+void AES192(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_BLOB Param2;
+	C_LONGINT Param3;
+	C_LONGINT Param4;
+	C_LONGINT Param5;
+	C_TEXT returnValue;
+
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	Param3.fromParamAtIndex(pParams, 3);
+	Param4.fromParamAtIndex(pParams, 4);
+	Param5.fromParamAtIndex(pParams, 5);
+
+	EVP_CIPHER_CTX ctx;
+	EVP_CIPHER_CTX_init(&ctx);
+
+	unsigned char key[EVP_MAX_KEY_LENGTH], iv[EVP_MAX_IV_LENGTH];
+	
+	const EVP_CIPHER *cipher;
+	
+	switch (Param4.getIntValue())
+	{
+		case 0:
+			cipher = EVP_aes_192_ecb();
+		break;
+		case 1:
+			cipher = EVP_aes_192_cbc();
+		break;
+		case 2:
+			cipher = EVP_aes_192_cfb1();
+		break;
+		case 3:
+			cipher = EVP_aes_192_cfb8();
+		break;
+		case 4:
+			cipher = EVP_aes_192_cfb128();
+		break;
+		case 5:
+			cipher = EVP_aes_192_ofb();
+		break;
+		case 6:
+			cipher = EVP_aes_192_ctr();
+		break;
+		case 7:
+			cipher = EVP_aes_192_gcm();
+		break;
+		case 8:
+			cipher = EVP_aes_192_ccm();
+		break;
+		default:
+			cipher = EVP_aes_192_ecb();
+		break;
+	}
+
+	const unsigned char *source = (const unsigned char *)Param1.getBytesPtr();
+	int source_len = Param1.getBytesLength();
+	int crypted_len, tail_len;
+	
+	// passphrase -> key, iv
+  if (EVP_BytesToKey(cipher, EVP_md5(), NULL,
+		Param2.getBytesPtr(), Param2.getBytesLength(),
+		2048, key, iv) > 0) {
+		if(EVP_CipherInit(&ctx, cipher, key, iv, 0 == Param3.getIntValue()))
+		{
+			size_t buf_size = source_len + EVP_MAX_BLOCK_LENGTH;
+			unsigned char *buf = (unsigned char *)calloc(buf_size, sizeof(unsigned char));
+			if(EVP_CipherUpdate(&ctx, buf, &crypted_len, source, source_len))
+			{
+				if(EVP_CipherFinal(&ctx, (buf + crypted_len), &tail_len))
+				{
+					crypted_len += tail_len;
+					C_BLOB temp;
+					temp.setBytes((const uint8_t *)buf, crypted_len);
+					
+					switch (Param5.getIntValue())
+					{
+						case 1:
+							temp.toB64Text(&returnValue);	
+							break;
+						default:
+							temp.toHexText(&returnValue);	
+							break;
+					}
+				}
+			}
+			free(buf);
+		}
+		EVP_CIPHER_CTX_cleanup(&ctx);
+  }
+
+	returnValue.setReturn(pResult);
+}
+
+void AES256(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_BLOB Param2;
+	C_LONGINT Param3;
+	C_LONGINT Param4;
+	C_LONGINT Param5;
+	C_TEXT returnValue;
+
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	Param3.fromParamAtIndex(pParams, 3);
+	Param4.fromParamAtIndex(pParams, 4);
+	Param5.fromParamAtIndex(pParams, 5);
+
+	EVP_CIPHER_CTX ctx;
+	EVP_CIPHER_CTX_init(&ctx);
+
+	unsigned char key[EVP_MAX_KEY_LENGTH], iv[EVP_MAX_IV_LENGTH];
+	
+	const EVP_CIPHER *cipher;
+	
+	switch (Param4.getIntValue())
+	{
+		case 0:
+			cipher = EVP_aes_256_ecb();
+		break;
+		case 1:
+			cipher = EVP_aes_256_cbc();
+		break;
+		case 2:
+			cipher = EVP_aes_256_cfb1();
+		break;
+		case 3:
+			cipher = EVP_aes_256_cfb8();
+		break;
+		case 4:
+			cipher = EVP_aes_256_cfb128();
+		break;
+		case 5:
+			cipher = EVP_aes_256_ofb();
+		break;
+		case 6:
+			cipher = EVP_aes_256_ctr();
+		break;
+		case 7:
+			cipher = EVP_aes_256_gcm();
+		break;
+		case 8:
+			cipher = EVP_aes_256_ccm();
+		break;
+		case 9:
+			cipher = EVP_aes_256_xts();
+		break;
+		default:
+			cipher = EVP_aes_256_ecb();
+		break;
+	}
+
+	const unsigned char *source = (const unsigned char *)Param1.getBytesPtr();
+	int source_len = Param1.getBytesLength();
+	int crypted_len, tail_len;
+	
+	// passphrase -> key, iv
+  if (EVP_BytesToKey(cipher, EVP_md5(), NULL,
+		Param2.getBytesPtr(), Param2.getBytesLength(),
+		2048, key, iv) > 0) {
+		if(EVP_CipherInit(&ctx, cipher, key, iv, 0 == Param3.getIntValue()))
+		{
+			size_t buf_size = source_len + EVP_MAX_BLOCK_LENGTH;
+			unsigned char *buf = (unsigned char *)calloc(buf_size, sizeof(unsigned char));
+			if(EVP_CipherUpdate(&ctx, buf, &crypted_len, source, source_len))
+			{
+				if(EVP_CipherFinal(&ctx, (buf + crypted_len), &tail_len))
+				{
+					crypted_len += tail_len;
+					C_BLOB temp;
+					temp.setBytes((const uint8_t *)buf, crypted_len);
+					
+					switch (Param5.getIntValue())
+					{
+						case 1:
+							temp.toB64Text(&returnValue);	
+							break;
+						default:
+							temp.toHexText(&returnValue);	
+							break;
+					}
+				}
+			}
+			free(buf);
+		}
+		EVP_CIPHER_CTX_cleanup(&ctx);
+  }
+
+	returnValue.setReturn(pResult);
+}
+
+#pragma mark -
 
 void PEM_From_P12(sLONG_PTR *pResult, PackagePtr pParams)
 {
@@ -230,6 +538,8 @@ void PEM_From_P12(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
+#pragma mark -
+
 void Get_timestamp(sLONG_PTR *pResult, PackagePtr pParams)
 {
 	C_TEXT returnValue;
@@ -280,60 +590,7 @@ void Get_unixtime(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void RSASHA256(sLONG_PTR *pResult, PackagePtr pParams)
-{
-	C_BLOB Param1;
-	C_BLOB Param2;
-	C_LONGINT Param3;
-	C_TEXT returnValue;
-    
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
-	Param3.fromParamAtIndex(pParams, 3);
-
-	uint8_t *buf = (uint8_t *)calloc(32, sizeof(uint8_t)); 
-	
-	CC_SHA256((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);	    
-    
-    unsigned int signatureLength = 0;
-    
-	BIO *bio = BIO_new_mem_buf((void *)Param2.getBytesPtr(), Param2.getBytesLength());
-	
-	if(bio){
-		
-		RSA *key = NULL;
-		key = PEM_read_bio_RSAPrivateKey(bio, NULL, NULL, NULL);	
-		
-		if(key){
-			
-			uint8_t *sgn = (uint8_t *)calloc(RSA_size(key), sizeof(uint8_t)); 
-			
-			if(RSA_sign(NID_sha256, buf, 32, sgn, &signatureLength, key)){
-				
-				C_BLOB temp;
-				temp.setBytes((const uint8_t *)sgn, signatureLength);
-				
-				switch (Param3.getIntValue()) 
-				{
-					case 1:
-						temp.toB64Text(&returnValue);	
-						break;
-					default:
-						temp.toHexText(&returnValue);	
-						break;
-				}
-			}
-			
-			free(sgn);
-		}
-		
-		BIO_free(bio);
-	}
-    
-	free(buf);
-	
-	returnValue.setReturn(pResult);
-}
+#pragma mark -
 
 void HMACMD5(sLONG_PTR *pResult, PackagePtr pParams)
 {
@@ -369,6 +626,8 @@ void HMACMD5(sLONG_PTR *pResult, PackagePtr pParams)
 	
 	returnValue.setReturn(pResult);
 }
+
+#pragma mark -
 
 void HMACSHA1(sLONG_PTR *pResult, PackagePtr pParams)
 {
@@ -506,67 +765,7 @@ void HMACSHA512(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void SHA384(sLONG_PTR *pResult, PackagePtr pParams)
-{
-	C_BLOB Param1;
-	C_LONGINT Param2;
-	C_TEXT returnValue;
-	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
-	
-	uint8_t *buf = (uint8_t *)calloc(48, sizeof(uint8_t)); 
-	
-	CC_SHA384((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);	
-	
-	C_BLOB temp;
-	temp.setBytes((const uint8_t *)buf, 48);
-	
-	switch (Param2.getIntValue()) 
-	{
-		case 1:
-			temp.toB64Text(&returnValue);	
-			break;
-		default:
-			temp.toHexText(&returnValue);	
-			break;
-	}
-	
-	free(buf);
-	
-	returnValue.setReturn(pResult);
-}
-
-void SHA512(sLONG_PTR *pResult, PackagePtr pParams)
-{
-	C_BLOB Param1;
-	C_LONGINT Param2;
-	C_TEXT returnValue;
-	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
-	
-	uint8_t *buf = (uint8_t *)calloc(64, sizeof(uint8_t)); 
-	
-	CC_SHA512((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);	
-	
-	C_BLOB temp;
-	temp.setBytes((const uint8_t *)buf, 64);
-	
-	switch (Param2.getIntValue()) 
-	{
-		case 1:
-			temp.toB64Text(&returnValue);	
-			break;
-		default:
-			temp.toHexText(&returnValue);	
-			break;
-	}
-	
-	free(buf);
-	
-	returnValue.setReturn(pResult);
-}
+#pragma mark -
 
 void MD5(sLONG_PTR *pResult, PackagePtr pParams)
 {
@@ -598,6 +797,8 @@ void MD5(sLONG_PTR *pResult, PackagePtr pParams)
 	
 	returnValue.setReturn(pResult);
 }
+
+#pragma mark -
 
 void SHA1(sLONG_PTR *pResult, PackagePtr pParams)
 {
@@ -661,6 +862,70 @@ void SHA256(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
+void SHA384(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_LONGINT Param2;
+	C_TEXT returnValue;
+	
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	
+	uint8_t *buf = (uint8_t *)calloc(48, sizeof(uint8_t)); 
+	
+	CC_SHA384((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);	
+	
+	C_BLOB temp;
+	temp.setBytes((const uint8_t *)buf, 48);
+	
+	switch (Param2.getIntValue()) 
+	{
+		case 1:
+			temp.toB64Text(&returnValue);	
+			break;
+		default:
+			temp.toHexText(&returnValue);	
+			break;
+	}
+	
+	free(buf);
+	
+	returnValue.setReturn(pResult);
+}
+
+void SHA512(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_LONGINT Param2;
+	C_TEXT returnValue;
+	
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	
+	uint8_t *buf = (uint8_t *)calloc(64, sizeof(uint8_t)); 
+	
+	CC_SHA512((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);	
+	
+	C_BLOB temp;
+	temp.setBytes((const uint8_t *)buf, 64);
+	
+	switch (Param2.getIntValue()) 
+	{
+		case 1:
+			temp.toB64Text(&returnValue);	
+			break;
+		default:
+			temp.toHexText(&returnValue);	
+			break;
+	}
+	
+	free(buf);
+	
+	returnValue.setReturn(pResult);
+}
+
+#pragma mark -
+
 void RSASHA1(sLONG_PTR *pResult, PackagePtr pParams)
 {
 	C_BLOB Param1;
@@ -716,3 +981,57 @@ void RSASHA1(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
+void RSASHA256(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_BLOB Param2;
+	C_LONGINT Param3;
+	C_TEXT returnValue;
+    
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	Param3.fromParamAtIndex(pParams, 3);
+
+	uint8_t *buf = (uint8_t *)calloc(32, sizeof(uint8_t)); 
+	
+	CC_SHA256((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);	    
+    
+    unsigned int signatureLength = 0;
+    
+	BIO *bio = BIO_new_mem_buf((void *)Param2.getBytesPtr(), Param2.getBytesLength());
+	
+	if(bio){
+		
+		RSA *key = NULL;
+		key = PEM_read_bio_RSAPrivateKey(bio, NULL, NULL, NULL);	
+		
+		if(key){
+			
+			uint8_t *sgn = (uint8_t *)calloc(RSA_size(key), sizeof(uint8_t)); 
+			
+			if(RSA_sign(NID_sha256, buf, 32, sgn, &signatureLength, key)){
+				
+				C_BLOB temp;
+				temp.setBytes((const uint8_t *)sgn, signatureLength);
+				
+				switch (Param3.getIntValue()) 
+				{
+					case 1:
+						temp.toB64Text(&returnValue);	
+						break;
+					default:
+						temp.toHexText(&returnValue);	
+						break;
+				}
+			}
+			
+			free(sgn);
+		}
+		
+		BIO_free(bio);
+	}
+    
+	free(buf);
+	
+	returnValue.setReturn(pResult);
+}
