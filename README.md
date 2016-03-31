@@ -87,7 +87,7 @@ ASSERT(RSASHA256 ($someDataToSign;$pemData;Crypto BASE64)="SFoEVXo/EqSagiapclf0m
 ```
 
 * AES
-* 
+ 
 ```
 CONVERT FROM TEXT("4D4D";"utf-8";$password)
 CONVERT FROM TEXT("data"*4;"utf-8";$data)
