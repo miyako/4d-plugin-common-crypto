@@ -12,10 +12,10 @@ Commands
 
 ```c
 // --- Common Crypto
-PEM_From_P12
-Get_timestamp
-Get_timestring
-Get_unixtime
+PEM From P12
+Get timestamp
+Get timestring
+Get unixtime
 RSASHA256
 HMACMD5
 HMACSHA1
@@ -28,6 +28,9 @@ MD5
 SHA1
 SHA256
 RSASHA1
+AES128
+AES192
+AES256
 ```
 
 Examples
@@ -81,4 +84,18 @@ C_BLOB($someDataToSign)
 SET BLOB SIZE($someDataToSign;512)
 
 ASSERT(RSASHA256 ($someDataToSign;$pemData;Crypto BASE64)="SFoEVXo/EqSagiapclf0m2J/d8wQPSq3So/G0EQeGZlpTnsBLQK1LGh9kqySf4yjmd1qdtrtNvmPkBkhNBHNNS9TfBD3OGipXFFE3aG2TSDoicz7yw5bASXD2k0ystqxWPJVk2TpucRBP2Z8dreZviKNqB+ljkWN/zy1vD1FlI8=")
+```
+
+* AES
+* 
+```
+CONVERT FROM TEXT("4D4D";"utf-8";$password)
+CONVERT FROM TEXT("data"*4;"utf-8";$data)
+
+$encrypted:=AES256 ($data;$password;Crypto Encrypt;Crypto AES ECB;Crypto BASE64)
+BASE64 DECODE($encrypted;$data)
+
+$decrypted:=AES256 ($data;$password;Crypto Decrypt;Crypto AES ECB;Crypto BASE64)
+BASE64 DECODE($decrypted;$data)
+$decrypted:=Convert to text($data;"utf-8")
 ```
