@@ -35,3 +35,4 @@ void RSASHA1(sLONG_PTR *pResult, PackagePtr pParams);
 void AES128(sLONG_PTR *pResult, PackagePtr pParams);
 void AES192(sLONG_PTR *pResult, PackagePtr pParams);
 void AES256(sLONG_PTR *pResult, PackagePtr pParams);
+void RIPEMD160(sLONG_PTR *pResult, PackagePtr pParams);
