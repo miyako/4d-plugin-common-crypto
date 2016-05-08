@@ -31,6 +31,7 @@ RSASHA1
 AES128
 AES192
 AES256
+RIPE160
 ```
 
 Examples
@@ -98,4 +99,69 @@ BASE64 DECODE($encrypted;$data)
 $decrypted:=AES256 ($data;$password;Crypto Decrypt;Crypto AES ECB;Crypto BASE64)
 BASE64 DECODE($decrypted;$data)
 $decrypted:=Convert to text($data;"utf-8")
+```
+
+* AES with IV
+
+```
+CONVERT FROM TEXT("data"*4;"utf-8";$data)
+
+  //define key and iv instead of a password
+C_BLOB($key;$iv)
+SET BLOB SIZE($key;32)
+SET BLOB SIZE($iv;16)
+
+$iv{0x0000}:=0x0000
+$iv{0x0001}:=0x0001
+$iv{0x0002}:=0x0002
+$iv{0x0003}:=0x0003
+$iv{0x0004}:=0x0004
+$iv{0x0005}:=0x0005
+$iv{0x0006}:=0x0006
+$iv{0x0007}:=0x0007
+$iv{0x0008}:=0x0008
+$iv{0x0009}:=0x0009
+$iv{0x000A}:=0x000A
+$iv{0x000B}:=0x000B
+$iv{0x000C}:=0x000C
+$iv{0x000D}:=0x000D
+$iv{0x000E}:=0x000E
+$iv{0x000F}:=0x000F
+
+$key{0x0000}:=0x002B
+$key{0x0001}:=0x007E
+$key{0x0002}:=0x0015
+$key{0x0003}:=0x0016
+$key{0x0004}:=0x0028
+$key{0x0005}:=0x00AE
+$key{0x0006}:=0x00D2
+$key{0x0007}:=0x00A6
+$key{0x0008}:=0x00AB
+$key{0x0009}:=0x00F7
+$key{0x000A}:=0x0015
+$key{0x000B}:=0x0088
+$key{0x000C}:=0x0009
+$key{0x000D}:=0x00CF
+$key{0x000E}:=0x004F
+$key{0x000F}:=0x003C
+
+$encrypted:=AES256 ($data;"";Crypto Encrypt;Crypto AES CTR;Crypto BASE64;Crypto AES No padding;$key;$iv)
+BASE64 DECODE($encrypted;$data)
+
+$decrypted:=AES256 ($data;"";Crypto Decrypt;Crypto AES CTR;Crypto BASE64;Crypto AES No padding;$key;$iv)
+BASE64 DECODE($decrypted;$data)
+$decrypted:=Convert to text($data;"utf-8")
+
+ASSERT($decrypted=("data"*4))
+```
+
+* RIPEMD160
+
+```
+$source:="Hello World!"
+$key:="my_secret_key"
+
+CONVERT FROM TEXT($source;"utf-8";$sourceData)
+
+ASSERT(RIPEMD160 ($sourceData;Crypto BASE64)="hHbuRjG5swrCdUsO4MR+Fh0/ckw=")
 ```
