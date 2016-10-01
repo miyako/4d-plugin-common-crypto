@@ -189,6 +189,14 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 		case 20 :
 			RIPEMD160(pResult, pParams);
 			break;
+			
+		case 21 :
+			RSAVERIFYSHA1(pResult, pParams);
+			break;
+			
+		case 22 :
+			RSAVERIFYSHA256(pResult, pParams);
+			break;
 	}
 }
 
@@ -880,6 +888,85 @@ void RSASHA256(sLONG_PTR *pResult, PackagePtr pParams)
 	Param3.fromParamAtIndex(pParams, 3);
 
 	CC_RSASHA(32, NID_sha256, CC_SHA256, Param1, Param2, Param3, returnValue);
+	
+	returnValue.setReturn(pResult);
+}
+
+#pragma mark -
+
+void CC_RSASHAVERIFY(unsigned int hashlen, int nid, void (*CC)(const void *data, uint32_t len, unsigned char *md),
+										 C_BLOB &Param1,
+										 C_BLOB &Param2,
+										 C_TEXT &Param3,
+										 C_LONGINT &Param4,
+										 C_LONGINT &returnValue)
+{
+	uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
+	
+	CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
+	BIO *bio = BIO_new_mem_buf((void *)Param2.getBytesPtr(), Param2.getBytesLength());
+	
+	if(bio)
+	{
+		RSA *key = NULL;
+		key = PEM_read_bio_RSA_PUBKEY(bio, NULL, NULL, NULL);
+		if(key)
+		{
+			C_BLOB temp;
+			
+			switch (Param4.getIntValue())
+			{
+				case 1:
+					temp.fromB64Text(&Param3);
+					break;
+				default:
+					temp.fromHexText(&Param3);
+					break;
+			}
+			
+			if(RSA_verify(nid, buf, hashlen, (unsigned char *)temp.getBytesPtr(), temp.getBytesLength(), key))
+			{
+				returnValue.setIntValue(1);
+			}
+			
+		}
+		BIO_free(bio);
+	}
+	free(buf);
+}
+
+void RSAVERIFYSHA1(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_BLOB Param2;
+	C_TEXT Param3;
+	C_LONGINT Param4;
+	C_LONGINT returnValue;
+	
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	Param3.fromParamAtIndex(pParams, 3);
+	Param4.fromParamAtIndex(pParams, 4);
+	
+	CC_RSASHAVERIFY(20, NID_sha1, CC_SHA1, Param1, Param2, Param3, Param4, returnValue);
+	
+	returnValue.setReturn(pResult);
+}
+
+void RSAVERIFYSHA256(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB Param1;
+	C_BLOB Param2;
+	C_TEXT Param3;
+	C_LONGINT Param4;
+	C_LONGINT returnValue;
+	
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
+	Param3.fromParamAtIndex(pParams, 3);
+	Param4.fromParamAtIndex(pParams, 4);
+	
+	CC_RSASHAVERIFY(32, NID_sha256, CC_SHA256, Param1, Param2, Param3, Param4, returnValue);
 	
 	returnValue.setReturn(pResult);
 }
