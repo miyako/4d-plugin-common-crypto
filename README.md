@@ -29,7 +29,6 @@ Commands
 ---
 
 ```c
-// --- Common Crypto
 PEM From P12
 Get timestamp
 Get timestring
