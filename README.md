@@ -68,6 +68,67 @@ pemText|TEXT|converted to text, for convenience
 effectively the same as ``openssl pkcs12 -in *.p12 -out *.pem -nodes``
 
 ```
+result:=AES128 (value;pass;mode;type;format)
+result:=AES192 (value;pass;mode;type;format)
+result:=AES256 (value;pass;mode;type;format)
+result:=AES128 (value;pass;mode;type;format;option;key;iv)
+result:=AES192 (value;pass;mode;type;format;option;key;iv)
+result:=AES256 (value;pass;mode;type;format;option;key;iv)
+```
+
+Parameter|Type|Description
+------------|------------|----
+value|BLOB|
+pass|BLOB|
+mode|LONGINT|
+type|LONGINT|
+format|LONGINT|
+option|LONGINT|
+key|BLOB|
+iv|BLOB|
+result|TEXT|
+
+in the first syntax, ``pass`` is used  
+in the second syntax, ``key`` and ``iv`` are used instead of a password  
+
+```
+hash:=RIPEMD160 (value;format)
+```
+
+Parameter|Type|Description
+------------|------------|----
+value|BLOB|
+format|LONGINT|
+hash|TEXT|
+
+#### Formats
+
+``Crypto HEX`` ``0``  
+``Crypto BASE64`` ``1``  
+
+#### Encryption Modes
+
+``Crypto Encrypt`` ``0``  
+``Crypto Decrypt`` ``1``  
+
+#### AES Modes
+
+``Crypto AES ECB`` ``0``  
+``Crypto AES CBC`` ``1``  
+``Crypto AES CFB1`` ``2``  
+``Crypto AES CFB8`` ``3``  
+``Crypto AES CFB128`` ``4``  
+``Crypto AES OFB`` ``5``  
+``Crypto AES CTR`` ``6``  
+``Crypto AES GCM`` ``7``  
+``Crypto AES CCM`` ``8``  
+``Crypto AES XTS`` ``9``  
+
+#### AES Padding Options
+
+``Crypto AES No padding`` ``1``
+
+```
 timestamp:=Get timestamp
 ```
 Parameter|Type|Description
@@ -89,47 +150,18 @@ Parameter|Type|Description
 ------------|------------|----
 unixtime|TEXT|
 
-**New**
-
-Verify RSA SHA1 and SHA256.
-
 ```
-CONVERT FROM TEXT("abcde";"utf-8";$data)
-
-DOCUMENT TO BLOB(System folder(Desktop)+"prvkey.pem";$prvKey)
-$data64:=RSASHA1 ($data;$prvKey;Crypto BASE64)
-
-DOCUMENT TO BLOB(System folder(Desktop)+"pubkey.pem";$pubKey)
-$OK:=RSAVERIFYSHA1 ($data;$pubKey;$data64;Crypto BASE64)
+OK:=RSAVERIFYSHA1 (value;key;hash;format)
+OK:=RSAVERIFYSHA256 (value;key;hash;format)
 ```
 
-Commands
----
-
-```c
-PEM From P12
-Get timestamp
-Get timestring
-Get unixtime
-RSASHA256
-HMACMD5
-HMACSHA1
-HMACSHA256
-HMACSHA384
-HMACSHA512
-SHA384
-SHA512
-MD5
-SHA1
-SHA256
-RSASHA1
-AES128
-AES192
-AES256
-RIPE160
-RSAVERIFYSHA1
-RSAVERIFYSHA256
-```
+Parameter|Type|Description
+------------|------------|----
+value|BLOB|
+key|BLOB|
+hash|TEXT|
+format|LONGINT|
+OK|LONGINT|
 
 Examples
 ---
@@ -262,3 +294,16 @@ CONVERT FROM TEXT($source;"utf-8";$sourceData)
 
 ASSERT(RIPEMD160 ($sourceData;Crypto BASE64)="hHbuRjG5swrCdUsO4MR+Fh0/ckw=")
 ```
+
+* Verify
+
+```
+CONVERT FROM TEXT("abcde";"utf-8";$data)
+
+DOCUMENT TO BLOB(System folder(Desktop)+"prvkey.pem";$prvKey)
+$data64:=RSASHA1 ($data;$prvKey;Crypto BASE64)
+
+DOCUMENT TO BLOB(System folder(Desktop)+"pubkey.pem";$pubKey)
+$OK:=RSAVERIFYSHA1 ($data;$pubKey;$data64;Crypto BASE64)
+```
+
