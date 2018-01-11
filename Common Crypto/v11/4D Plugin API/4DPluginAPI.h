@@ -21,6 +21,8 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
+#define PLUGIN_SDK_v11 1
+
 #include "C_TEXT.h"
 #include "C_INTEGER.h"
 #include "C_LONGINT.h"

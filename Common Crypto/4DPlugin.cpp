@@ -15,12 +15,12 @@
 void CC_EVP(const EVP_MD *evp, uint32_t mlen, const void *data, uint32_t len, unsigned char *md)
 {
 	unsigned int mdlen = mlen;
-	EVP_MD_CTX* c = EVP_MD_CTX_create();
-	EVP_MD_CTX_init(c);
+	EVP_MD_CTX* c = EVP_MD_CTX_new();
+	EVP_MD_CTX_reset(c);
 	EVP_DigestInit(c, evp);
 	EVP_DigestUpdate(c, data, len);
 	EVP_DigestFinal(c, md, &mdlen);	
-	EVP_MD_CTX_destroy(c);			
+	EVP_MD_CTX_free(c);
 }
 
 void CC_MD5(const void *data, uint32_t len, unsigned char *md)
@@ -58,23 +58,9 @@ void CC_RIPEMD160(const void *data, uint32_t len, unsigned char *md)
 
 #pragma mark -
 
-bool IsProcessOnExit(){    
-    C_TEXT name;
-    PA_long32 state, time;
-    PA_GetProcessInfo(PA_GetCurrentProcessNumber(), name, &state, &time);
-    CUTF16String procName(name.getUTF16StringPtr());
-    CUTF16String exitProcName((PA_Unichar *)"$\0x\0x\0\0\0");
-    return (!procName.compare(exitProcName));
-}
-
 void OnStartup(){
-    OpenSSL_add_all_algorithms();//for PEM_From_P12
-}
-
-void OnCloseProcess(){
-    if(IsProcessOnExit()){
-        EVP_cleanup();    
-    }
+	OPENSSL_init_crypto(OPENSSL_INIT_ADD_ALL_CIPHERS \
+											| OPENSSL_INIT_ADD_ALL_DIGESTS, NULL);//for PEM_From_P12
 }
 
 #pragma mark -
@@ -102,10 +88,6 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
         case kInitPlugin :
         case kServerInitPlugin :            
             OnStartup();
-            break;    
-
-        case kCloseProcess :            
-            OnCloseProcess();
             break;
                         
 // --- Common Crypto
@@ -214,8 +196,7 @@ void CC_AES(const EVP_CIPHER *cipher,
 						C_BLOB &Param8,
 						C_TEXT &returnValue)
 {
-	EVP_CIPHER_CTX ctx;
-	EVP_CIPHER_CTX_init(&ctx);
+	EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
 	
 	unsigned char key[EVP_MAX_KEY_LENGTH], iv[EVP_MAX_IV_LENGTH];
 	
@@ -245,17 +226,17 @@ void CC_AES(const EVP_CIPHER *cipher,
 	}
 	
 	if (key_and_iv_is_valid) {
-		if(EVP_CipherInit(&ctx, cipher, key, iv, 0 == Param3.getIntValue()))
+		if(EVP_CipherInit(ctx, cipher, key, iv, 0 == Param3.getIntValue()))
 		{
 			if(Param6.getIntValue())
 			{
-				EVP_CIPHER_CTX_set_padding(&ctx, 0);
+				EVP_CIPHER_CTX_set_padding(ctx, 0);
 			}
 			size_t buf_size = source_len + EVP_MAX_BLOCK_LENGTH;
 			unsigned char *buf = (unsigned char *)calloc(buf_size, sizeof(unsigned char));
-			if(EVP_CipherUpdate(&ctx, buf, &crypted_len, source, source_len))
+			if(EVP_CipherUpdate(ctx, buf, &crypted_len, source, source_len))
 			{
-				if(EVP_CipherFinal(&ctx, (buf + crypted_len), &tail_len))
+				if(EVP_CipherFinal(ctx, (buf + crypted_len), &tail_len))
 				{
 					crypted_len += tail_len;
 					C_BLOB temp;
@@ -274,7 +255,7 @@ void CC_AES(const EVP_CIPHER *cipher,
 			}
 			free(buf);
 		}
-		EVP_CIPHER_CTX_cleanup(&ctx);
+		EVP_CIPHER_CTX_free(ctx);
 	}
 }
 

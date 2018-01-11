@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.4D.4DPlugin.miyako.CommonCrypto</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleSignature</key>
 	<string>4D06</string>
 	<key>CFBundleVersion</key>
-	<string>14.3</string>
+	<string>2.0</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 </dict>

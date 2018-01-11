@@ -12,12 +12,13 @@
 		18B684F906944F2000CC6A1E /* Flags.h in Headers */ = {isa = PBXBuildFile; fileRef = 18B684F206944F2000CC6A1E /* Flags.h */; };
 		18B684FA06944F2000CC6A1E /* PrivateTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 18B684F306944F2000CC6A1E /* PrivateTypes.h */; };
 		18B684FB06944F2000CC6A1E /* PublicTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 18B684F406944F2000CC6A1E /* PublicTypes.h */; };
-		18B684FF06944F8800CC6A1E /* 4DPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */; };
+		18B684FF06944F8800CC6A1E /* 4DPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		8D01CCC80486CAD60068D4B7 /* 4D Plugin_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32BAE0B30371A71500C91783 /* 4D Plugin_Prefix.pch */; };
 		8D01CCCA0486CAD60068D4B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		D120937F13534DCC00A72CAA /* 4DPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D120937E13534DCC00A72CAA /* 4DPlugin.h */; };
+		D122856A2007472D008C75E5 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D12285692007472D008C75E5 /* libcrypto.a */; };
 		D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D130064E12F02D9700702C0E /* Cocoa.framework */; };
-		D13116A91A03ACB700DE1322 /* 4DPluginAPI.c in Sources */ = {isa = PBXBuildFile; fileRef = D13116A81A03ACB700DE1322 /* 4DPluginAPI.c */; };
+		D13116A91A03ACB700DE1322 /* 4DPluginAPI.c in Sources */ = {isa = PBXBuildFile; fileRef = D13116A81A03ACB700DE1322 /* 4DPluginAPI.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D13116AC1A03B10800DE1322 /* C_LONGINT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116AA1A03B10800DE1322 /* C_LONGINT.cpp */; };
 		D13116AD1A03B10800DE1322 /* C_LONGINT.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116AB1A03B10800DE1322 /* C_LONGINT.h */; };
 		D13116B01A03B33D00DE1322 /* C_INTEGER.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116AE1A03B33D00DE1322 /* C_INTEGER.cpp */; };
@@ -28,14 +29,14 @@
 		D13116BB1A03B3C300DE1322 /* C_REAL.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116B51A03B3C300DE1322 /* C_REAL.h */; };
 		D13116BC1A03B3C300DE1322 /* C_TIME.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116B61A03B3C300DE1322 /* C_TIME.cpp */; };
 		D13116BD1A03B3C300DE1322 /* C_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116B71A03B3C300DE1322 /* C_TIME.h */; };
-		D13116C41A03B48900DE1322 /* C_TEXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116C21A03B48900DE1322 /* C_TEXT.cpp */; };
+		D13116C41A03B48900DE1322 /* C_TEXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116C21A03B48900DE1322 /* C_TEXT.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D13116C51A03B48900DE1322 /* C_TEXT.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116C31A03B48900DE1322 /* C_TEXT.h */; };
 		D13116C71A03B5B600DE1322 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13116C61A03B5B600DE1322 /* AppKit.framework */; };
 		D13116CA1A03B5CC00DE1322 /* C_POINTER.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116C81A03B5CC00DE1322 /* C_POINTER.cpp */; };
 		D13116CB1A03B5CC00DE1322 /* C_POINTER.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116C91A03B5CC00DE1322 /* C_POINTER.h */; };
-		D13116CE1A03B62400DE1322 /* C_PICTURE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116CC1A03B62400DE1322 /* C_PICTURE.cpp */; };
+		D13116CE1A03B62400DE1322 /* C_PICTURE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116CC1A03B62400DE1322 /* C_PICTURE.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D13116CF1A03B62400DE1322 /* C_PICTURE.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116CD1A03B62400DE1322 /* C_PICTURE.h */; };
-		D13116D81A03BBFC00DE1322 /* ARRAY_TEXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116D61A03BBFC00DE1322 /* ARRAY_TEXT.cpp */; };
+		D13116D81A03BBFC00DE1322 /* ARRAY_TEXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116D61A03BBFC00DE1322 /* ARRAY_TEXT.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D13116D91A03BBFC00DE1322 /* ARRAY_TEXT.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116D71A03BBFC00DE1322 /* ARRAY_TEXT.h */; };
 		D13116E21A03BC1100DE1322 /* ARRAY_BOOLEAN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116DA1A03BC1100DE1322 /* ARRAY_BOOLEAN.cpp */; };
 		D13116E31A03BC1100DE1322 /* ARRAY_BOOLEAN.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116DB1A03BC1100DE1322 /* ARRAY_BOOLEAN.h */; };
@@ -47,12 +48,11 @@
 		D13116E91A03BC1100DE1322 /* ARRAY_REAL.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116E11A03BC1100DE1322 /* ARRAY_REAL.h */; };
 		D13116EC1A03BE2300DE1322 /* ARRAY_TIME.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116EA1A03BE2300DE1322 /* ARRAY_TIME.cpp */; };
 		D13116ED1A03BE2300DE1322 /* ARRAY_TIME.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116EB1A03BE2300DE1322 /* ARRAY_TIME.h */; };
-		D13116F01A03C2D400DE1322 /* C_BLOB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116EE1A03C2D400DE1322 /* C_BLOB.cpp */; };
+		D13116F01A03C2D400DE1322 /* C_BLOB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116EE1A03C2D400DE1322 /* C_BLOB.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D13116F11A03C2D400DE1322 /* C_BLOB.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116EF1A03C2D400DE1322 /* C_BLOB.h */; };
 		D13116F41A03C7AF00DE1322 /* ARRAY_DATE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116F21A03C7AF00DE1322 /* ARRAY_DATE.cpp */; };
 		D13116F51A03C7AF00DE1322 /* ARRAY_DATE.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116F31A03C7AF00DE1322 /* ARRAY_DATE.h */; };
 		D134D4AC1A030BA0008D14EF /* manifest.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = D134D4A91A030B06008D14EF /* manifest.json */; };
-		D15BFAA41CAD56EC000A0AD3 /* libcrypto.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FCB70A1B38589E0000A167 /* libcrypto.1.0.0.dylib */; };
 		D175D9CD1A02E8DD0006B569 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +81,7 @@
 		32BAE0B30371A71500C91783 /* 4D Plugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "4D Plugin_Prefix.pch"; sourceTree = "<group>"; };
 		8D01CCD10486CAD60068D4B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D120937E13534DCC00A72CAA /* 4DPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 4DPlugin.h; sourceTree = "<group>"; };
+		D12285692007472D008C75E5 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = a/libcrypto.a; sourceTree = "<group>"; };
 		D130064E12F02D9700702C0E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		D13116A81A03ACB700DE1322 /* 4DPluginAPI.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = 4DPluginAPI.c; sourceTree = "<group>"; };
 		D13116AA1A03B10800DE1322 /* C_LONGINT.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = C_LONGINT.cpp; path = Classes/C_LONGINT.cpp; sourceTree = "<group>"; };
@@ -119,6 +120,9 @@
 		D134D4A91A030B06008D14EF /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		D14D10DD1A03A8A5008B3411 /* constants.xlf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = constants.xlf; sourceTree = "<group>"; };
 		D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D1A428C720074032006BB528 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		D1A428CA20074688006BB528 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
+		D1A428CC20074690006BB528 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		D1FCB70A1B38589E0000A167 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = lib/libcrypto.1.0.0.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,9 +131,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D15BFAA41CAD56EC000A0AD3 /* libcrypto.1.0.0.dylib in Frameworks */,
 				D13116C71A03B5B600DE1322 /* AppKit.framework in Frameworks */,
 				D175D9CD1A02E8DD0006B569 /* CoreGraphics.framework in Frameworks */,
+				D122856A2007472D008C75E5 /* libcrypto.a in Frameworks */,
 				D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,11 +144,14 @@
 		089C166AFE841209C02AAC07 /* Common Crypto */ = {
 			isa = PBXGroup;
 			children = (
+				D12285692007472D008C75E5 /* libcrypto.a */,
+				D1A428C620074032006BB528 /* a */,
 				D108BD7A1A03D1E6001F1B90 /* Manifest */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				189286360695AD8900B05D6E /* Products */,
+				D1A428C920074688006BB528 /* Frameworks */,
 			);
 			name = "Common Crypto";
 			sourceTree = "<group>";
@@ -266,6 +273,23 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		D1A428C620074032006BB528 /* a */ = {
+			isa = PBXGroup;
+			children = (
+				D1A428C720074032006BB528 /* libcrypto.a */,
+			);
+			path = a;
+			sourceTree = "<group>";
+		};
+		D1A428C920074688006BB528 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1A428CC20074690006BB528 /* libcommonCrypto.dylib */,
+				D1A428CA20074688006BB528 /* libcrypto.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -329,7 +353,13 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0820;
+				TargetAttributes = {
+					8D01CCC60486CAD60068D4B7 = {
+						DevelopmentTeam = Y69CWUC25B;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 42D60B430A9DDBC8002ABB42 /* Build configuration list for PBXProject "Common Crypto" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -416,10 +446,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				DEPLOYMENT_LOCATION = NO;
+				DEVELOPMENT_TEAM = Y69CWUC25B;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -431,19 +463,18 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/include/**";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
-					"$(BUILT_PRODUCTS_DIR)/Common",
-					Crypto.bundle/Contents/MacOS,
-					/Users/miyako/Desktop,
-					"$(PROJECT_DIR)/lib",
+					"$(inherited)",
+					"$(PROJECT_DIR)/a",
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.4D.CommonCrypto;
 				PRODUCT_NAME = "Common Crypto";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -460,9 +491,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_LOCATION = NO;
+				DEVELOPMENT_TEAM = Y69CWUC25B;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_TRIGRAPHS = NO;
@@ -472,19 +505,18 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/include/**";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
-					"$(BUILT_PRODUCTS_DIR)/Common",
-					Crypto.bundle/Contents/MacOS,
-					/Users/miyako/Desktop,
-					"$(PROJECT_DIR)/lib",
+					"$(inherited)",
+					"$(PROJECT_DIR)/a",
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.4D.CommonCrypto;
 				PRODUCT_NAME = "Common Crypto";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -501,8 +533,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = NO;
+				DEVELOPMENT_TEAM = Y69CWUC25B;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -511,20 +545,18 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/include/**";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/Common",
-					Crypto.4dbase/Plugins/Common,
-					Crypto.bundle/Contents/MacOS,
-					/Users/miyako/Desktop,
-					"$(PROJECT_DIR)/lib",
+					"$(inherited)",
+					"$(PROJECT_DIR)/a",
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.4D.CommonCrypto;
 				PRODUCT_NAME = "Common Crypto";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -540,10 +572,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/include/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = macosx10.8;
@@ -556,10 +606,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/include/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = macosx10.8;
@@ -572,9 +640,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/include/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx10.8;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";

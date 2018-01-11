@@ -4061,8 +4061,8 @@ void PA_ResizeArray( PA_Variable *ar, PA_long32 nb )
 					
 					PA_UnlockHandle( ar->uValue.fArray.fData );
 				}
-				size = nb1 * (PA_long32) sizeof( PA_Handle );
-				oldSize = oldCount * (PA_long32) sizeof( PA_Handle );
+				size = nb1 * (PA_long32) sizeof( PA_Blob );
+				oldSize = oldCount * (PA_long32) sizeof( PA_Blob );
 				break;
 
 			case eVK_ArrayUnicode :
