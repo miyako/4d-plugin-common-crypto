@@ -1,5 +1,5 @@
 # 4d-plugin-common-crypto
-Collection of common hash algorithms based on [OpenSSL](https://www.openssl.org).
+Collection of common hash algorithms based on native functions and some help from [OpenSSL](https://www.openssl.org).
 
 ### Platform
 
@@ -10,6 +10,43 @@ Collection of common hash algorithms based on [OpenSSL](https://www.openssl.org)
 ### Version
 
 <img src="https://cloud.githubusercontent.com/assets/1725068/18940649/21945000-8645-11e6-86ed-4a0f800e5a73.png" width="32" height="32" /> <img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" />
+
+## Syntax
+
+```
+pemText:=PEM From P12 (p12;pemBytes;pass)
+```
+
+Parameter|Type|Description
+------------|------------|----
+p12|BLOB|
+pemBytes|BLOB|result
+pass|TEXT|
+pemText|TEXT|converted to text, for convenience
+
+effectively the same as ``openssl pkcs12 -in *.p12 -out *.pem -nodes``
+
+```
+timestamp:=Get timestamp
+```
+Parameter|Type|Description
+------------|------------|----
+timestamp|TEXT|
+
+```
+timestring:=Get timestring
+```
+Parameter|Type|Description
+------------|------------|----
+timestring|TEXT|
+
+```
+unixtime:=Get unixtime
+```
+
+Parameter|Type|Description
+------------|------------|----
+unixtime|TEXT|
 
 **New**
 
