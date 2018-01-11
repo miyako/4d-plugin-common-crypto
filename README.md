@@ -14,6 +14,47 @@ Collection of common hash algorithms based on native functions and some help fro
 ## Syntax
 
 ```
+hash:=MD5 (value;format)
+hash:=SHA1 (value;format)
+hash:=SHA256 (value;format)
+hash:=SHA384 (value;format)
+hash:=SHA512 (value;format)
+```
+
+Parameter|Type|Description
+------------|------------|----
+value|BLOB|
+format|LONGINT|
+hash|TEXT|
+
+```
+hash:=HMACMD5 (key;value;format)
+hash:=HMACSHA1 (key;value;format)
+hash:=HMACSHA256 (key;value;format)
+hash:=HMACSHA384 (key;value;format)
+hash:=HMACSHA512 (key;value;format)
+```
+
+Parameter|Type|Description
+------------|------------|----
+key|BLOB|
+value|BLOB|
+format|LONGINT|
+hash|TEXT|
+
+```
+hash:=RSASHA1 (value;pem;format)
+hash:=RSASHA256 (value;pem;format)
+```
+
+Parameter|Type|Description
+------------|------------|----
+value|BLOB|
+pem|BLOB|
+format|LONGINT|
+hash|TEXT|
+
+```
 pemText:=PEM From P12 (p12;pemBytes;pass)
 ```
 
