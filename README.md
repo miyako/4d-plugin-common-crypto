@@ -15,6 +15,10 @@ Collection of common hash algorithms based on native functions and some help fro
 
 base64 encoded string are now folded (``\n`` is inserted). this especially concerns ``SHA512``
 
+### Releases
+
+[2.0](https://github.com/miyako/4d-plugin-common-crypto/releases/tag/2.0)
+
 ## Syntax
 
 ```
