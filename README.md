@@ -19,6 +19,8 @@ base64 encoded string are now folded (``\n`` is inserted). this especially conce
 
 [2.0](https://github.com/miyako/4d-plugin-common-crypto/releases/tag/2.0)
 
+[1.2](https://github.com/miyako/4d-plugin-common-crypto/releases/tag/1.2)
+
 ## Syntax
 
 ```
