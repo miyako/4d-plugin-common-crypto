@@ -15,6 +15,7 @@
 #include "openssl/hmac.h"
 #include "openssl/pkcs12.h"
 #include "openssl/err.h"
+#include "openssl/sha.h"
 
 // --- Common Crypto
 void PEM_From_P12(sLONG_PTR *pResult, PackagePtr pParams);
@@ -39,3 +40,4 @@ void AES256(sLONG_PTR *pResult, PackagePtr pParams);
 void RIPEMD160(sLONG_PTR *pResult, PackagePtr pParams);
 void RSAVERIFYSHA1(sLONG_PTR *pResult, PackagePtr pParams);
 void RSAVERIFYSHA256(sLONG_PTR *pResult, PackagePtr pParams);
+void PBKDF2(sLONG_PTR *pResult, PackagePtr pParams);

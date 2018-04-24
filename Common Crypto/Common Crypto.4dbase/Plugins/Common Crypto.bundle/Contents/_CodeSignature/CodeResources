@@ -90,7 +90,7 @@
 		</data>
 		<key>Resources/Documentation/index.html</key>
 		<data>
-		y0RisWQYENcD/O99+gkKPBfuMvk=
+		RBUj9pr68uX9pTpqUxINVNSOknE=
 		</data>
 		<key>Resources/Documentation/styles/common.css</key>
 		<data>
@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xMeIBl59wHdfsxpx07XGFC7Davw=
+			Fn6Ad7CIQbjcxrA2LNB7VSOcjf8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -115,11 +115,20 @@
 		</data>
 		<key>Resources/constants.xlf</key>
 		<data>
-		cl3O3qCxOMR9zAEJV00Mf2V0E1M=
+		Ic95KYJ4ksMS7aevI/PcDOPM7aI=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>MacOS/libcrypto.1.0.0.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			SQJzCW1kn2S8lPiG/f190ZuWzIc=
+			</data>
+			<key>requirement</key>
+			<string>identifier "libcrypto.1" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
+		</dict>
 		<key>QuickLook/Thumbnail.png</key>
 		<dict>
 			<key>hash</key>
@@ -366,11 +375,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			y0RisWQYENcD/O99+gkKPBfuMvk=
+			RBUj9pr68uX9pTpqUxINVNSOknE=
 			</data>
 			<key>hash2</key>
 			<data>
-			gdwcU5X3vYo0DpQRsEELDic1yRrbMOl/bBa/W6BWMfI=
+			AZwebjfIbFoEkku20M4Ng9yA0XhbI+iSjYVGQwXjm8I=
 			</data>
 		</dict>
 		<key>Resources/Documentation/styles/common.css</key>
@@ -388,11 +397,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xMeIBl59wHdfsxpx07XGFC7Davw=
+			Fn6Ad7CIQbjcxrA2LNB7VSOcjf8=
 			</data>
 			<key>hash2</key>
 			<data>
-			XYLZy+CQzYn6sU4bMTxt6uvJ+GEkX6mcPtR3ieqpb2o=
+			ZNZqn95xPcfpFVsqTcNmM3xSR+VatzuiXyKdKdALhEs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -423,22 +432,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cl3O3qCxOMR9zAEJV00Mf2V0E1M=
+			Ic95KYJ4ksMS7aevI/PcDOPM7aI=
 			</data>
 			<key>hash2</key>
 			<data>
-			8HWCigwgLgJJlWm/txyxrSFYSNW7gwYvzfnQhfE826w=
+			/Ow3Sa7H8IDHhidS5qz1XeY/BhMwlpLknIAfP/+Ky1E=
 			</data>
 		</dict>
 		<key>Windows/Common Crypto.4DX</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ySsjt5QANmy+XuEcXbJbOhIT9/I=
+			2IrZq1cc3pNJ/etgVBHUA+At7gs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Efa+zuvxiOLWkH1gcK/kDN6pbu+Fq3gxpUgWBCcjXcw=
+			7ECwjqR613iAEhLHu30uTca4XqdcxHH84KAMJMyHack=
 			</data>
 		</dict>
 		<key>Windows/msvcr100.dll</key>
@@ -456,11 +465,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Jo9FH+L8ajqzui3v4wFW4jpqNfI=
+			J3eOcVPHMrEdkcU4Q7PmLDSWhXU=
 			</data>
 			<key>hash2</key>
 			<data>
-			QsyhPOoeiPV4YrFyFiHK+9+tfsBuZahGOS2m2JLYJHw=
+			Nx6YAodjmRPXyZFALooL5jOE36PdshzXeqM0AZIXzu0=
 			</data>
 		</dict>
 		<key>Windows64/msvcr100.dll</key>
@@ -478,7 +487,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			XvLwV7mENOMajTd8cBVoEhEO4Kc=
+			fnoTAkG+qVr6oJ178o+xAPATnmo=
 			</data>
 			<key>requirement</key>
 			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>

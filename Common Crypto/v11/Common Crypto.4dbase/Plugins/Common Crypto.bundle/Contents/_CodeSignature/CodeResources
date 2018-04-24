@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Common Crypto.rsrc</key>
 		<data>
-		vR8j05qncQhSDmMrOGJogdorgiU=
+		x9omRvFm4UqNG41aC6Fp0GTONnA=
 		</data>
 		<key>Resources/Documentation/images/Field_0.png</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>Resources/Documentation/index.html</key>
 		<data>
-		y0RisWQYENcD/O99+gkKPBfuMvk=
+		RBUj9pr68uX9pTpqUxINVNSOknE=
 		</data>
 		<key>Resources/Documentation/styles/common.css</key>
 		<data>
@@ -104,7 +104,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xMeIBl59wHdfsxpx07XGFC7Davw=
+			Fn6Ad7CIQbjcxrA2LNB7VSOcjf8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -124,6 +124,24 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>MacOS/Common Crypto.html</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			UYtbad5X/1CBd1w8dArCXcBICb8=
+			</data>
+			<key>requirement</key>
+			<string>identifier "Common Crypto" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
+		</dict>
+		<key>MacOS/libcrypto.1.0.0.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			r8cjdTSvL9myR57nX3/XMIAtQtw=
+			</data>
+			<key>requirement</key>
+			<string>identifier "libcrypto.1" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
+		</dict>
 		<key>QuickLook/Thumbnail.png</key>
 		<dict>
 			<key>hash</key>
@@ -139,11 +157,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vR8j05qncQhSDmMrOGJogdorgiU=
+			x9omRvFm4UqNG41aC6Fp0GTONnA=
 			</data>
 			<key>hash2</key>
 			<data>
-			/m8yB7lZsW1bdIj8dZ581eSWtYlCoMXRgRqMg5i6hlU=
+			SyK2TsI9jyGKpaZKICM0ALFbmrFOOQgHqyhY47S3pdc=
 			</data>
 		</dict>
 		<key>Resources/Documentation/images/Field_0.png</key>
@@ -381,11 +399,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			y0RisWQYENcD/O99+gkKPBfuMvk=
+			RBUj9pr68uX9pTpqUxINVNSOknE=
 			</data>
 			<key>hash2</key>
 			<data>
-			gdwcU5X3vYo0DpQRsEELDic1yRrbMOl/bBa/W6BWMfI=
+			AZwebjfIbFoEkku20M4Ng9yA0XhbI+iSjYVGQwXjm8I=
 			</data>
 		</dict>
 		<key>Resources/Documentation/styles/common.css</key>
@@ -403,11 +421,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xMeIBl59wHdfsxpx07XGFC7Davw=
+			Fn6Ad7CIQbjcxrA2LNB7VSOcjf8=
 			</data>
 			<key>hash2</key>
 			<data>
-			XYLZy+CQzYn6sU4bMTxt6uvJ+GEkX6mcPtR3ieqpb2o=
+			ZNZqn95xPcfpFVsqTcNmM3xSR+VatzuiXyKdKdALhEs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -460,11 +478,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0+bRZuHrwN/7R1vVX+wq9CD1khA=
+			W41rAAj/gzezbdRtNUdHKiHb8Hg=
 			</data>
 			<key>hash2</key>
 			<data>
-			MjqiLvjYUH4BzuhTbrSLgq1dVQi3JYQN9Ho/hvcUX9w=
+			+XaSw1JQspReyMobT07jYZewONM0T4QqQOugbTi7z0E=
+			</data>
+		</dict>
+		<key>Windows/Common Crypto.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3f3hE90+GMuzyHmK9RVQvLK+Zs8=
+			</data>
+			<key>hash2</key>
+			<data>
+			EKLRdLPtg+PsdxOrCPdnhlHZLbWCJYLapu/sbQTYgHg=
 			</data>
 		</dict>
 		<key>Windows/msvcr100.dll</key>
@@ -476,17 +505,6 @@
 			<key>hash2</key>
 			<data>
 			h5M1NGGCb71I8l6ouDW+IEt1jOdRDbKvYxsohQNVvRg=
-			</data>
-		</dict>
-		<key>Windows/vcruntime140.dll</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			qDpOxwF20NwKx03mv6KIkMGPHSU=
-			</data>
-			<key>hash2</key>
-			<data>
-			LbJKllnn90/lxa10K72DUMj1vkYPmt8cn6EeDztFcb4=
 			</data>
 		</dict>
 		<key>Windows64/Common Crypto.4DX</key>
@@ -504,11 +522,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0+bRZuHrwN/7R1vVX+wq9CD1khA=
+			W41rAAj/gzezbdRtNUdHKiHb8Hg=
 			</data>
 			<key>hash2</key>
 			<data>
-			MjqiLvjYUH4BzuhTbrSLgq1dVQi3JYQN9Ho/hvcUX9w=
+			+XaSw1JQspReyMobT07jYZewONM0T4QqQOugbTi7z0E=
+			</data>
+		</dict>
+		<key>Windows64/Common Crypto.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3f3hE90+GMuzyHmK9RVQvLK+Zs8=
+			</data>
+			<key>hash2</key>
+			<data>
+			EKLRdLPtg+PsdxOrCPdnhlHZLbWCJYLapu/sbQTYgHg=
 			</data>
 		</dict>
 		<key>Windows64/msvcr100.dll</key>
@@ -520,17 +549,6 @@
 			<key>hash2</key>
 			<data>
 			rjy2xq+6mkqlyF9mAjw1M4ylebMDJt0CkY+dVSWVA9U=
-			</data>
-		</dict>
-		<key>Windows64/vcruntime140.dll</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			RPwfL/P6ciT52XBdcgtg819m1E8=
-			</data>
-			<key>hash2</key>
-			<data>
-			OTedDDGKoZ+/s6xN6UqEYAIYzvrjPCu0QSf5lLOQv5A=
 			</data>
 		</dict>
 	</dict>

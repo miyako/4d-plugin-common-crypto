@@ -15,12 +15,12 @@
 void CC_EVP(const EVP_MD *evp, uint32_t mlen, const void *data, uint32_t len, unsigned char *md)
 {
 	unsigned int mdlen = mlen;
-	EVP_MD_CTX* c = EVP_MD_CTX_new();
-	EVP_MD_CTX_reset(c);
+	EVP_MD_CTX* c = EVP_MD_CTX_create();
+	EVP_MD_CTX_init(c);
 	EVP_DigestInit(c, evp);
 	EVP_DigestUpdate(c, data, len);
 	EVP_DigestFinal(c, md, &mdlen);	
-	EVP_MD_CTX_free(c);
+	EVP_MD_CTX_destroy(c);			
 }
 
 void CC_MD5(const void *data, uint32_t len, unsigned char *md)
@@ -58,9 +58,23 @@ void CC_RIPEMD160(const void *data, uint32_t len, unsigned char *md)
 
 #pragma mark -
 
+bool IsProcessOnExit(){    
+    C_TEXT name;
+    PA_long32 state, time;
+    PA_GetProcessInfo(PA_GetCurrentProcessNumber(), name, &state, &time);
+    CUTF16String procName(name.getUTF16StringPtr());
+    CUTF16String exitProcName((PA_Unichar *)"$\0x\0x\0\0\0");
+    return (!procName.compare(exitProcName));
+}
+
 void OnStartup(){
-	OPENSSL_init_crypto(OPENSSL_INIT_ADD_ALL_CIPHERS \
-											| OPENSSL_INIT_ADD_ALL_DIGESTS, NULL);//for PEM_From_P12
+    OpenSSL_add_all_algorithms();//for PEM_From_P12
+}
+
+void OnCloseProcess(){
+    if(IsProcessOnExit()){
+        EVP_cleanup();    
+    }
 }
 
 #pragma mark -
@@ -88,6 +102,10 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
         case kInitPlugin :
         case kServerInitPlugin :            
             OnStartup();
+            break;    
+
+        case kCloseProcess :            
+            OnCloseProcess();
             break;
                         
 // --- Common Crypto
@@ -179,6 +197,10 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 		case 22 :
 			RSAVERIFYSHA256(pResult, pParams);
 			break;
+			
+		case 23 :
+			PBKDF2(pResult, pParams);
+			break;
 	}
 }
 
@@ -196,7 +218,8 @@ void CC_AES(const EVP_CIPHER *cipher,
 						C_BLOB &Param8,
 						C_TEXT &returnValue)
 {
-	EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+	EVP_CIPHER_CTX ctx;
+	EVP_CIPHER_CTX_init(&ctx);
 	
 	unsigned char key[EVP_MAX_KEY_LENGTH], iv[EVP_MAX_IV_LENGTH];
 	
@@ -226,17 +249,17 @@ void CC_AES(const EVP_CIPHER *cipher,
 	}
 	
 	if (key_and_iv_is_valid) {
-		if(EVP_CipherInit(ctx, cipher, key, iv, 0 == Param3.getIntValue()))
+		if(EVP_CipherInit(&ctx, cipher, key, iv, 0 == Param3.getIntValue()))
 		{
 			if(Param6.getIntValue())
 			{
-				EVP_CIPHER_CTX_set_padding(ctx, 0);
+				EVP_CIPHER_CTX_set_padding(&ctx, 0);
 			}
 			size_t buf_size = source_len + EVP_MAX_BLOCK_LENGTH;
 			unsigned char *buf = (unsigned char *)calloc(buf_size, sizeof(unsigned char));
-			if(EVP_CipherUpdate(ctx, buf, &crypted_len, source, source_len))
+			if(EVP_CipherUpdate(&ctx, buf, &crypted_len, source, source_len))
 			{
-				if(EVP_CipherFinal(ctx, (buf + crypted_len), &tail_len))
+				if(EVP_CipherFinal(&ctx, (buf + crypted_len), &tail_len))
 				{
 					crypted_len += tail_len;
 					C_BLOB temp;
@@ -255,7 +278,7 @@ void CC_AES(const EVP_CIPHER *cipher,
 			}
 			free(buf);
 		}
-		EVP_CIPHER_CTX_free(ctx);
+		EVP_CIPHER_CTX_cleanup(&ctx);
 	}
 }
 
@@ -948,6 +971,91 @@ void RSAVERIFYSHA256(sLONG_PTR *pResult, PackagePtr pParams)
 	Param4.fromParamAtIndex(pParams, 4);
 	
 	CC_RSASHAVERIFY(32, NID_sha256, CC_SHA256, Param1, Param2, Param3, Param4, returnValue);
+	
+	returnValue.setReturn(pResult);
+}
+
+#define Crypto_PRF_SHA1 0
+#define Crypto_PRF_SHA224 1
+#define Crypto_PRF_SHA256 2
+#define Crypto_PRF_SHA384 3
+#define Crypto_PRF_SHA512 4
+
+void CC_PBKDF2(const EVP_MD * (*EVP)(void),
+							 C_TEXT &Param_Password,
+							 C_BLOB &Param_Salt,
+							 C_LONGINT &Param_Iteration,
+							 C_LONGINT &Param_KeyLength,
+							 C_LONGINT &Param_Format,
+							 C_TEXT &returnValue)
+{
+	CUTF8String pass;
+	Param_Password.copyUTF8String(&pass);
+	
+	int keylen = Param_KeyLength.getIntValue();
+	
+	uint8_t *buf = (uint8_t *)calloc(keylen, sizeof(uint8_t));
+	
+	if(PKCS5_PBKDF2_HMAC((const char *)pass.c_str(),
+										(int)pass.size(),
+										(const unsigned char *)Param_Salt.getBytesPtr(),
+										(int)Param_Salt.getBytesLength(),
+										(int)Param_Iteration.getIntValue(),
+										EVP(),
+										keylen,
+										(unsigned char *)buf))
+	{
+		C_BLOB temp;
+		temp.setBytes((const uint8_t *)buf, keylen);
+		switch (Param_Format.getIntValue())
+		{
+			case 1:
+				temp.toB64Text(&returnValue);
+				break;
+			default:
+				temp.toHexText(&returnValue);
+				break;
+		}
+	}
+	
+	free(buf);
+}
+
+void PBKDF2(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_LONGINT Param_Algorithm;
+	C_TEXT Param_Password;
+	C_BLOB Param_Salt;
+	C_LONGINT Param_Iteration;
+	C_LONGINT Param_KeyLength;
+	C_LONGINT Param_Format;
+	C_TEXT returnValue;
+	
+	Param_Algorithm.fromParamAtIndex(pParams, 1);
+	Param_Password.fromParamAtIndex(pParams, 2);
+	Param_Salt.fromParamAtIndex(pParams, 3);
+	Param_Iteration.fromParamAtIndex(pParams, 4);
+	Param_KeyLength.fromParamAtIndex(pParams, 5);
+	Param_Format.fromParamAtIndex(pParams, 6);
+	
+	switch (Param_Algorithm.getIntValue()) {
+  case Crypto_PRF_SHA224:
+			CC_PBKDF2(EVP_sha224, Param_Password, Param_Salt, Param_Iteration, Param_KeyLength, Param_Format, returnValue);
+			break;
+  case Crypto_PRF_SHA256:
+			CC_PBKDF2(EVP_sha256, Param_Password, Param_Salt, Param_Iteration, Param_KeyLength, Param_Format, returnValue);
+			break;
+  case Crypto_PRF_SHA384:
+			CC_PBKDF2(EVP_sha384, Param_Password, Param_Salt, Param_Iteration, Param_KeyLength, Param_Format, returnValue);
+			break;
+  case Crypto_PRF_SHA512:
+			CC_PBKDF2(EVP_sha512, Param_Password, Param_Salt, Param_Iteration, Param_KeyLength, Param_Format, returnValue);
+			break;
+  case Crypto_PRF_SHA1:
+  default:
+			CC_PBKDF2(EVP_sha1, Param_Password, Param_Salt, Param_Iteration, Param_KeyLength, Param_Format, returnValue);
+			break;
+	}
 	
 	returnValue.setReturn(pResult);
 }
