@@ -17,6 +17,14 @@ Collection of common hash algorithms based on native functions and some help fro
 
 ![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
 
+only the following that do not take BLOB
+
+* ``Get timestamp``
+
+* ``Get timestring``
+
+* ``Get unixtime``
+
 ## Syntax
 
 ```
