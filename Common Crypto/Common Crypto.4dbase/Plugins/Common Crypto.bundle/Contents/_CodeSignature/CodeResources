@@ -434,11 +434,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			y0nDxLxNdrfh6Qz5bRc3gWisU4k=
+			tcQsRtwFOpT6w5tQ29Bo8C8B+a0=
 			</data>
 			<key>hash2</key>
 			<data>
-			sBAHnrAnS5NIeBBjpM+IC5V1DvkPqw1yc4+415N+hzw=
+			A01byIakzywngs8jsF+wpJysKdVXboSU19O4azm19Xw=
 			</data>
 		</dict>
 		<key>Windows/msvcr100.dll</key>
@@ -467,11 +467,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zc85yIXU4Ne+9cOGUIRten3/WQU=
+			iz2QY1hjNSYH0/rHE313vIljBR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			zs1Tb8a/v3z0D3XnMC3BG6s4WpBz5pU27WET5iZKOOE=
+			JUcxEtwVO3lXonXWnoHtkCnwOJ+4qdU807RU3sIKQmw=
 			</data>
 		</dict>
 		<key>Windows64/msvcr100.dll</key>
@@ -500,7 +500,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			DyYFPuR0iy+Qs77px7H3sByyHOY=
+			gGCm/OPAwbAHQFd3QRvtCnHp5iE=
 			</data>
 			<key>requirement</key>
 			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>

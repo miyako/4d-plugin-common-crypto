@@ -276,8 +276,12 @@ void CBytes::toB64Text(C_TEXT *b64, bool fold)
 	const ::std::size_t binlen = this->_CBytes.size();
 	
 	::std::size_t olen = (((binlen + 2) / 3) * 4);
-	olen += olen / 72; /* line feeds */
 	
+	if(fold)
+	{
+		olen += olen / 72; /* account for line feeds */
+	}
+
 	// Use = signs so the end is properly padded.
 	CUTF8String retval(olen, '=');
 	
@@ -294,16 +298,18 @@ void CBytes::toB64Text(C_TEXT *b64, bool fold)
 		while (bits_collected >= 6) {
 			bits_collected -= 6;
 			retval[outpos++] = b64_table[(accumulator >> bits_collected) & 0x3fu];
-			line_len++;
-			if (line_len >= 72) {
-				if(fold) {
+			
+			if(fold)
+			{
+				line_len++;
+				if (line_len >= 72) {
 					retval[outpos++] = '\n';
+					line_len = 0;
+					//breathe every 8KO
+					//				if((outpos % 0x2000)==0) {
+					//					PA_YieldAbsolute();
+					//				}
 				}
-				line_len = 0;
-				//breathe every 8KO
-//				if((outpos % 0x2000)==0) {
-//					PA_YieldAbsolute();
-//				}
 			}
 		}
 	}
@@ -391,7 +397,7 @@ void C_BLOB::toHexText(C_TEXT *hex)
 
 void C_BLOB::toB64Text(C_TEXT *b64, bool fold)
 {
-	this->_CBytes->toB64Text(b64);	
+	this->_CBytes->toB64Text(b64, fold);
 }
 
 
