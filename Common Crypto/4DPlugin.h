@@ -39,3 +39,12 @@ void AES256(sLONG_PTR *pResult, PackagePtr pParams);
 void RIPEMD160(sLONG_PTR *pResult, PackagePtr pParams);
 void RSAVERIFYSHA1(sLONG_PTR *pResult, PackagePtr pParams);
 void RSAVERIFYSHA256(sLONG_PTR *pResult, PackagePtr pParams);
+
+#if VERSIONWIN
+FILE _iob[] = { *stdin, *stdout, *stderr };
+
+extern "C" FILE * __cdecl __iob_func(void)
+{
+	return _iob;
+}
+#endif

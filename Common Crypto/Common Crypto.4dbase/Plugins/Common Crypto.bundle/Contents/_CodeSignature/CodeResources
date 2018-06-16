@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xMeIBl59wHdfsxpx07XGFC7Davw=
+			2mYld+CGppAkjeyOZKS2bt6urxI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -115,7 +115,7 @@
 		</data>
 		<key>Resources/constants.xlf</key>
 		<data>
-		cl3O3qCxOMR9zAEJV00Mf2V0E1M=
+		4tbp9UEzIwoqFzNIdXA0tKuTpy0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -388,11 +388,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xMeIBl59wHdfsxpx07XGFC7Davw=
+			2mYld+CGppAkjeyOZKS2bt6urxI=
 			</data>
 			<key>hash2</key>
 			<data>
-			XYLZy+CQzYn6sU4bMTxt6uvJ+GEkX6mcPtR3ieqpb2o=
+			8HZvWfbUsSQ37rSouUq2TFssHQ5ASF46z2z+F6fX2I0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -423,11 +423,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cl3O3qCxOMR9zAEJV00Mf2V0E1M=
+			4tbp9UEzIwoqFzNIdXA0tKuTpy0=
 			</data>
 			<key>hash2</key>
 			<data>
-			8HWCigwgLgJJlWm/txyxrSFYSNW7gwYvzfnQhfE826w=
+			HeSdTF2Dii6uVp9lqz+J77rTHKCY2y6ylJqEDoL2MWk=
 			</data>
 		</dict>
 		<key>Windows/Common Crypto.4DX</key>
@@ -452,6 +452,17 @@
 			h5M1NGGCb71I8l6ouDW+IEt1jOdRDbKvYxsohQNVvRg=
 			</data>
 		</dict>
+		<key>Windows/vcruntime140.dll</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qDpOxwF20NwKx03mv6KIkMGPHSU=
+			</data>
+			<key>hash2</key>
+			<data>
+			LbJKllnn90/lxa10K72DUMj1vkYPmt8cn6EeDztFcb4=
+			</data>
+		</dict>
 		<key>Windows64/Common Crypto.4DX</key>
 		<dict>
 			<key>hash</key>
@@ -474,11 +485,22 @@
 			rjy2xq+6mkqlyF9mAjw1M4ylebMDJt0CkY+dVSWVA9U=
 			</data>
 		</dict>
+		<key>Windows64/vcruntime140.dll</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RPwfL/P6ciT52XBdcgtg819m1E8=
+			</data>
+			<key>hash2</key>
+			<data>
+			OTedDDGKoZ+/s6xN6UqEYAIYzvrjPCu0QSf5lLOQv5A=
+			</data>
+		</dict>
 		<key>manifest.json</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			XvLwV7mENOMajTd8cBVoEhEO4Kc=
+			DyYFPuR0iy+Qs77px7H3sByyHOY=
 			</data>
 			<key>requirement</key>
 			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
