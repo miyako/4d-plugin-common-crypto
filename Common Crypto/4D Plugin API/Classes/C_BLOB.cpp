@@ -127,7 +127,7 @@ void CBytes::toHexText(C_TEXT *hex)
 		//breathe every 8KO
 		pos++;
 		if((pos % 0x2000)==0) {
-			PA_YieldAbsolute();
+//			PA_YieldAbsolute();
 		}
 #if VERSIONMAC
 		sprintf((char *)&buf[0], "%02x", *i);
@@ -158,7 +158,7 @@ void CBytes::fromHexText(C_TEXT *hex)
 	for(pos = 0; pos < t.length(); pos++){
 		//breathe every 8KO
 		if((pos % 0x2000)==0) {
-			PA_YieldAbsolute();
+//			PA_YieldAbsolute();
 		}
 		
 		size_t f = v.find(t[pos]);
@@ -242,7 +242,7 @@ void CBytes::fromB64Text(C_TEXT *b64)
 			outpos++;
 			//breathe every 8KO
 			if((outpos % 0x2000)==0) {
-				PA_YieldAbsolute();
+//				PA_YieldAbsolute();
 			}
 		}
 	}
@@ -280,7 +280,7 @@ void CBytes::toB64Text(C_TEXT *b64)
 				line_len = 0;
 				//breathe every 8KO
 				if((outpos % 0x2000)==0) {
-					PA_YieldAbsolute();
+//					PA_YieldAbsolute();
 				}
 			}
 		}
