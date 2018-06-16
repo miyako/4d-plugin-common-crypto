@@ -17,10 +17,6 @@ Collection of common hash algorithms based on native functions and some help fro
 
 ![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
 
-[2.0](https://github.com/miyako/4d-plugin-common-crypto/releases/tag/2.0) base64 encoded string are now folded (``\n`` is inserted). this especially concerns ``SHA512``
-
-[1.2](https://github.com/miyako/4d-plugin-common-crypto/releases/tag/1.2)
-
 ## Syntax
 
 ```
