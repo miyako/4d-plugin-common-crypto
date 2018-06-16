@@ -19,8 +19,6 @@ Collection of common hash algorithms based on native functions and some help fro
 
 only the following that do not take BLOB
 
-* ``PEM From P12``
-
 * ``Get timestamp``
 
 * ``Get timestring``
