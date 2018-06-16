@@ -8,6 +8,26 @@
 
 #include "C_BLOB.h"
 
+/* PA_YieldAbsolute isn't allowed in preemptive mode */
+
+void CBytes::fromParamAtIndex(PA_PluginParameters params, uint32_t index)
+{
+	if(index)
+	{
+		void *bytes = NULL;
+		PA_long32 len = PA_GetBlobParameter(params, index, bytes);
+		if(len)
+		{
+			std::vector<uint8_t>buf(len);
+			bytes = &buf[0];
+			PA_GetBlobParameter(params, index, bytes);
+			this->setBytes((const uint8_t *)bytes, len);
+		}
+	}
+}
+
+/* PA_GetBlobHandleParameter doesn't work in preemptive mode */
+
 void CBytes::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 {
 	if(index)
@@ -119,16 +139,16 @@ void CBytes::toHexText(C_TEXT *hex)
 {
 	
 	CUTF8String u;
-	size_t pos = 0;
+//	size_t pos = 0;
 	std::vector<uint8_t> buf(3);
 	const std::vector<uint8_t>::const_iterator binend = this->_CBytes.end();
 	
 	for (std::vector<uint8_t>::const_iterator i = this->_CBytes.begin(); i != binend; ++i) {
 		//breathe every 8KO
-		pos++;
-		if((pos % 0x2000)==0) {
+//		pos++;
+//		if((pos % 0x2000)==0) {
 //			PA_YieldAbsolute();
-		}
+//		}
 #if VERSIONMAC
 		sprintf((char *)&buf[0], "%02x", *i);
 #else
@@ -157,9 +177,9 @@ void CBytes::fromHexText(C_TEXT *hex)
 	
 	for(pos = 0; pos < t.length(); pos++){
 		//breathe every 8KO
-		if((pos % 0x2000)==0) {
+//		if((pos % 0x2000)==0) {
 //			PA_YieldAbsolute();
-		}
+//		}
 		
 		size_t f = v.find(t[pos]);
 		
@@ -241,16 +261,16 @@ void CBytes::fromB64Text(C_TEXT *b64)
 			this->_CBytes.push_back((uint8_t)((accumulator >> bits_collected) & 0xffu));
 			outpos++;
 			//breathe every 8KO
-			if((outpos % 0x2000)==0) {
+//			if((outpos % 0x2000)==0) {
 //				PA_YieldAbsolute();
-			}
+//			}
 		}
 	}
 }
 
 static const char b64_table[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-void CBytes::toB64Text(C_TEXT *b64)
+void CBytes::toB64Text(C_TEXT *b64, bool fold)
 {
 	
 	const ::std::size_t binlen = this->_CBytes.size();
@@ -276,12 +296,14 @@ void CBytes::toB64Text(C_TEXT *b64)
 			retval[outpos++] = b64_table[(accumulator >> bits_collected) & 0x3fu];
 			line_len++;
 			if (line_len >= 72) {
-				retval[outpos++] = '\n';
+				if(fold) {
+					retval[outpos++] = '\n';
+				}
 				line_len = 0;
 				//breathe every 8KO
-				if((outpos % 0x2000)==0) {
+//				if((outpos % 0x2000)==0) {
 //					PA_YieldAbsolute();
-				}
+//				}
 			}
 		}
 	}
@@ -305,6 +327,11 @@ CBytes::CBytes() : _cursorPosition(0)
 
 CBytes::~CBytes()
 {
+}
+
+void C_BLOB::fromParamAtIndex(PA_PluginParameters params, uint32_t index)
+{
+	this->_CBytes->fromParamAtIndex(params, index);
 }
 
 void C_BLOB::fromParamAtIndex(PackagePtr pParams, uint32_t index)
@@ -362,7 +389,7 @@ void C_BLOB::toHexText(C_TEXT *hex)
 	this->_CBytes->toHexText(hex);	
 }
 
-void C_BLOB::toB64Text(C_TEXT *b64)
+void C_BLOB::toB64Text(C_TEXT *b64, bool fold)
 {
 	this->_CBytes->toB64Text(b64);	
 }

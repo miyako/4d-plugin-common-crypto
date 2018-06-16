@@ -26,7 +26,7 @@ extern "C" {
 		uint32_t _cursorPosition;
 		
 	public:
-		
+		void fromParamAtIndex(PA_PluginParameters params, uint32_t index);
 		void fromParamAtIndex(PackagePtr pParams, uint32_t index);
 		void toParamAtIndex(PackagePtr pParams, uint32_t index);	
 		void setReturn(sLONG_PTR *pResult);	
@@ -43,7 +43,7 @@ extern "C" {
 		void fromB64Text(C_TEXT *b64);
 		
 		void toHexText(C_TEXT *hex);
-		void toB64Text(C_TEXT *b64);		
+		void toB64Text(C_TEXT *b64, bool fold = false);		
 		
 		CBytes();	
 		~CBytes();
@@ -59,6 +59,7 @@ extern "C" {
 		
 	public:
 		
+		void fromParamAtIndex(PA_PluginParameters params, uint32_t index);
 		void fromParamAtIndex(PackagePtr pParams, uint32_t index);
 		void toParamAtIndex(PackagePtr pParams, uint32_t index);	
 		void setReturn(sLONG_PTR *pResult);		
@@ -75,7 +76,7 @@ extern "C" {
 		void fromB64Text(C_TEXT *b64);
 
 		void toHexText(C_TEXT *hex);
-		void toB64Text(C_TEXT *b64);
+		void toB64Text(C_TEXT *b64, bool fold = false);
 		
 		C_BLOB();
 		~C_BLOB();

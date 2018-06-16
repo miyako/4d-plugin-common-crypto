@@ -17,28 +17,28 @@
 #include "openssl/err.h"
 
 // --- Common Crypto
-void PEM_From_P12(sLONG_PTR *pResult, PackagePtr pParams);
-void Get_timestamp(sLONG_PTR *pResult, PackagePtr pParams);
-void Get_timestring(sLONG_PTR *pResult, PackagePtr pParams);
-void Get_unixtime(sLONG_PTR *pResult, PackagePtr pParams);
-void RSASHA256(sLONG_PTR *pResult, PackagePtr pParams);
-void HMACMD5(sLONG_PTR *pResult, PackagePtr pParams);
-void HMACSHA1(sLONG_PTR *pResult, PackagePtr pParams);
-void HMACSHA256(sLONG_PTR *pResult, PackagePtr pParams);
-void HMACSHA384(sLONG_PTR *pResult, PackagePtr pParams);
-void HMACSHA512(sLONG_PTR *pResult, PackagePtr pParams);
-void SHA384(sLONG_PTR *pResult, PackagePtr pParams);
-void SHA512(sLONG_PTR *pResult, PackagePtr pParams);
-void MD5(sLONG_PTR *pResult, PackagePtr pParams);
-void SHA1(sLONG_PTR *pResult, PackagePtr pParams);
-void SHA256(sLONG_PTR *pResult, PackagePtr pParams);
-void RSASHA1(sLONG_PTR *pResult, PackagePtr pParams);
-void AES128(sLONG_PTR *pResult, PackagePtr pParams);
-void AES192(sLONG_PTR *pResult, PackagePtr pParams);
-void AES256(sLONG_PTR *pResult, PackagePtr pParams);
-void RIPEMD160(sLONG_PTR *pResult, PackagePtr pParams);
-void RSAVERIFYSHA1(sLONG_PTR *pResult, PackagePtr pParams);
-void RSAVERIFYSHA256(sLONG_PTR *pResult, PackagePtr pParams);
+void PEM_From_P12(PA_PluginParameters params);
+void Get_timestamp(PA_PluginParameters params);
+void Get_timestring(PA_PluginParameters params);
+void Get_unixtime(PA_PluginParameters params);
+void RSASHA256(PA_PluginParameters params);
+void HMACMD5(PA_PluginParameters params);
+void HMACSHA1(PA_PluginParameters params);
+void HMACSHA256(PA_PluginParameters params);
+void HMACSHA384(PA_PluginParameters params);
+void HMACSHA512(PA_PluginParameters params);
+void SHA384(PA_PluginParameters params);
+void SHA512(PA_PluginParameters params);
+void MD5(PA_PluginParameters params);
+void SHA1(PA_PluginParameters params);
+void SHA256(PA_PluginParameters params);
+void RSASHA1(PA_PluginParameters params);
+void AES128(PA_PluginParameters params);
+void AES192(PA_PluginParameters params);
+void AES256(PA_PluginParameters params);
+void RIPEMD160(PA_PluginParameters params);
+void RSAVERIFYSHA1(PA_PluginParameters params);
+void RSAVERIFYSHA256(PA_PluginParameters params);
 
 #if VERSIONWIN
 FILE _iob[] = { *stdin, *stdout, *stderr };

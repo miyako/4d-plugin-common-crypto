@@ -65,23 +65,22 @@ void OnStartup(){
 
 #pragma mark -
 
+void CommandDispatcher(PA_long32 selector, PA_PluginParameters params);
+
 void PluginMain(PA_long32 selector, PA_PluginParameters params)
 {
 	try
 	{
-		PA_long32 pProcNum = selector;
-		sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
-		PackagePtr pParams = (PackagePtr)params->fParameters;
-
-		CommandDispatcher(pProcNum, pResult, pParams); 
+		CommandDispatcher(selector, params);
 	}
 	catch(...)
 	{
-
+		
 	}
+	
 }
 
-void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pParams)
+void CommandDispatcher (PA_long32 pProcNum, PA_PluginParameters params)
 {
 	switch(pProcNum)
 	{
@@ -93,91 +92,91 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 // --- Common Crypto
 
 		case 1 :
-			PEM_From_P12(pResult, pParams);
+			PEM_From_P12(params);
 			break;
 
 		case 2 :
-			Get_timestamp(pResult, pParams);
+			Get_timestamp(params);
 			break;
 
 		case 3 :
-			Get_timestring(pResult, pParams);
+			Get_timestring(params);
 			break;
 
 		case 4 :
-			Get_unixtime(pResult, pParams);
+			Get_unixtime(params);
 			break;
 
 		case 5 :
-			RSASHA256(pResult, pParams);
+			RSASHA256(params);
 			break;
 
 		case 6 :
-			HMACMD5(pResult, pParams);
+			HMACMD5(params);
 			break;
 
 		case 7 :
-			HMACSHA1(pResult, pParams);
+			HMACSHA1(params);
 			break;
 
 		case 8 :
-			HMACSHA256(pResult, pParams);
+			HMACSHA256(params);
 			break;
 
 		case 9 :
-			HMACSHA384(pResult, pParams);
+			HMACSHA384(params);
 			break;
 
 		case 10 :
-			HMACSHA512(pResult, pParams);
+			HMACSHA512(params);
 			break;
 
 		case 11 :
-			SHA384(pResult, pParams);
+			SHA384(params);
 			break;
 
 		case 12 :
-			SHA512(pResult, pParams);
+			SHA512(params);
 			break;
 
 		case 13 :
-			MD5(pResult, pParams);
+			MD5(params);
 			break;
 
 		case 14 :
-			SHA1(pResult, pParams);
+			SHA1(params);
 			break;
 
 		case 15 :
-			SHA256(pResult, pParams);
+			SHA256(params);
 			break;
 
 		case 16 :
-			RSASHA1(pResult, pParams);
+			RSASHA1(params);
 			break;
 
 		case 17 :
-			AES128(pResult, pParams);
+			AES128(params);
 			break;
 
 		case 18 :
-			AES192(pResult, pParams);
+			AES192(params);
 			break;
 
 		case 19 :
-			AES256(pResult, pParams);
+			AES256(params);
 			break;
-
+			
 		case 20 :
-			RIPEMD160(pResult, pParams);
+			RIPEMD160(params);
 			break;
 			
 		case 21 :
-			RSAVERIFYSHA1(pResult, pParams);
+			RSAVERIFYSHA1(params);
 			break;
 			
 		case 22 :
-			RSAVERIFYSHA256(pResult, pParams);
+			RSAVERIFYSHA256(params);
 			break;
 	}
 }
@@ -247,6 +246,9 @@ void CC_AES(const EVP_CIPHER *cipher,
 						case 1:
 							temp.toB64Text(&returnValue);
 							break;
+						case 2:
+							temp.toB64Text(&returnValue, true);
+							break;
 						default:
 							temp.toHexText(&returnValue);
 							break;
@@ -259,8 +261,11 @@ void CC_AES(const EVP_CIPHER *cipher,
 	}
 }
 
-void AES128(sLONG_PTR *pResult, PackagePtr pParams)
+void AES128(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
@@ -271,14 +276,14 @@ void AES128(sLONG_PTR *pResult, PackagePtr pParams)
 	C_BLOB Param8;
 	C_TEXT returnValue;
 
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	Param5.fromParamAtIndex(pParams, 5);
 	Param6.fromParamAtIndex(pParams, 6);
-	Param7.fromParamAtIndex(pParams, 7);
-	Param8.fromParamAtIndex(pParams, 8);
+	Param7.fromParamAtIndex(params, 7);
+	Param8.fromParamAtIndex(params, 8);
 	
 	const EVP_CIPHER *cipher;
 	
@@ -324,8 +329,11 @@ void AES128(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void AES192(sLONG_PTR *pResult, PackagePtr pParams)
+void AES192(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
@@ -336,14 +344,14 @@ void AES192(sLONG_PTR *pResult, PackagePtr pParams)
 	C_BLOB Param8;
 	C_TEXT returnValue;
 
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	Param5.fromParamAtIndex(pParams, 5);
 	Param6.fromParamAtIndex(pParams, 6);
-	Param7.fromParamAtIndex(pParams, 7);
-	Param8.fromParamAtIndex(pParams, 8);
+	Param7.fromParamAtIndex(params, 7);
+	Param8.fromParamAtIndex(params, 8);
 	
 	const EVP_CIPHER *cipher;
 	
@@ -386,8 +394,11 @@ void AES192(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void AES256(sLONG_PTR *pResult, PackagePtr pParams)
+void AES256(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
@@ -398,14 +409,14 @@ void AES256(sLONG_PTR *pResult, PackagePtr pParams)
 	C_BLOB Param8;
 	C_TEXT returnValue;
 
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	Param5.fromParamAtIndex(pParams, 5);
 	Param6.fromParamAtIndex(pParams, 6);
-	Param7.fromParamAtIndex(pParams, 7);
-	Param8.fromParamAtIndex(pParams, 8);
+	Param7.fromParamAtIndex(params, 7);
+	Param8.fromParamAtIndex(params, 8);
 	
 	const EVP_CIPHER *cipher;
 	
@@ -453,14 +464,17 @@ void AES256(sLONG_PTR *pResult, PackagePtr pParams)
 
 #pragma mark -
 
-void PEM_From_P12(sLONG_PTR *pResult, PackagePtr pParams)
+void PEM_From_P12(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_TEXT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
+	Param1.fromParamAtIndex(params, 1);
 	Param3.fromParamAtIndex(pParams, 3);	
 	
 	BIO *bio = BIO_new_mem_buf((void *)Param1.getBytesPtr(), Param1.getBytesLength());
@@ -513,8 +527,11 @@ void PEM_From_P12(sLONG_PTR *pResult, PackagePtr pParams)
 
 #pragma mark -
 
-void Get_timestamp(sLONG_PTR *pResult, PackagePtr pParams)
+void Get_timestamp(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_TEXT returnValue;
 	
 	time_t timestamp = time(NULL);
@@ -532,8 +549,11 @@ void Get_timestamp(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void Get_timestring(sLONG_PTR *pResult, PackagePtr pParams)
+void Get_timestring(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_TEXT returnValue;
 	
 	time_t timestamp = time(NULL);
@@ -551,8 +571,11 @@ void Get_timestring(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void Get_unixtime(sLONG_PTR *pResult, PackagePtr pParams)
+void Get_unixtime(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_TEXT returnValue;
 	
 	time_t timestamp = time(NULL);
@@ -582,6 +605,9 @@ void CC_HMACHASH(uint32_t hashlen, const EVP_MD * (*EVP)(void),
 		case 1:
 			temp.toB64Text(&returnValue);
 			break;
+		case 2:
+			temp.toB64Text(&returnValue, true);
+			break;
 		default:
 			temp.toHexText(&returnValue);
 			break;
@@ -590,15 +616,18 @@ void CC_HMACHASH(uint32_t hashlen, const EVP_MD * (*EVP)(void),
 	free(buf);
 }
 
-void HMACMD5(sLONG_PTR *pResult, PackagePtr pParams)
+void HMACMD5(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(16, EVP_md5, Param1, Param2, Param3, returnValue);
@@ -606,15 +635,18 @@ void HMACMD5(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void HMACSHA1(sLONG_PTR *pResult, PackagePtr pParams)
+void HMACSHA1(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(20, EVP_sha1, Param1, Param2, Param3, returnValue);
@@ -622,15 +654,18 @@ void HMACSHA1(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void HMACSHA256(sLONG_PTR *pResult, PackagePtr pParams)
+void HMACSHA256(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(32, EVP_sha256, Param1, Param2, Param3, returnValue);
@@ -638,15 +673,18 @@ void HMACSHA256(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void HMACSHA384(sLONG_PTR *pResult, PackagePtr pParams)
+void HMACSHA384(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(48, EVP_sha384, Param1, Param2, Param3, returnValue);
@@ -654,15 +692,18 @@ void HMACSHA384(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void HMACSHA512(sLONG_PTR *pResult, PackagePtr pParams)
+void HMACSHA512(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(64, EVP_sha512, Param1, Param2, Param3, returnValue);
@@ -672,13 +713,16 @@ void HMACSHA512(sLONG_PTR *pResult, PackagePtr pParams)
 
 #pragma mark -
 
-void RIPEMD160(sLONG_PTR *pResult, PackagePtr pParams)
+void RIPEMD160(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
+	Param1.fromParamAtIndex(params, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	uint8_t *buf = (uint8_t *)calloc(20, sizeof(uint8_t));
@@ -692,6 +736,9 @@ void RIPEMD160(sLONG_PTR *pResult, PackagePtr pParams)
 	{
 		case 1:
 			temp.toB64Text(&returnValue);
+			break;
+		case 2:
+			temp.toB64Text(&returnValue, true);
 			break;
 		default:
 			temp.toHexText(&returnValue);
@@ -721,6 +768,9 @@ void CC_HASH(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, un
 		case 1:
 			temp.toB64Text(&returnValue);
 			break;
+		case 2:
+			temp.toB64Text(&returnValue, true);
+			break;
 		default:
 			temp.toHexText(&returnValue);
 			break;
@@ -729,13 +779,16 @@ void CC_HASH(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, un
 	free(buf);
 }
 
-void MD5(sLONG_PTR *pResult, PackagePtr pParams)
+void MD5(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
+	Param1.fromParamAtIndex(params, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(16, CC_MD5, Param1, Param2, returnValue);
@@ -743,13 +796,16 @@ void MD5(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void SHA1(sLONG_PTR *pResult, PackagePtr pParams)
+void SHA1(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
+	Param1.fromParamAtIndex(params, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(20, CC_SHA1, Param1, Param2, returnValue);
@@ -757,13 +813,16 @@ void SHA1(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void SHA256(sLONG_PTR *pResult, PackagePtr pParams)
+void SHA256(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
+	Param1.fromParamAtIndex(params, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(32, CC_SHA256, Param1, Param2, returnValue);
@@ -771,13 +830,16 @@ void SHA256(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void SHA384(sLONG_PTR *pResult, PackagePtr pParams)
+void SHA384(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
+	Param1.fromParamAtIndex(params, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(48, CC_SHA384, Param1, Param2, returnValue);
@@ -785,13 +847,16 @@ void SHA384(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void SHA512(sLONG_PTR *pResult, PackagePtr pParams)
+void SHA512(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
+	Param1.fromParamAtIndex(params, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(64, CC_SHA512, Param1, Param2, returnValue);
@@ -829,6 +894,9 @@ void CC_RSASHA(unsigned int hashlen, int nid, void (*CC)(const void *data, uint3
 					case 1:
 						temp.toB64Text(&returnValue);
 						break;
+					case 2:
+						temp.toB64Text(&returnValue, true);
+						break;
 					default:
 						temp.toHexText(&returnValue);
 						break;
@@ -841,15 +909,18 @@ void CC_RSASHA(unsigned int hashlen, int nid, void (*CC)(const void *data, uint3
 	free(buf);
 }
 
-void RSASHA1(sLONG_PTR *pResult, PackagePtr pParams)
+void RSASHA1(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
 	C_TEXT returnValue;
     
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_RSASHA(20, NID_sha1, CC_SHA1, Param1, Param2, Param3, returnValue);
@@ -857,15 +928,18 @@ void RSASHA1(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void RSASHA256(sLONG_PTR *pResult, PackagePtr pParams)
+void RSASHA256(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_LONGINT Param3;
 	C_TEXT returnValue;
     
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 
 	CC_RSASHA(32, NID_sha256, CC_SHA256, Param1, Param2, Param3, returnValue);
@@ -916,16 +990,19 @@ void CC_RSASHAVERIFY(unsigned int hashlen, int nid, void (*CC)(const void *data,
 	free(buf);
 }
 
-void RSAVERIFYSHA1(sLONG_PTR *pResult, PackagePtr pParams)
+void RSAVERIFYSHA1(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_TEXT Param3;
 	C_LONGINT Param4;
 	C_LONGINT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	
@@ -934,16 +1011,19 @@ void RSAVERIFYSHA1(sLONG_PTR *pResult, PackagePtr pParams)
 	returnValue.setReturn(pResult);
 }
 
-void RSAVERIFYSHA256(sLONG_PTR *pResult, PackagePtr pParams)
+void RSAVERIFYSHA256(PA_PluginParameters params)
 {
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+	
 	C_BLOB Param1;
 	C_BLOB Param2;
 	C_TEXT Param3;
 	C_LONGINT Param4;
 	C_LONGINT returnValue;
 	
-	Param1.fromParamAtIndex(pParams, 1);
-	Param2.fromParamAtIndex(pParams, 2);
+	Param1.fromParamAtIndex(params, 1);
+	Param2.fromParamAtIndex(params, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	
