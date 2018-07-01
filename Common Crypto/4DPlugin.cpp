@@ -276,14 +276,14 @@ void AES128(PA_PluginParameters params)
 	C_BLOB Param8;
 	C_TEXT returnValue;
 
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	Param5.fromParamAtIndex(pParams, 5);
 	Param6.fromParamAtIndex(pParams, 6);
-	Param7.fromParamAtIndex(params, 7);
-	Param8.fromParamAtIndex(params, 8);
+	Param7.fromParamAtIndex(pParams, 7);
+	Param8.fromParamAtIndex(pParams, 8);
 	
 	const EVP_CIPHER *cipher;
 	
@@ -344,14 +344,14 @@ void AES192(PA_PluginParameters params)
 	C_BLOB Param8;
 	C_TEXT returnValue;
 
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	Param5.fromParamAtIndex(pParams, 5);
 	Param6.fromParamAtIndex(pParams, 6);
-	Param7.fromParamAtIndex(params, 7);
-	Param8.fromParamAtIndex(params, 8);
+	Param7.fromParamAtIndex(pParams, 7);
+	Param8.fromParamAtIndex(pParams, 8);
 	
 	const EVP_CIPHER *cipher;
 	
@@ -409,14 +409,14 @@ void AES256(PA_PluginParameters params)
 	C_BLOB Param8;
 	C_TEXT returnValue;
 
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	Param5.fromParamAtIndex(pParams, 5);
 	Param6.fromParamAtIndex(pParams, 6);
-	Param7.fromParamAtIndex(params, 7);
-	Param8.fromParamAtIndex(params, 8);
+	Param7.fromParamAtIndex(pParams, 7);
+	Param8.fromParamAtIndex(pParams, 8);
 	
 	const EVP_CIPHER *cipher;
 	
@@ -474,7 +474,7 @@ void PEM_From_P12(PA_PluginParameters params)
 	C_TEXT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
+	Param1.fromParamAtIndex(pParams, 1);
 	Param3.fromParamAtIndex(pParams, 3);	
 	
 	BIO *bio = BIO_new_mem_buf((void *)Param1.getBytesPtr(), Param1.getBytesLength());
@@ -626,8 +626,8 @@ void HMACMD5(PA_PluginParameters params)
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(16, EVP_md5, Param1, Param2, Param3, returnValue);
@@ -645,8 +645,8 @@ void HMACSHA1(PA_PluginParameters params)
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(20, EVP_sha1, Param1, Param2, Param3, returnValue);
@@ -664,8 +664,8 @@ void HMACSHA256(PA_PluginParameters params)
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(32, EVP_sha256, Param1, Param2, Param3, returnValue);
@@ -683,8 +683,8 @@ void HMACSHA384(PA_PluginParameters params)
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(48, EVP_sha384, Param1, Param2, Param3, returnValue);
@@ -702,8 +702,8 @@ void HMACSHA512(PA_PluginParameters params)
 	C_LONGINT Param3;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_HMACHASH(64, EVP_sha512, Param1, Param2, Param3, returnValue);
@@ -722,7 +722,7 @@ void RIPEMD160(PA_PluginParameters params)
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
+	Param1.fromParamAtIndex(pParams, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	uint8_t *buf = (uint8_t *)calloc(20, sizeof(uint8_t));
@@ -788,7 +788,7 @@ void MD5(PA_PluginParameters params)
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
+	Param1.fromParamAtIndex(pParams, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(16, CC_MD5, Param1, Param2, returnValue);
@@ -805,7 +805,7 @@ void SHA1(PA_PluginParameters params)
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
+	Param1.fromParamAtIndex(pParams, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(20, CC_SHA1, Param1, Param2, returnValue);
@@ -822,7 +822,7 @@ void SHA256(PA_PluginParameters params)
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
+	Param1.fromParamAtIndex(pParams, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(32, CC_SHA256, Param1, Param2, returnValue);
@@ -839,7 +839,7 @@ void SHA384(PA_PluginParameters params)
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
+	Param1.fromParamAtIndex(pParams, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(48, CC_SHA384, Param1, Param2, returnValue);
@@ -856,7 +856,7 @@ void SHA512(PA_PluginParameters params)
 	C_LONGINT Param2;
 	C_TEXT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
+	Param1.fromParamAtIndex(pParams, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	
 	CC_HASH(64, CC_SHA512, Param1, Param2, returnValue);
@@ -919,8 +919,8 @@ void RSASHA1(PA_PluginParameters params)
 	C_LONGINT Param3;
 	C_TEXT returnValue;
     
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	
 	CC_RSASHA(20, NID_sha1, CC_SHA1, Param1, Param2, Param3, returnValue);
@@ -938,8 +938,8 @@ void RSASHA256(PA_PluginParameters params)
 	C_LONGINT Param3;
 	C_TEXT returnValue;
     
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 
 	CC_RSASHA(32, NID_sha256, CC_SHA256, Param1, Param2, Param3, returnValue);
@@ -1001,8 +1001,8 @@ void RSAVERIFYSHA1(PA_PluginParameters params)
 	C_LONGINT Param4;
 	C_LONGINT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	
@@ -1022,8 +1022,8 @@ void RSAVERIFYSHA256(PA_PluginParameters params)
 	C_LONGINT Param4;
 	C_LONGINT returnValue;
 	
-	Param1.fromParamAtIndex(params, 1);
-	Param2.fromParamAtIndex(params, 2);
+	Param1.fromParamAtIndex(pParams, 1);
+	Param2.fromParamAtIndex(pParams, 2);
 	Param3.fromParamAtIndex(pParams, 3);
 	Param4.fromParamAtIndex(pParams, 4);
 	

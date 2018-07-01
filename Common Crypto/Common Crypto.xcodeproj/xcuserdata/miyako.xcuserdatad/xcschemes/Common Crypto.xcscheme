@@ -45,7 +45,7 @@
       <PathRunnable
          runnableDebuggingMode = "0"
          BundleIdentifier = "com.4d.4d"
-         FilePath = "/Applications/4D/4D v17/4D.app">
+         FilePath = "/Applications/4D/4D v17/224978/4D.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference

@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2mYld+CGppAkjeyOZKS2bt6urxI=
+			Nj3Dyg3h7zEdDgVaOhqP2Di55og=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -388,11 +388,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2mYld+CGppAkjeyOZKS2bt6urxI=
+			Nj3Dyg3h7zEdDgVaOhqP2Di55og=
 			</data>
 			<key>hash2</key>
 			<data>
-			8HZvWfbUsSQ37rSouUq2TFssHQ5ASF46z2z+F6fX2I0=
+			3+2JvO6wj8iiTcAF3FUI39yzjr8zaOUxccpMIIoPFn4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -434,11 +434,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tcQsRtwFOpT6w5tQ29Bo8C8B+a0=
+			yoqDKN6P4IU33jnGn5JeoSi6KIg=
 			</data>
 			<key>hash2</key>
 			<data>
-			A01byIakzywngs8jsF+wpJysKdVXboSU19O4azm19Xw=
+			rQEUTK0hOlac1pSfT238XZaaAIIvEw85UpNGSrwAOG4=
+			</data>
+		</dict>
+		<key>Windows/Common Crypto.exp</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mT5VU1GpSm68e4wwsW7EdH1NI9M=
+			</data>
+			<key>hash2</key>
+			<data>
+			GBzQxlQGYC9L2h+bjAlC5S762D2dMiR1+oP3X/ZseNU=
+			</data>
+		</dict>
+		<key>Windows/Common Crypto.iobj</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			txI/YdKoHj8nRpaFy5nWG1ab9Lo=
+			</data>
+			<key>hash2</key>
+			<data>
+			C56SyPivk6JbiH2zFKZFyQo5zUIQ+jllqAvqFdrIC3o=
+			</data>
+		</dict>
+		<key>Windows/Common Crypto.ipdb</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aHifiBKwlMN3D8lMtxpH2NU2Jzk=
+			</data>
+			<key>hash2</key>
+			<data>
+			eeoNAJHJ+ABxq+UQ37UkwJWGJh+108WZ3jsKEbvRFKU=
+			</data>
+		</dict>
+		<key>Windows/Common Crypto.lib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			p1qpmwzyyShgPb2tggLSsmhbvTk=
+			</data>
+			<key>hash2</key>
+			<data>
+			InGDB8I5YqHK4XhNDnV0xCrVFJrRTiCp9K39BymffiQ=
 			</data>
 		</dict>
 		<key>Windows/msvcr100.dll</key>
@@ -467,11 +511,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			iz2QY1hjNSYH0/rHE313vIljBR8=
+			9iRUIp0nxVXPmqRs2M6DsjZu0ao=
 			</data>
 			<key>hash2</key>
 			<data>
-			JUcxEtwVO3lXonXWnoHtkCnwOJ+4qdU807RU3sIKQmw=
+			84IUR9C8ez1Hm+tRg3At8DzhRgvdSoUFztQmGj6FHEI=
+			</data>
+		</dict>
+		<key>Windows64/Common Crypto.exp</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ic+6+d33PYXtYOziPjKkzgxRXoI=
+			</data>
+			<key>hash2</key>
+			<data>
+			LOem9YPfQHO4INsofAztmcn4p0f3VfZRwuJk9CWM3DM=
+			</data>
+		</dict>
+		<key>Windows64/Common Crypto.iobj</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			F4HwBZybg/7wOhfGqC0+McrGIwE=
+			</data>
+			<key>hash2</key>
+			<data>
+			dt94D89kwWv9pIGm8Qj03NGrFAqgU69mwM4AC+Q0hNQ=
+			</data>
+		</dict>
+		<key>Windows64/Common Crypto.ipdb</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			k2jd3QCjVqvQesAhh9vZ9euETpY=
+			</data>
+			<key>hash2</key>
+			<data>
+			EwrVEIoRIhL4v3qdJDM5ic5h+X/vvolZWzbS7pgHtWg=
+			</data>
+		</dict>
+		<key>Windows64/Common Crypto.lib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qu07nf32FbmJwKP8bfMJipjGDiQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			VdzcSlpRsIcfQkZt60NIt66wdDU8tqXAhZL4684q3ZU=
 			</data>
 		</dict>
 		<key>Windows64/msvcr100.dll</key>
@@ -500,7 +588,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			gGCm/OPAwbAHQFd3QRvtCnHp5iE=
+			DyYFPuR0iy+Qs77px7H3sByyHOY=
 			</data>
 			<key>requirement</key>
 			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>

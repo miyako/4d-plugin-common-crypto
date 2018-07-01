@@ -10,6 +10,8 @@
 
 /* PA_YieldAbsolute isn't allowed in preemptive mode */
 
+/* PA_GetBlobParameter doesn't work in preemptive mode */
+
 void CBytes::fromParamAtIndex(PA_PluginParameters params, uint32_t index)
 {
 	if(index)
@@ -26,7 +28,7 @@ void CBytes::fromParamAtIndex(PA_PluginParameters params, uint32_t index)
 	}
 }
 
-/* PA_GetBlobHandleParameter doesn't work in preemptive mode */
+/* PA_GetBlobHandleParameter doesn't work in preemptive mode before ACI0098388 fix */
 
 void CBytes::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 {
@@ -38,8 +40,8 @@ void CBytes::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 			unsigned int size = PA_GetHandleSize(h);
 			
 			this->_CBytes.resize(size);
-			
-			PA_MoveBlock(PA_LockHandle(h), (char *)&this->_CBytes[0], size);		
+			memmove((char *)&this->_CBytes[0], PA_LockHandle(h), size);
+//		PA_MoveBlock(PA_LockHandle(h), (char *)&this->_CBytes[0], size);
 			PA_UnlockHandle(h);
 		}
 	}
@@ -54,14 +56,18 @@ void CBytes::toParamAtIndex(PackagePtr pParams, uint32_t index)
 		if (*h) PA_DisposeHandle(*h);
 				
 		PA_Handle d = PA_NewHandle((unsigned int)this->_CBytes.size());
-        
-        if(this->_CBytes.size())//  0 is apparently a range violation on windows
-        {
-            PA_MoveBlock((char *)&this->_CBytes[0], PA_LockHandle(d), (unsigned int)this->_CBytes.size());
-            PA_UnlockHandle(d);
-        }
-		
-		*h = d;
+		/* PA_NewHandle can fail before ACI0098388 */
+		if(eER_NoErr == PA_GetLastError())
+		{
+			if(this->_CBytes.size())//  0 is apparently a range violation on windows
+			{
+				memmove(PA_LockHandle(d), (char *)&this->_CBytes[0], (unsigned int)this->_CBytes.size());
+//			PA_MoveBlock((char *)&this->_CBytes[0], PA_LockHandle(d), (unsigned int)this->_CBytes.size());
+				PA_UnlockHandle(d);
+			}
+			
+			*h = d;
+		}
 	}
 }
 
@@ -70,7 +76,8 @@ void CBytes::setBytes(const uint8_t *bytes, unsigned int len)
 	if(bytes)
 	{
 		this->_CBytes.resize(len);
-		PA_MoveBlock((void *)bytes, (char *)&this->_CBytes[0], len);	
+		memmove((char *)&this->_CBytes[0], (void *)bytes, len);
+//	PA_MoveBlock((void *)bytes, (char *)&this->_CBytes[0], len);
 	}
 }
 
@@ -80,7 +87,8 @@ void CBytes::addBytes(const uint8_t *bytes, unsigned int len)
 	{
 		unsigned int originalSize = this->_CBytes.size();
 		this->_CBytes.resize(originalSize + len);
-		PA_MoveBlock((void *)bytes, (char *)&this->_CBytes[originalSize], len);	
+		memmove((char *)&this->_CBytes[originalSize], (void *)bytes, len);
+//	PA_MoveBlock((void *)bytes, (char *)&this->_CBytes[originalSize], len);
 	}
 }
 
@@ -90,14 +98,18 @@ void CBytes::setReturn(sLONG_PTR *pResult)
 	PA_Handle *h = (PA_Handle *)pResult;
 	
 	PA_Handle d = PA_NewHandle((unsigned int)this->_CBytes.size());
-    
-    if(this->_CBytes.size())//  0 is apparently a range violation on windows
-    {
-        PA_MoveBlock((char *)&this->_CBytes[0], PA_LockHandle(d), (unsigned int)this->_CBytes.size());
-        PA_UnlockHandle(d);
-    }
-	
-	*h = d;
+	/* PA_NewHandle can fail before ACI0098388 */
+	if(eER_NoErr == PA_GetLastError())
+	{
+		if(this->_CBytes.size())//  0 is apparently a range violation on windows
+		{
+			memmove(PA_LockHandle(d), (char *)&this->_CBytes[0], (unsigned int)this->_CBytes.size());
+//		PA_MoveBlock((char *)&this->_CBytes[0], PA_LockHandle(d), (unsigned int)this->_CBytes.size());
+			PA_UnlockHandle(d);
+		}
+		*h = d;
+	}
+
 }
 
 const uint8_t *CBytes::getBytesPtr()
