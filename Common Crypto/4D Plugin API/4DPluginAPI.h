@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2017-present, 4D, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 // ---------------------------------------------------------------
 //
 // 4D Plugin API
@@ -13,36 +20,9 @@
 
 #include "Flags.h"
 #include "PublicTypes.h"
-
-#include <string>
-#include <vector>
-#include <map>
-
-#include "C_INTEGER.h"
-#include "C_LONGINT.h"
-#include "C_TIME.h"
-#include "C_DATE.h"
-#include "C_REAL.h"
-#include "C_TEXT.h"
-#include "C_BLOB.h"
-#include "C_POINTER.h"
-#include "C_PICTURE.h"
-
-#include "ARRAY_TEXT.h"
-#include "ARRAY_BOOLEAN.h"
-#include "ARRAY_INTEGER.h"
-#include "ARRAY_REAL.h"
-#include "ARRAY_LONGINT.h"
-#include "ARRAY_TIME.h"
-#include "ARRAY_DATE.h"
-
-//some external libraries assume first load; include this file after them 
-#if VERSIONWIN
-#ifndef _WINDOWS_
-#include <windows.h>
+#ifndef NULL
+#define NULL 0
 #endif
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -53,7 +33,7 @@ extern "C" {
 // interface that must be provided by user
 // ---------------------------------------------------------------
 void PluginMain( PA_long32 selector, PA_PluginParameters params );
-void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pParams);
+
 
 // ---------------------------------------------------------------
 // Returns the last error returned by any call to the API
@@ -116,13 +96,41 @@ void			PA_CopyUnichars( PA_Unichar* source, PA_Unichar* dest, PA_long32 maxbytes
 // ---------------------------------------------------------------
 // pictures manipulations 
 // ---------------------------------------------------------------
-
+//The pictures are manipulated by reference
 PA_Picture   PA_CreatePicture( void* buffer, PA_long32 len );
 void*        PA_CreateNativePictureForScreen( PA_Picture picture );	// creates a CGImageRef on Mac, and a gdiplus::bitmap* on Windows
 void*        PA_CreateNativePictureForPrinting( PA_Picture picture );	// creates a CGPDFDocumentRef on Mac, and a gdiplus::metafile* on Windows
 void         PA_DisposePicture( PA_Picture picture );
 PA_Unistring PA_GetPictureData( PA_Picture picture, PA_long32 index, PA_Handle handle );
 PA_Picture   PA_DuplicatePicture( PA_Picture picture, char retainOnly );
+
+
+// ---------------------------------------------------------------
+// object manipulations | From 17.x 
+// ---------------------------------------------------------------
+//The objects are manipulated by reference
+PA_ObjectRef     PA_CreateObject ( void );
+void             PA_DisposeObject ( PA_ObjectRef object );
+
+PA_ObjectRef     PA_DuplicateObject ( PA_ObjectRef object );
+PA_Variable  	 PA_GetObjectProperty		(PA_ObjectRef object, PA_Unistring* key);
+void		 	 PA_SetObjectProperty		(PA_ObjectRef object, PA_Unistring* key, PA_Variable value);
+void             PA_RemoveObjectProperty( PA_ObjectRef object, PA_Unistring* key );
+char             PA_HasObjectProperty( PA_ObjectRef object, PA_Unistring* key );
+PA_VariableKind  PA_GetObjectPropertyType( PA_ObjectRef object, PA_Unistring* key );
+PA_Variable      PA_JsonParse( PA_Unistring* json, PA_VariableKind kind );
+PA_Unistring     PA_JsonStringify( PA_Variable value, char prettyPrint );
+
+// ---------------------------------------------------------------
+// Collection manipulations| From 17.x 
+// ---------------------------------------------------------------
+//The collections are manipulated by reference
+PA_CollectionRef PA_CreateCollection(void);
+PA_Variable  	 PA_GetCollectionElement(PA_CollectionRef collection, long index);
+void		 	 PA_SetCollectionElement(PA_CollectionRef collection, long index, PA_Variable value);
+void             PA_DisposeCollection(PA_CollectionRef collection);
+PA_long32		 PA_GetCollectionLength(PA_CollectionRef collection);
+
 
 // ---------------------------------------------------------------
 // these commands returns or set informations 
@@ -301,7 +309,7 @@ char  PA_IsTableVisible ( short table );
 void  PA_GetTableAndFieldNumbers( PA_Unichar* tableAndFieldNames, short* table, short* field );
 
 // ---- fields
-short PA_CountFields        ( short table );
+short PA_CountFields        ( short table);
 void  PA_GetFieldName       ( short table, short field, PA_Unichar* fieldName );
 void  PA_GetFieldProperties ( short table, short field, PA_FieldKind* kind,
                               short* stringlength, char* indexed, PA_long32* attributes );
@@ -359,6 +367,7 @@ short        PA_GetIntegerField    ( short table, short field );
 PA_long32         PA_GetTimeField       ( short table, short field );
 void         PA_GetDateField       ( short table, short field, short* day, short* month, short* year );
 char         PA_GetBooleanField    ( short table, short field );
+PA_ObjectRef PA_GetObjectField     ( short table, short field );
 
 // ---------------------------------------------------------------
 // Set fields in database
@@ -374,6 +383,7 @@ void PA_SetIntegerField    ( short table, short field, short value );
 void PA_SetTimeField       ( short table, short field, PA_long32  value );
 void PA_SetDateField       ( short table, short field, short day, short month, short year );
 void PA_SetBooleanField    ( short table, short field, char value );
+void PA_SetObjectField     ( short table, short field, PA_ObjectRef object );
 
 
 
@@ -400,12 +410,13 @@ PA_long32			PA_GetBlobParameter          ( PA_PluginParameters params, short ind
 PA_Handle		PA_GetBlobHandleParameter    ( PA_PluginParameters params, short index );
 PA_Picture		PA_GetPictureParameter       ( PA_PluginParameters params, short index );
 void			PA_GetDateParameter          ( PA_PluginParameters params, short index, short* day, short* month, short* year );
-PA_long32			PA_GetTimeParameter          ( PA_PluginParameters params, short index );
+PA_long32		PA_GetTimeParameter          ( PA_PluginParameters params, short index );
 PA_Variable		PA_GetVariableParameter      ( PA_PluginParameters params, short index );
+PA_ObjectRef    PA_GetObjectParameter(PA_PluginParameters params, short index);
+PA_CollectionRef PA_GetCollectionParameter(PA_PluginParameters params, short index);
 
 
 PA_Pointer		PA_GetPointerParameter       ( PA_PluginParameters params, short index );
-
 PA_Variable		PA_GetPointerValue           ( PA_Pointer pointer ); // Call PA_ClearVariable to clear the returned PA_Variable.
 PA_PointerKind	PA_GetPointerKind			 ( PA_Pointer pointer );
 void			PA_GetPointerValueProperties ( PA_Pointer inPointer, PA_VariableKind* outKind, PA_long32* outStringLength, PA_long32* outArraySize);
@@ -425,7 +436,8 @@ void PA_ReturnBlob     ( PA_PluginParameters params, void* blob, PA_long32 len )
 void PA_ReturnPicture  ( PA_PluginParameters params, PA_Picture picture );
 void PA_ReturnDate     ( PA_PluginParameters params, short day, short month, short year );
 void PA_ReturnTime     ( PA_PluginParameters params, PA_long32 value );
-
+void PA_ReturnObject		( PA_PluginParameters params, PA_ObjectRef object);
+void PA_ReturnCollection	( PA_PluginParameters params, PA_CollectionRef object);
 void PA_ReturnBlobHandle    ( PA_PluginParameters params, PA_Handle hblob );
 
 
@@ -444,7 +456,6 @@ void PA_SetPictureParameter	   ( PA_PluginParameters params, short index, PA_Pic
 void PA_SetDateParameter	   ( PA_PluginParameters params, short index, short day, short month, short year );
 void PA_SetTimeParameter	   ( PA_PluginParameters params, short index, PA_long32 value );
 void PA_SetVariableParameter   ( PA_PluginParameters params, short index, PA_Variable variable, char clearOldValue );
-
 
 
 // -----------------------------------------------------
@@ -471,7 +482,7 @@ void    PA_CustomizeDesignMode    ( PA_PluginParameters params );
 void    PA_DontTakeEvent          ( PA_PluginParameters params );
 void    PA_CallPluginAreaMethod   ( PA_PluginParameters params );
 void    PA_SetMenuIcon            ( PA_PluginParameters params, short id );
-PA_long32    PA_GetUpdateHDC           ( );
+PA_HDC	PA_GetHDC				  (	PA_PluginParameters params);
 void	PA_PublishWebPicture      ( PA_PluginParameters params, char pictureMap );
 void	PA_SendHTML               ( PA_PluginParameters params, void* webData, char* HTMLbuffer, PA_long32 len );
 void	PA_SendWebPicture         ( PA_PluginParameters params, void* webData, void* picture, PA_long32 len, PA_WebPictureKind kind );
@@ -556,14 +567,17 @@ PA_VariableKind PA_GetVariableKind     ( PA_Variable variable );
 PA_VariableKind PA_GetPointerValueKind ( PA_Pointer inVarPtr );
 
 PA_Unistring PA_GetStringVariable      ( PA_Variable variable );
-PA_long32         PA_GetBlobVariable        ( PA_Variable variable, void* blob );
+PA_long32    PA_GetBlobVariable        ( PA_Variable variable, void* blob );
 PA_Handle    PA_GetBlobHandleVariable  ( PA_Variable variable );
 PA_Picture   PA_GetPictureVariable     ( PA_Variable variable );
 double       PA_GetRealVariable        ( PA_Variable variable );
-PA_long32         PA_GetLongintVariable     ( PA_Variable variable );
-PA_long32         PA_GetTimeVariable        ( PA_Variable variable );
+PA_long32    PA_GetLongintVariable     ( PA_Variable variable );
+PA_long32    PA_GetTimeVariable        ( PA_Variable variable );
 void         PA_GetDateVariable        ( PA_Variable variable, short* day, short* month, short* year );
 char         PA_GetBooleanVariable     ( PA_Variable variable );
+PA_ObjectRef PA_GetObjectVariable      ( PA_Variable variable );
+PA_CollectionRef PA_GetCollectionVariable	   (PA_Variable variable);
+void		 PA_CopyVariable		   (PA_Variable *source, PA_Variable *destination);
 
 
 
@@ -583,10 +597,12 @@ void PA_SetLongintVariable    ( PA_Variable* variable, PA_long32 value   );
 void PA_SetTimeVariable       ( PA_Variable* variable, PA_long32 value   );
 void PA_SetDateVariable       ( PA_Variable* variable, short day, short month, short year );
 void PA_SetBooleanVariable    ( PA_Variable* variable, char value );
+void PA_SetObjectVariable     ( PA_Variable* variable, PA_ObjectRef object );
+void PA_SetCollectionVariable (PA_Variable* variable, PA_CollectionRef collection);
 
 // those functions are usefull to pass parameters to 4D Commands, using PA_ExecuteCommandByID
-void PA_SetOperationVariable   ( PA_Variable* variable, char op );		// op can be '*', '<', '>'...
-void PA_SetTableFieldVariable ( PA_Variable* variable, short table, short field );	// pass 0 to table to pass only the field
+void PA_SetOperationVariable		( PA_Variable* variable, char op );		// op can be '*', '<', '>'...
+void PA_SetTableFieldVariable		( PA_Variable* variable, short table, short field );	// pass 0 to table to pass only the field
 void PA_SetVariableOrFieldReference ( PA_Variable* outVariable , PA_Pointer inPointer);
 
 // ---------------------------------------------------------------
@@ -620,6 +636,7 @@ char         PA_GetBooleanInArray ( PA_Variable ar, PA_long32 i );
 PA_Blob      PA_GetBlobInArray    ( PA_Variable ar, PA_long32 i );
 PA_Variable  PA_GetArrayInArray   ( PA_Variable ar, PA_long32 i );
 PointerBlock PA_GetPointerInArray ( PA_Variable ar, PA_long32 i );
+PA_ObjectRef PA_GetObjectInArray  ( PA_Variable ar, PA_long32 i );
 
 // Setting values on arrays
 void PA_SetIntegerInArray   ( PA_Variable ar, PA_long32 i, short value );
@@ -633,6 +650,7 @@ void PA_SetBooleanInArray   ( PA_Variable ar, PA_long32 i, char value );
 void PA_SetBlobInArray      ( PA_Variable ar, PA_long32 i, PA_Blob value );
 void PA_SetArrayInArray     ( PA_Variable ar, PA_long32 i, PA_Variable value );
 void PA_SetPointerInArray   ( PA_Variable ar, PA_long32 i, PointerBlock value );
+void PA_SetObjectInArray    ( PA_Variable ar, PA_long32 i, PA_ObjectRef object );
 
 // ---------------------------------------------------------------
 // 4D Application Methods and functions
@@ -692,7 +710,7 @@ void* PA_GetWindowsPrintingDC();
 
 PA_long32 PA_CountActiveProcess      ( );
 PA_long32 PA_CountTotalProcess       ( );
-void PA_GetProcessInfo          ( PA_long32 process, C_TEXT &name, PA_long32* state, PA_long32* time );
+void PA_GetProcessInfo          ( PA_long32 process, PA_Unichar* name, PA_long32* state, PA_long32* time );
 void PA_FreezeProcess           ( PA_long32 process );
 void PA_UnfreezeProcess         ( PA_long32 process );
 char PA_IsProcessDying          ( );
@@ -816,8 +834,9 @@ void         PA_SetWindowFocused ( PA_WindowRef windowRef );
 char         PA_IsWindowFocused  ( PA_WindowRef windowRef );
 
 void  PA_UpdateVariables       ( );
-sLONG_PTR  PA_GetHWND               ( PA_WindowRef windowRef );
-sLONG_PTR  PA_GetWindowPtr          ( PA_WindowRef windowRef );
+sLONG_PTR	PA_GetHWND               ( PA_WindowRef windowRef );
+sLONG_PTR	PA_GetMainWindowHWND();
+sLONG_PTR	PA_GetWindowPtr          ( PA_WindowRef windowRef );
 void  PA_ClosePluginWindow     ( PA_PluginRef pluginRef );
 void  PA_SetPluginWindowTitle  ( PA_PluginRef pluginRef, PA_Unichar* windowTitle );
 void  PA_SetPluginAreaClipMode ( PA_PluginRef pluginRef, char clipChildren );
@@ -1002,6 +1021,10 @@ void         PA_Dial4DAllowXResize         ( PA_Dial4D dialog, char allowResize 
 void         PA_Dial4DAllowYResize         ( PA_Dial4D dialog, char allowResize );
 void         PA_Dial4DGetWindowMinMaxInfo  ( PA_Dial4D dialog, PA_long32* minXresize, PA_long32* maxXresize, PA_long32* minYresize, PA_long32* maxYresize );
 void         PA_Dial4DSetWindowSize        ( PA_Dial4D dialog, PA_long32 width, PA_long32 height );
+
+PA_Variable PA_ExecuteCollectionMethod(PA_CollectionRef inCollection, PA_Unichar* funtionName, PA_Variable* parameters, short nbParameters);
+PA_Variable PA_ExecuteObjectMethod(PA_ObjectRef inObject, PA_Unichar* funtionName, PA_Variable* parameters, short nbParameters);
+
 
 #ifdef __cplusplus
 }

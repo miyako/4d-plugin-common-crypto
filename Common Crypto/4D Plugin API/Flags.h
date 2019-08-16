@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2017-present, 4D, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
 // ---------------------------------------------------------------
 //
 // 4D Plugin API
@@ -23,7 +31,7 @@
 	// See http://msdn.microsoft.com/en-us/library/b0084kay(v=VS.80).aspx for predefined macros on Visual
 	#define VERSIONWIN 1
 	#define VERSIONMAC 0
-	#if defined (WIN64) || defined (_WIN64)
+	#if defined (_WIN64)
 		#undef PA_64BITS_ARCHITECTURE
 		#define PA_64BITS_ARCHITECTURE 1
 	#endif

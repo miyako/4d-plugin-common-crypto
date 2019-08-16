@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2017-present, 4D, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
 // ---------------------------------------------------------------
 //
 // 4D Plugin API
@@ -21,14 +29,20 @@ typedef unsigned __int64 PA_ulong64;
 typedef unsigned long PA_ulong32;
 typedef long PA_long32;
 #elif VERSIONMAC
-typedef SInt64 PA_long64;
-typedef UInt64 PA_ulong64;
-typedef UInt32 PA_ulong32;
-typedef SInt32 PA_long32;
+    #if PA_64BITS_ARCHITECTURE
+    typedef unsigned int PA_ulong32;
+    typedef signed int PA_long32;
+    #else
+    typedef unsigned long PA_ulong32;
+    typedef signed long PA_long32;
+    #endif
+typedef signed long long PA_long64;
+typedef unsigned long long PA_ulong64;
 #endif
 
 typedef char** PA_Handle;
 typedef void* PA_WindowRef;
+typedef void* PA_HDC;
 typedef void* PA_PortRef;
 typedef void* PA_PluginRef;
 typedef PA_Handle PA_QueryRef;
@@ -38,7 +52,8 @@ typedef unsigned short PA_Unichar;
 typedef void* PA_Picture;
 typedef void* PA_DragContextRef;
 typedef void* PA_PasteboardRef;
-
+typedef void* PA_ObjectRef;
+typedef void* PA_CollectionRef;
 typedef struct
 {
 	PA_long32			fLength;
@@ -68,17 +83,6 @@ typedef struct PluginBlock
 } PluginBlock;
 typedef PluginBlock* PA_PluginParameters;
 
-#ifndef uint8_t
-typedef unsigned char uint8_t;
-#endif
-#ifndef uint16_t
-typedef unsigned short uint16_t;
-#endif
-#ifndef uint32_t
-typedef unsigned int uint32_t;
-#endif
-typedef uint8_t * BytePtr;
-typedef BytePtr *PackagePtr;
 
 // different selectors that can be sent to plugin for different event
 
@@ -297,7 +301,7 @@ typedef struct PA_PluginProperties
 	char			fPrintingMode;	//	0: Not printing, -1: Printing, -2: Print line.
 	short			fPage;
 	short			fTable;
-	PA_long32			fUnused;
+	void*			fUnused;
 	char			fDraggable;
 	char			fDroppable;
 	short			fLook;
@@ -447,16 +451,21 @@ typedef enum
 
 typedef struct PA_DragAndDropInfo
 {
-	char				fReserved1[10];
-	PA_long32				fToArrayIndice;		// indice of element when destination is an array
-	PA_long32				fReserved2[2];
-	PA_long32				fFromArrayIndice;	// indice of element when source is an array
+#if     PA_64BITS_ARCHITECTURE
+	char            fReserved1[18];
+#else
+	char            fReserved1[10];
+#endif
+
+	PA_long32			fToArrayIndice;		// indice of element when destination is an array
+	sLONG_PTR			fReserved2[2];
+	PA_long32			fFromArrayIndice;	// indice of element when source is an array
 	short				fFromProcess;
 	short				fFromWhereV;		// where user clicks at first
 	short				fFromWhereH;
 	short				fToWhereV;			// where user release mouse button
 	short				fToWhereH;
-	PA_long32				fReserved3;
+	sLONG_PTR			fReserved3;
 	char				fVariableName[32];	// empty string or variable name if user drags a variable
 	char				fInterProcess;
 	short 				fField;
@@ -487,7 +496,8 @@ typedef struct PA_Variable
 		PA_Array		fArray;		// Any array
 		PA_Pointer*		fPointer;	// C_POINTER variables
 		unsigned char	fOperation;	// to pass '*', '<' or '>' to PA_ExecuterCommandByID
-
+		PA_ObjectRef	fObject;
+		PA_CollectionRef fCollection;
 		struct
 		{
 			short fFieldNumber;	// to pass a field or table to PA_ExecuteCommandByID
@@ -702,7 +712,8 @@ typedef enum
   eFK_TimeField			= 11,	//	Time field
   eFK_Long8				= 25,	
   eFK_BlobField			= 30,	//	Blob field
-  eFK_FloatField		= 35	//  Float
+  eFK_FloatField		= 35,	//  Float
+  eFK_ObjectField		= 38	//  Object field
 } PA_FieldKind;
 
 
@@ -730,6 +741,7 @@ typedef struct PA_MethodFlags
 typedef enum
 {														
 	eVK_Real			= 1,	// Variable declared using C_REAL
+	eVK_Text			= 2,
 	eVK_Date			= 4,	// Variable declared using C_DATE
 	eVK_Undefined		= 5,	// Undefined variable
 	eVK_Boolean			= 6,	// variable declared using C_BOOLEAN
@@ -742,6 +754,7 @@ typedef enum
 	eVK_ArrayInteger	= 15,	// One dimension array declared using ARRAY INTEGER
 	eVK_ArrayLongint	= 16,	// One dimension array declared using ARRAY LONGINT
 	eVK_ArrayDate		= 17,	// One dimension array declared using ARRAY DATE
+	eVK_ArrayText		= 18,
 	eVK_ArrayPicture	= 19,	// One dimension array declared using ARRAY PICTURE
 	eVK_ArrayPointer	= 20,	// One dimension array declared using ARRAY POINTER
 	eVK_ArrayBoolean	= 22,	// One dimension array declared using ARRAY BOOLEAN
@@ -750,7 +763,11 @@ typedef enum
 	eVK_ArrayBlob		= 31,	// One dimension array declared using ARRAY BLOB
 	eVK_ArrayTime		= 32,	// One dimension array declared using ARRAY TIME
 	eVK_Unistring		= 33,	// Variable declared using C_STRING or C_TEXT
-	eVK_ArrayUnicode	= 34	// One Dimension array declared using ARRAY STRING or ARRAY TEXT
+	eVK_ArrayUnicode	= 34,	// One Dimension array declared using ARRAY STRING or ARRAY TEXT
+	eVK_Object			= 38,	// Variable declared using C_OBJECT
+	eVK_ArrayObject		= 39,	// Variable declared using ARRAY OBJECT
+	eVK_Collection		= 42,	// Variable declared using C_COLLECTION
+	eVK_Null			= 255	// Null type value
 } PA_VariableKind;
 
 

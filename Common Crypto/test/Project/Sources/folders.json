@@ -1,0 +1,21 @@
+﻿{
+	"SHA": {
+		"methods": [
+			"TEST_SHA2",
+			"TEST_SHA3"
+		]
+	},
+	"export_project": {
+		"methods": [
+			"generate_project_source",
+			"generate_project_plugin_stub",
+			"generate_project_vs",
+			"generate_project",
+			"generate_project_xcode",
+			"generate_constants_xlf",
+			"generate_project_infoplist",
+			"generate_file_from_template"
+		]
+	},
+	"trash": {}
+}

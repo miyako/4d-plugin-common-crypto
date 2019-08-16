@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2017-present, 4D, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
 // ---------------------------------------------------------------
 //
 // 4D Plugin API
@@ -86,13 +94,13 @@ typedef struct EngineBlock
 #define Call4D(s,p) (*gCall4D)(s,p)
 
 #if VERSIONMAC
-	#define FOURDCALL pascal __attribute__((visibility("default"))) void
+	#define FOURDCALL __attribute__((visibility("default"))) void
 #elif VERSIONWIN
 	#define FOURDCALL void __stdcall
 #endif
 
 #if VERSIONMAC
-	typedef pascal void (*Call4DProcPtr)( short, EngineBlock* );
+	typedef void (*Call4DProcPtr)( short, EngineBlock* );
 #elif VERSIONWIN
 	typedef void (__stdcall *Call4DProcPtr)( short, EngineBlock* );
 #endif

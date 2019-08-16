@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><preferences stamp="2">
+	<com.4d>
+		<database>
+			<cache adaptative="false" flush_buffer_delay="20s" size_fixed="200"/>
+		</database>
+		<php ip_address="127.0.0.1"/>
+		<web>
+			<standalone_server>
+				<configuration port_number="80"/>
+			</standalone_server>
+		</web>
+		<server>
+			<network>
+				<options publication_name="test"/>
+			</network>
+		</server>
+		<compiler>
+			<typage default_for_button="2" default_for_numeric="1"/>
+			<options error_file="true" symbol_file="true"/>
+		</compiler>
+	</com.4d>
+</preferences>

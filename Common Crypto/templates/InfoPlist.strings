@@ -1,0 +1,1 @@
+/* Localized versions of Info.plist keys */CFBundleName = "$4DEVAL($1.PRODUCT_NAME)";CFBundleShortVersionString = "$4DEVAL($1.PRODUCT_VERSION)";CFBundleGetInfoString = "$4DEVAL($1.PRODUCT_NAME) version $4DEVAL($1.PRODUCT_VERSION), Copyright $4DEVAL($1.COPYRIGHT_YEAR) $4DEVAL($1.AUTHOR).";

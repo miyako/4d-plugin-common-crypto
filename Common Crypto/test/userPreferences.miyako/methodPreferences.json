@@ -1,0 +1,209 @@
+﻿{
+	"Sources/Methods/generate_project_xcode.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T13:57:13.000Z"
+	},
+	"Sources/Methods/generate_constants_xlf.4dm": {
+		"startSelection": 75,
+		"endSelection": 75,
+		"firstSelectedLine": 13,
+		"lastSelectedLine": 13,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-29T04:26:04.177Z"
+	},
+	"Sources/Methods/generate_project_vs.4dm": {
+		"startSelection": 19,
+		"endSelection": 19,
+		"firstSelectedLine": 12,
+		"lastSelectedLine": 12,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-24T08:49:03.338Z"
+	},
+	"Sources/Methods/generate_project.4dm": {
+		"startSelection": 23,
+		"endSelection": 23,
+		"firstSelectedLine": 10,
+		"lastSelectedLine": 10,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-08-16T01:21:52.477Z"
+	},
+	"Sources/Methods/generate_project_source.4dm": {
+		"startSelection": 18,
+		"endSelection": 18,
+		"firstSelectedLine": 5,
+		"lastSelectedLine": 5,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T14:36:13.407Z"
+	},
+	"Sources/Methods/generate_file_from_template.4dm": {
+		"startSelection": 12,
+		"endSelection": 12,
+		"firstSelectedLine": 32,
+		"lastSelectedLine": 32,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-29T04:26:04.720Z"
+	},
+	"Sources/Methods/generate_project_plugin_stub.4dm": {
+		"startSelection": 33,
+		"endSelection": 33,
+		"firstSelectedLine": 48,
+		"lastSelectedLine": 48,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T14:18:29.030Z"
+	},
+	"Sources/Methods/generate_project_infoplist.4dm": {
+		"startSelection": 17,
+		"endSelection": 17,
+		"firstSelectedLine": 11,
+		"lastSelectedLine": 11,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T13:51:21.190Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/ボタン.4dm": {
+		"startSelection": 58,
+		"endSelection": 58,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T22:58:13.507Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/ボタン1.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T22:50:34.527Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/ボタン2.4dm": {
+		"startSelection": 26,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T22:44:33.789Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/Get window tab id.4dm": {
+		"startSelection": 22,
+		"endSelection": 5,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T22:49:42.746Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/SET WINDOW TAB ID.4dm": {
+		"startSelection": 17,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T22:50:44.191Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/TOGGLE WINDOW TAB OVERVIEW.4dm": {
+		"startSelection": 26,
+		"endSelection": 26,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T22:53:02.777Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/TOGGLE WINDOW TAB BAR.4dm": {
+		"startSelection": 21,
+		"endSelection": 21,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T22:56:42.251Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/MERGE ALL WINDOWS.4dm": {
+		"startSelection": 17,
+		"endSelection": 17,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T23:03:29.333Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/SELECT PREVIOUS WINDOW TAB.4dm": {
+		"startSelection": 26,
+		"endSelection": 26,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T23:14:14.222Z"
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/SELECT NEXT WINDOW TAB.4dm": {
+		"startSelection": 22,
+		"endSelection": 22,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": ""
+	},
+	"Sources/Forms/フォーム1/ObjectMethods/SET WINDOW TAB ID (%22%22).4dm": {
+		"startSelection": 31,
+		"endSelection": 31,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-02T23:15:40.975Z"
+	},
+	"Sources/Methods/TEST.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 40,
+		"lastSelectedLine": 40,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-07T00:11:38.643Z"
+	},
+	"Sources/Methods/TEST_v17.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-07-07T00:13:49.000Z"
+	},
+	"Sources/Methods/TEST_SHA3.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-08-16T04:37:43.000Z"
+	},
+	"Sources/Methods/TEST_SHA2.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2019-08-16T04:39:14.000Z"
+	}
+}

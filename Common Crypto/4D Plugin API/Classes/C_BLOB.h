@@ -10,8 +10,8 @@
 #define __C_BLOB_H__ 1
 
 #include "4DPluginAPI.h"
-
-class C_TEXT;
+#include "C_TYPES.h"
+#include "C_TEXT.h"
 
 #ifdef __cplusplus
 extern "C" {
