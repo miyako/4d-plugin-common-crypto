@@ -1,176 +1,26 @@
 # 4d-plugin-common-crypto
 Collection of common hash algorithms based on native functions and some help from [OpenSSL](https://www.openssl.org).
 
+### News
+
+- thread safe
+- library update ``1.1.1c``
+
 ### Platform
 
 | carbon | cocoa | win32 | win64 |
 |:------:|:-----:|:---------:|:---------:|
-||<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
+|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" /> |<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" /> |<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" /> |<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" /> 
 
 ### Version
 
 <img src="https://user-images.githubusercontent.com/1725068/41266195-ddf767b2-6e30-11e8-9d6b-2adf6a9f57a5.png" width="32" height="32" />
 
-### Releases
+### Syntax
 
-[2.2](https://github.com/miyako/4d-plugin-common-crypto/releases/tag/2.2) all commands are preemptive
+[miyako.github.io](https://miyako.github.io/2019/08/16/4d-plugin-common-crypto.html)
 
-![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
-
-## Syntax
-
-```
-hash:=MD5 (value;format)
-hash:=SHA1 (value;format)
-hash:=SHA256 (value;format)
-hash:=SHA384 (value;format)
-hash:=SHA512 (value;format)
-```
-
-Parameter|Type|Description
-------------|------------|----
-value|BLOB|
-format|LONGINT|
-hash|TEXT|
-
-```
-hash:=HMACMD5 (key;value;format)
-hash:=HMACSHA1 (key;value;format)
-hash:=HMACSHA256 (key;value;format)
-hash:=HMACSHA384 (key;value;format)
-hash:=HMACSHA512 (key;value;format)
-```
-
-Parameter|Type|Description
-------------|------------|----
-key|BLOB|
-value|BLOB|
-format|LONGINT|
-hash|TEXT|
-
-```
-hash:=RSASHA1 (value;pem;format)
-hash:=RSASHA256 (value;pem;format)
-```
-
-Parameter|Type|Description
-------------|------------|----
-value|BLOB|
-pem|BLOB|
-format|LONGINT|
-hash|TEXT|
-
-```
-pemText:=PEM From P12 (p12;pemBytes;pass)
-```
-
-Parameter|Type|Description
-------------|------------|----
-p12|BLOB|
-pemBytes|BLOB|result
-pass|TEXT|
-pemText|TEXT|converted to text, for convenience
-
-effectively the same as ``openssl pkcs12 -in *.p12 -out *.pem -nodes``
-
-```
-result:=AES128 (value;pass;mode;type;format)
-result:=AES192 (value;pass;mode;type;format)
-result:=AES256 (value;pass;mode;type;format)
-result:=AES128 (value;pass;mode;type;format;option;key;iv)
-result:=AES192 (value;pass;mode;type;format;option;key;iv)
-result:=AES256 (value;pass;mode;type;format;option;key;iv)
-```
-
-Parameter|Type|Description
-------------|------------|----
-value|BLOB|
-pass|BLOB|
-mode|LONGINT|
-type|LONGINT|
-format|LONGINT|
-option|LONGINT|
-key|BLOB|
-iv|BLOB|
-result|TEXT|
-
-in the first syntax, ``pass`` is used  
-in the second syntax, ``key`` and ``iv`` are used instead of a password  
-
-```
-hash:=RIPEMD160 (value;format)
-```
-
-Parameter|Type|Description
-------------|------------|----
-value|BLOB|
-format|LONGINT|
-hash|TEXT|
-
-#### Formats
-
-``Crypto HEX`` ``0``  
-``Crypto BASE64`` ``1``  
-
-#### Encryption Modes
-
-``Crypto Encrypt`` ``0``  
-``Crypto Decrypt`` ``1``  
-
-#### AES Modes
-
-``Crypto AES ECB`` ``0``  
-``Crypto AES CBC`` ``1``  
-``Crypto AES CFB1`` ``2``  
-``Crypto AES CFB8`` ``3``  
-``Crypto AES CFB128`` ``4``  
-``Crypto AES OFB`` ``5``  
-``Crypto AES CTR`` ``6``  
-``Crypto AES GCM`` ``7``  
-``Crypto AES CCM`` ``8``  
-``Crypto AES XTS`` ``9``  
-
-#### AES Padding Options
-
-``Crypto AES No padding`` ``1``
-
-```
-timestamp:=Get timestamp
-```
-Parameter|Type|Description
-------------|------------|----
-timestamp|TEXT|
-
-```
-timestring:=Get timestring
-```
-Parameter|Type|Description
-------------|------------|----
-timestring|TEXT|
-
-```
-unixtime:=Get unixtime
-```
-
-Parameter|Type|Description
-------------|------------|----
-unixtime|TEXT|
-
-```
-OK:=RSAVERIFYSHA1 (value;key;hash;format)
-OK:=RSAVERIFYSHA256 (value;key;hash;format)
-```
-
-Parameter|Type|Description
-------------|------------|----
-value|BLOB|
-key|BLOB|
-hash|TEXT|
-format|LONGINT|
-OK|LONGINT|
-
-Examples
----
+### Examples
 
 * HASH
 
