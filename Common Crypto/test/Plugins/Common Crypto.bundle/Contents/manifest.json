@@ -124,12 +124,12 @@
         },
         {
             "theme": "Common Crypto SHA3",
-            "syntax": "SHAKE128(&O;&L):T",
+            "syntax": "SHAKE128(&O;&L;&L):T",
             "threadSafe": true
         },
         {
             "theme": "Common Crypto SHA3",
-            "syntax": "SHAKE256(&O;&L):T",
+            "syntax": "SHAKE256(&O;&L;&L):T",
             "threadSafe": true
         },
         {

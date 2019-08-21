@@ -23,9 +23,9 @@ void CC_EVP(const EVP_MD *evp, uint32_t mlen, const void *data, uint32_t len, un
     EVP_MD_CTX_free(c);
 }
 
-void CC_EVP_XOF(const EVP_MD *evp, uint32_t mlen, const void *data, uint32_t len, unsigned char *md) {
+void CC_EVP_XOF(const EVP_MD *evp, uint32_t mlen, const void *data,
+                uint32_t len, uint32_t mdlen, unsigned char *md) {
     
-    unsigned int mdlen = mlen;
     EVP_MD_CTX* c = EVP_MD_CTX_new();
     EVP_MD_CTX_reset(c);
     EVP_DigestInit(c, evp);
@@ -96,15 +96,15 @@ void CC_SHA3_512(const void *data, uint32_t len, unsigned char *md)
     CC_EVP(EVP_sha3_512(), 64, data, len, md);
 }
 
-void CC_SHAKE128(const void *data, uint32_t len, unsigned char *md)
+void CC_SHAKE128(const void *data, uint32_t len, uint32_t mdlen, unsigned char *md)
 {
-    CC_EVP_XOF(EVP_shake128(), 32, data, len, md);
+    CC_EVP_XOF(EVP_shake128(), 32, data, len, mdlen, md);
 
 }
 
-void CC_SHAKE256(const void *data, uint32_t len, unsigned char *md)
+void CC_SHAKE256(const void *data, uint32_t len, uint32_t mdlen, unsigned char *md)
 {
-    CC_EVP_XOF(EVP_shake256(), 64, data, len, md);
+    CC_EVP_XOF(EVP_shake256(), 64, data, len, mdlen, md);
 }
 
 //RIPEMD
@@ -656,6 +656,35 @@ void CC_HASH(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, un
     C_BLOB temp;
     temp.setBytes((const uint8_t *)buf, hashlen);
     switch (Param2.getIntValue())
+    {
+        case 1:
+        temp.toB64Text(&returnValue);
+        break;
+        case 2:
+        temp.toB64Text(&returnValue, true);
+        break;
+        default:
+        temp.toHexText(&returnValue);
+        break;
+    }
+    
+    free(buf);
+}
+
+void CC_HASH_XOF(unsigned int hashlen, void (*CC)(const void *data,
+                                                  uint32_t len, uint32_t mdlen, unsigned char *md),
+             C_BLOB &Param1,
+             C_LONGINT &Param2,
+             C_LONGINT &Param3,
+             C_TEXT &returnValue) {
+    
+    uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
+    
+    CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), Param2.getIntValue(), buf);
+    
+    C_BLOB temp;
+    temp.setBytes((const uint8_t *)buf, hashlen);
+    switch (Param3.getIntValue())
     {
         case 1:
         temp.toB64Text(&returnValue);
@@ -1370,12 +1399,14 @@ void SHAKE128(PA_PluginParameters params) {
     
     C_BLOB Param1;
     C_LONGINT Param2;
+    C_LONGINT Param3;
     C_TEXT returnValue;
     
     Param1.fromParamAtIndex(pParams, 1);
     Param2.fromParamAtIndex(pParams, 2);
+    Param3.fromParamAtIndex(pParams, 3);
     
-    CC_HASH(32, CC_SHAKE128, Param1, Param2, returnValue);
+    CC_HASH_XOF(32, CC_SHAKE128, Param1, Param2, Param3, returnValue);
     
     returnValue.setReturn(pResult);
 }
@@ -1387,12 +1418,14 @@ void SHAKE256(PA_PluginParameters params) {
     
     C_BLOB Param1;
     C_LONGINT Param2;
+    C_LONGINT Param3;
     C_TEXT returnValue;
     
     Param1.fromParamAtIndex(pParams, 1);
     Param2.fromParamAtIndex(pParams, 2);
+    Param3.fromParamAtIndex(pParams, 3);
     
-    CC_HASH(64, CC_SHAKE256, Param1, Param2, returnValue);
+    CC_HASH_XOF(64, CC_SHAKE256, Param1, Param2, Param3, returnValue);
     
     returnValue.setReturn(pResult);
 }
