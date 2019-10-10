@@ -2,14 +2,11 @@
 	"editors": [
 		{
 			"type": "method",
-			"id": 2147483638,
+			"id": 2147483646,
 			"codeDescriptor": {
 				"type": 1,
 				"methodName": "TEST_SHA3"
 			}
-		},
-		{
-			"type": "explorer"
 		}
 	]
 }

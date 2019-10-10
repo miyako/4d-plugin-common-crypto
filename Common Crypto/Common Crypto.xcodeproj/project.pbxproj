@@ -276,7 +276,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#DEVELOPER_ID_APPLICATION_CODE_SIGN_IDENTITY_NAME=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\ncodesign -f -s \"$EXPANDED_CODE_SIGN_IDENTITY_NAME\" \"$CODESIGNING_FOLDER_PATH/Contents/manifest.json\"";
+			shellScript = "#DEVELOPER_ID_APPLICATION_CODE_SIGN_IDENTITY_NAME=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\ncodesign -f -s \"$EXPANDED_CODE_SIGN_IDENTITY_NAME\" \"$CODESIGNING_FOLDER_PATH/Contents/manifest.json\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -189,13 +189,13 @@
 		"stamp": "2019-07-07T00:13:49.000Z"
 	},
 	"Sources/Methods/TEST_SHA3.4dm": {
-		"startSelection": 0,
-		"endSelection": 0,
-		"firstSelectedLine": 0,
-		"lastSelectedLine": 0,
+		"startSelection": 79,
+		"endSelection": 79,
+		"firstSelectedLine": 8,
+		"lastSelectedLine": 8,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2019-08-16T04:37:43.000Z"
+		"stamp": "2019-08-21T23:28:58.481Z"
 	},
 	"Sources/Methods/TEST_SHA2.4dm": {
 		"startSelection": 0,

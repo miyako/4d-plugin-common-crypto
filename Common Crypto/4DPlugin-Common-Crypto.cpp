@@ -671,30 +671,28 @@ void CC_HASH(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, un
     free(buf);
 }
 
-void CC_HASH_XOF(unsigned int hashlen, void (*CC)(const void *data,
-                                                  uint32_t len, uint32_t mdlen, unsigned char *md),
+void CC_HASH_XOF(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, uint32_t mdlen, unsigned char *md),
              C_BLOB &Param1,
              C_LONGINT &Param2,
-             C_LONGINT &Param3,
              C_TEXT &returnValue) {
     
     uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
     
-    CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), Param2.getIntValue(), buf);
+    CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), hashlen, buf);
     
     C_BLOB temp;
     temp.setBytes((const uint8_t *)buf, hashlen);
-    switch (Param3.getIntValue())
+    switch (Param2.getIntValue())
     {
         case 1:
-        temp.toB64Text(&returnValue);
-        break;
+            temp.toB64Text(&returnValue);
+            break;
         case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
+            temp.toB64Text(&returnValue, true);
+            break;
         default:
-        temp.toHexText(&returnValue);
-        break;
+            temp.toHexText(&returnValue);
+            break;
     }
     
     free(buf);
@@ -1406,7 +1404,11 @@ void SHAKE128(PA_PluginParameters params) {
     Param2.fromParamAtIndex(pParams, 2);
     Param3.fromParamAtIndex(pParams, 3);
     
-    CC_HASH_XOF(32, CC_SHAKE128, Param1, Param2, Param3, returnValue);
+    unsigned int hashlen = Param2.getIntValue();
+    div_t d = div(hashlen, 4);
+    hashlen = d.quot + (d.rem == 0 ? 0 : 1);
+    
+    CC_HASH_XOF(hashlen, CC_SHAKE128, Param1, Param2, returnValue);
     
     returnValue.setReturn(pResult);
 }
@@ -1424,8 +1426,11 @@ void SHAKE256(PA_PluginParameters params) {
     Param1.fromParamAtIndex(pParams, 1);
     Param2.fromParamAtIndex(pParams, 2);
     Param3.fromParamAtIndex(pParams, 3);
-    
-    CC_HASH_XOF(64, CC_SHAKE256, Param1, Param2, Param3, returnValue);
+ 
+    unsigned int hashlen = Param2.getIntValue();
+    hashlen = hashlen / 4 + ((hashlen % 4) == 0 ? 0 : 4);
+
+    CC_HASH_XOF(hashlen, CC_SHAKE256, Param1, Param2, returnValue);
     
     returnValue.setReturn(pResult);
 }
