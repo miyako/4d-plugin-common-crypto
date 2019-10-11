@@ -8,7 +8,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Pz09IhZvJ4HJDsBOZzDKQb6qo0k=
+			Zf6d2D05wmvHc0JUoNzSVw3wQIk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -22,10 +22,6 @@
 	<dict>
 		<key>QuickLook/Thumbnail.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			hC+U8EqvyIRM1lLakHLfvl4V9Tc=
-			</data>
 			<key>hash2</key>
 			<data>
 			nGfrvibB5KlzvZgF4Bra+l0HpRloxismgTLePnOwCdk=
@@ -33,23 +29,15 @@
 		</dict>
 		<key>Resources/English.lproj/InfoPlist.strings</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Pz09IhZvJ4HJDsBOZzDKQb6qo0k=
-			</data>
 			<key>hash2</key>
 			<data>
-			hcLu6rg/nfMwjnR1dxEsTHcdpb/S4m3njIpcWD1fQ/Q=
+			x26etx/5xhhmI2RnF/Dn7yn87X00YErPXkQy/e/PZT4=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>Resources/constants.xlf</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			X7023yQTLEiVguIPRRJU/b4gr6Q=
-			</data>
 			<key>hash2</key>
 			<data>
 			F021mBzCLQPFnxim7U0uQ9ulqVa3H8QU9fv2W+iZpL8=
@@ -57,34 +45,26 @@
 		</dict>
 		<key>Windows/Common Crypto.4DX</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			K/uL4SHZ3n85iLLLP42TTjUPENc=
-			</data>
 			<key>hash2</key>
 			<data>
-			tNnx2aQvy1No3EHtPn55kM9PflLwHDHYk2S7mBidCsk=
+			d3KIkaEX8fMTUTcIQo1GHj7t8nyUSdqcaQt/WfXhnJ4=
 			</data>
 		</dict>
 		<key>Windows64/Common Crypto.4DX</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			HGy8L/GZlW+8vGX7fIAo4ILBlXU=
-			</data>
 			<key>hash2</key>
 			<data>
-			761RzlHEE50j3Eg3tXM6+gwlbNq3yOi23TpCI2G3VqU=
+			bNmBBnxlRilnRhQw6RCWI6J9mac902MrXpgRvglyGFc=
 			</data>
 		</dict>
 		<key>manifest.json</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			lmPN6nCRiGs2GA+shHmCqUx0lKI=
+			xWzr5mhjcHU293mS6W6rxKpwggI=
 			</data>
 			<key>requirement</key>
-			<string>identifier manifest and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: keisuke miyako (4W9UT59D3B)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
 		</dict>
 	</dict>
 	<key>rules</key>
