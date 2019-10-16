@@ -197,7 +197,7 @@
 				8D01CCCB0486CAD60068D4B7 /* Sources */,
 				8D01CCCD0486CAD60068D4B7 /* Frameworks */,
 				8D01CCCF0486CAD60068D4B7 /* Rez */,
-				D1292E7B22C4A91E00CB5A8C /* ShellScript */,
+				D10ED2AB2356D4FD0016A52A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -265,18 +265,22 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D1292E7B22C4A91E00CB5A8C /* ShellScript */ = {
+		D10ED2AB2356D4FD0016A52A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
+			);
+			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#DEVELOPER_ID_APPLICATION_CODE_SIGN_IDENTITY_NAME=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\ncodesign --force --verbose --sign \"$EXPANDED_CODE_SIGN_IDENTITY_NAME\" \"$CODESIGNING_FOLDER_PATH/Contents/manifest.json\"\n";
+			shellScript = "USER_NAME=keisuke.miyako@4d.com\nUUID=`uuidgen | tr -d - | tr -d '\\n' | tr '[:upper:]' '[:lower:]'`\nDEVELOPER_ID_APPLICATION_CODE_SIGN_IDENTITY_NAME=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\ncodesign --verbose --deep --timestamp --force --sign \"$DEVELOPER_ID_APPLICATION_CODE_SIGN_IDENTITY_NAME\" \"$CODESIGNING_FOLDER_PATH\"\nDMG_PATH=$PROJECT_DIR/$PROJECT.dmg\nrm \"$DMG_PATH\"\nhdiutil create -format UDBZ -plist -srcfolder \"$CODESIGNING_FOLDER_PATH\" \"$DMG_PATH\" \ncodesign --verbose --deep --timestamp --force --sign \"$DEVELOPER_ID_APPLICATION_CODE_SIGN_IDENTITY_NAME\" \"$DMG_PATH\"\nxcrun altool --notarize-app --file \"$DMG_PATH\" --username \"$USER_NAME\" --password \"@keychain:altool\" --primary-bundle-id $PRODUCT_BUNDLE_IDENTIFIER.$UUID\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -314,7 +318,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -367,7 +371,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -417,7 +421,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = NO;
@@ -480,7 +484,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				DEVELOPMENT_TEAM = Y69CWUC25B;
@@ -525,7 +529,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				DEVELOPMENT_TEAM = Y69CWUC25B;
@@ -570,7 +574,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
