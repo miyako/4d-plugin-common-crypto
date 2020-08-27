@@ -8,14 +8,18 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			r7zieXfYC6Gh4VBum4qKdp0B6Po=
+			ZLcZK5e3MoIF/cNcx8MyPqfxnOk=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>Resources/constants.xlf</key>
 		<data>
-		X7023yQTLEiVguIPRRJU/b4gr6Q=
+		5MBdMZfmsDhnq57I/1A8z2INYHc=
+		</data>
+		<key>Resources/manifest.json</key>
+		<data>
+		mmv68eFQg9poUwnFRt11sXAVF9M=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -31,7 +35,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BZ4PloCVXO5NIm6XJl81ebhCtsK0oQFWwna/4MxfR/g=
+			2j2llIIVhiOOqoB/xqt+KbGvtYWfGNXPWu1DqgDcJF0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -40,31 +44,29 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			F021mBzCLQPFnxim7U0uQ9ulqVa3H8QU9fv2W+iZpL8=
+			v5Z08XWb8CfgvOmmQ11zbYG+mhtigf5GgrlJj4R6lCs=
+			</data>
+		</dict>
+		<key>Resources/manifest.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BTr59ci+QVP1FgHJW311zXN69WVcSq8dTCAwFztBDok=
 			</data>
 		</dict>
 		<key>Windows/Common Crypto.4DX</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			d3KIkaEX8fMTUTcIQo1GHj7t8nyUSdqcaQt/WfXhnJ4=
+			KaK6fKlzDxq7mrCtTmCGlvvzAjAEARzwGwFvxVBZRs0=
 			</data>
 		</dict>
 		<key>Windows64/Common Crypto.4DX</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bNmBBnxlRilnRhQw6RCWI6J9mac902MrXpgRvglyGFc=
+			axnGV8SB59FyxfMT9vzBU2ZmlDoNK1Lhwg0z009cLHg=
 			</data>
-		</dict>
-		<key>manifest.json</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			xWzr5mhjcHU293mS6W6rxKpwggI=
-			</data>
-			<key>requirement</key>
-			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
 		</dict>
 	</dict>
 	<key>rules</key>

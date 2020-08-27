@@ -280,6 +280,55 @@ void CBytes::fromB64Text(C_TEXT *b64)
 	}
 }
 
+/* A-Z0-9 with I,O,0,1 removed */
+static const char b32_table[33] = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+void CBytes::toB32Text(C_TEXT *b32)
+{
+    const ::std::size_t srclen_bits = this->_CBytes.size();
+    
+    ::std::size_t olen = (srclen_bits + 4) / 5;  /* Symbols before adding CRC */
+
+    olen++;  /* For terminating null */
+    
+    int didx = 0;
+    
+    CUTF8String retval(olen, ' ');
+    
+    for (int i = 0; i < srclen_bits; i += 5) {
+        
+        int sym;
+        int sidx = i / 8;
+        int bit_offs = i % 8;
+        
+        if (bit_offs <= 3) {
+            /* Entire symbol fits in that byte */
+            sym = this->_CBytes.at(sidx) >> (3 - bit_offs);
+        } else {
+            /* Use the bits we have left */
+            sym = this->_CBytes.at(sidx) << (bit_offs - 3);
+            /* Use the bits from the next byte, if any */
+            if (i + 1 < srclen_bits)
+                sym |= this->_CBytes.at(sidx + 1) >> (11 - bit_offs);
+        }
+        
+        sym &= 0x1f;
+        
+        /* Pad incomplete symbol with 0 bits */
+        if (srclen_bits - i < 5)
+            sym &= 0x1f << (5 + i - srclen_bits);
+        
+        retval[didx++] = b32_table[sym];
+        
+    }
+    
+    /* Terminate string and return */
+    retval[didx] = 0;
+    
+    b32->setUTF8String(&retval);
+    
+}
+
 static const char b64_table[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 void CBytes::toB64Text(C_TEXT *b64, bool fold)
@@ -412,6 +461,10 @@ void C_BLOB::toB64Text(C_TEXT *b64, bool fold)
 	this->_CBytes->toB64Text(b64, fold);
 }
 
+void C_BLOB::toB32Text(C_TEXT *b32)
+{
+    this->_CBytes->toB32Text(b32);
+}
 
 C_BLOB::C_BLOB() : _CBytes(new CBytes)
 {

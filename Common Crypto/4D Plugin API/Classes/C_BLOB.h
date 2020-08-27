@@ -44,7 +44,8 @@ extern "C" {
 		
 		void toHexText(C_TEXT *hex);
 		void toB64Text(C_TEXT *b64, bool fold = false);		
-		
+		void toB32Text(C_TEXT *b32);
+        
 		CBytes();	
 		~CBytes();
 		
@@ -77,6 +78,7 @@ extern "C" {
 
 		void toHexText(C_TEXT *hex);
 		void toB64Text(C_TEXT *b64, bool fold = false);
+        void toB32Text(C_TEXT *b32);
 		
 		C_BLOB();
 		~C_BLOB();

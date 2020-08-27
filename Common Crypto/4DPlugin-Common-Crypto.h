@@ -21,6 +21,8 @@
 #include "openssl/pkcs12.h"
 #include "openssl/err.h"
 
+//#include "openssl/kdf.h"
+
 #include "C_TEXT.h"
 #include "C_BLOB.h"
 #include "C_LONGINT.h"
@@ -65,5 +67,21 @@ void HMACSHA3_224(PA_PluginParameters params);
 void HMACSHA3_256(PA_PluginParameters params);
 void HMACSHA3_384(PA_PluginParameters params);
 void HMACSHA3_512(PA_PluginParameters params);
+
+void PBKDF2_HMAC_MD5(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA1(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA224(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA256(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA384(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA512(PA_PluginParameters params);
+
+void PBKDF2_HMAC_SHA512_224(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA512_256(PA_PluginParameters params);
+
+void PBKDF2_HMAC_SHA3_224(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA3_256(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA3_384(PA_PluginParameters params);
+void PBKDF2_HMAC_SHA3_512(PA_PluginParameters params);
+
 
 #endif /* PLUGIN_COMMON_CRYPTO_H */

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <xliff version="1.0" xmlns:d4="http://www.4d.com/d4-ns">
     <header>
         <note>Common Crypto</note>
@@ -17,6 +17,9 @@
         </trans-unit>
         <trans-unit d4:value="2:L" id="FCB8230B04EF4DEA8C71EA5F8BA46742.3">
             <source>Crypto BASE64 fold</source>
+        </trans-unit>
+        <trans-unit d4:value="3:L" id="FCB8230B04EF4DEA8C71EA5F8BA46742.4">
+            <source>Crypto BASE32</source>
         </trans-unit>
     </group>
     <group resname="themes">

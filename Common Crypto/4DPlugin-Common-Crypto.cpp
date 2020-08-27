@@ -125,138 +125,177 @@ void OnStartup() {
 
 void PluginMain(PA_long32 selector, PA_PluginParameters params) {
     
-	try
-	{
+    try
+    {
         switch(selector)
         {
             case kInitPlugin :
             case kServerInitPlugin :
-            OnStartup();
-            break;
-            
-            // --- Common Crypto
-            
+                OnStartup();
+                break;
+                
+                // --- Common Crypto
+                
             case 1 :
-            PEM_From_P12(params);
-            break;
+                PEM_From_P12(params);
+                break;
             case 2 :
-        Get_timestamp(params);
-            break;
+                Get_timestamp(params);
+                break;
             case 3 :
-        Get_timestring(params);
-            break;
+                Get_timestring(params);
+                break;
             case 4 :
-        Get_unixtime(params);
-            break;
+                Get_unixtime(params);
+                break;
             case 5 :
-            MD5(params);
-            break;
+                MD5(params);
+                break;
             case 6 :
-            RIPEMD160(params);
-            break;
+                RIPEMD160(params);
+                break;
             case 7 :
-            SHA1(params);
-            break;
+                SHA1(params);
+                break;
             case 8 :
-            SHA224(params);
-            break;
+                SHA224(params);
+                break;
             case 9 :
-            SHA256(params);
-            break;
+                SHA256(params);
+                break;
             case 10 :
-            SHA384(params);
-            break;
+                SHA384(params);
+                break;
             case 11 :
-            SHA512(params);
-            break;
+                SHA512(params);
+                break;
             case 12 :
-            SHA512_224(params);
-            break;
+                SHA512_224(params);
+                break;
             case 13 :
-            SHA512_256(params);
-            break;
+                SHA512_256(params);
+                break;
             case 14 :
-            RSASHA1(params);
-            break;
+                RSASHA1(params);
+                break;
             case 15 :
-            RSASHA256(params);
-            break;
+                RSASHA256(params);
+                break;
             case 16 :
-            RSAVERIFYSHA1(params);
-            break;
+                RSAVERIFYSHA1(params);
+                break;
             case 17 :
-            RSAVERIFYSHA256(params);
-            break;
+                RSAVERIFYSHA256(params);
+                break;
             case 18 :
-            AES128(params);
-            break;
+                AES128(params);
+                break;
             case 19 :
-            AES192(params);
-            break;
+                AES192(params);
+                break;
             case 20 :
-            AES256(params);
-            break;
+                AES256(params);
+                break;
             case 21 :
-            SHA3_224(params);
-            break;
+                SHA3_224(params);
+                break;
             case 22 :
-            SHA3_256(params);
-            break;
+                SHA3_256(params);
+                break;
             case 23 :
-            SHA3_384(params);
-            break;
+                SHA3_384(params);
+                break;
             case 24 :
-            SHA3_512(params);
-            break;
+                SHA3_512(params);
+                break;
             case 25 :
-            SHAKE128(params);
-            break;
+                SHAKE128(params);
+                break;
             case 26 :
-            SHAKE256(params);
-            break;
+                SHAKE256(params);
+                break;
             case 27 :
-            HMACMD5(params);
-            break;
+                HMACMD5(params);
+                break;
             case 28 :
-            HMACSHA1(params);
-            break;
+                HMACSHA1(params);
+                break;
             case 29 :
-            HMACSHA224(params);
-            break;
+                HMACSHA224(params);
+                break;
             case 30 :
-            HMACSHA256(params);
-            break;
+                HMACSHA256(params);
+                break;
             case 31 :
-            HMACSHA384(params);
-            break;
+                HMACSHA384(params);
+                break;
             case 32 :
-            HMACSHA512(params);
-            break;
+                HMACSHA512(params);
+                break;
             case 33 :
-            HMACSHA512_224(params);
-            break;
+                HMACSHA512_224(params);
+                break;
             case 34 :
-            HMACSHA512_256(params);
-            break;
+                HMACSHA512_256(params);
+                break;
             case 35 :
-            HMACSHA3_224(params);
-            break;
+                HMACSHA3_224(params);
+                break;
             case 36 :
-            HMACSHA3_256(params);
-            break;
+                HMACSHA3_256(params);
+                break;
             case 37 :
-            HMACSHA3_384(params);
-            break;
+                HMACSHA3_384(params);
+                break;
             case 38 :
-            HMACSHA3_512(params);
-            break;
+                HMACSHA3_512(params);
+                break;
+                
+            case 39 :
+                PBKDF2_HMAC_MD5(params);
+                break;
+            case 40 :
+                PBKDF2_HMAC_SHA1(params);
+                break;
+            case 41 :
+                PBKDF2_HMAC_SHA224(params);
+                break;
+            case 42 :
+                PBKDF2_HMAC_SHA256(params);
+                break;
+            case 43 :
+                PBKDF2_HMAC_SHA384(params);
+                break;
+            case 44 :
+                PBKDF2_HMAC_SHA512(params);
+                break;
+                
+            case 45 :
+                PBKDF2_HMAC_SHA512_224(params);
+                break;
+            case 46 :
+                PBKDF2_HMAC_SHA512_256(params);
+                break;
+            case 47 :
+                PBKDF2_HMAC_SHA3_224(params);
+                break;
+            case 48 :
+                PBKDF2_HMAC_SHA3_256(params);
+                break;
+            case 49 :
+                PBKDF2_HMAC_SHA3_384(params);
+                break;
+            case 50 :
+                PBKDF2_HMAC_SHA3_512(params);
+                break;
+ 
         }
-
-	}
-	catch(...)
-	{
-
-	}
+        
+    }
+    catch(...)
+    {
+        
+    }
 }
 
 #pragma mark -
@@ -398,14 +437,17 @@ void CC_HMACHASH(uint32_t hashlen, const EVP_MD * (*EVP)(void),
     switch (Param3.getIntValue())
     {
         case 1:
-        temp.toB64Text(&returnValue);
-        break;
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
         case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
+            temp.toB64Text(&returnValue, true);
+            break;
         default:
-        temp.toHexText(&returnValue);
-        break;
+            temp.toHexText(&returnValue);
+            break;
     }
     
     free(buf);
@@ -658,14 +700,17 @@ void CC_HASH(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, un
     switch (Param2.getIntValue())
     {
         case 1:
-        temp.toB64Text(&returnValue);
-        break;
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
         case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
+            temp.toB64Text(&returnValue, true);
+            break;
         default:
-        temp.toHexText(&returnValue);
-        break;
+            temp.toHexText(&returnValue);
+            break;
     }
     
     free(buf);
@@ -686,6 +731,9 @@ void CC_HASH_XOF(unsigned int hashlen, void (*CC)(const void *data, uint32_t len
     {
         case 1:
             temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
             break;
         case 2:
             temp.toB64Text(&returnValue, true);
@@ -793,14 +841,17 @@ void CC_AES(const EVP_CIPHER *cipher,
                     switch (Param5.getIntValue())
                     {
                         case 1:
-                        temp.toB64Text(&returnValue);
-                        break;
+                            temp.toB64Text(&returnValue);
+                            break;
+                        case 3:
+                            temp.toB32Text(&returnValue);
+                            break;
                         case 2:
-                        temp.toB64Text(&returnValue, true);
-                        break;
+                            temp.toB64Text(&returnValue, true);
+                            break;
                         default:
-                        temp.toHexText(&returnValue);
-                        break;
+                            temp.toHexText(&returnValue);
+                            break;
                     }
                 }
             }
@@ -1011,6 +1062,333 @@ void AES256(PA_PluginParameters params) {
     returnValue.setReturn(pResult);
 }
 
+#pragma mark PBKDF2
+
+void CC_PBKDF2(unsigned int hashlen, const EVP_MD *digest,
+               C_BLOB& Param1, C_BLOB& Param2,
+               C_LONGINT& Param3, C_LONGINT& Param4,
+               C_TEXT& returnValue) {
+    
+    uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
+    
+    PKCS5_PBKDF2_HMAC((const char *)Param1.getBytesPtr(),
+                      Param1.getBytesLength(),
+                      (const unsigned char *)Param2.getBytesPtr(),
+                      Param2.getBytesLength(),
+                      Param3.getIntValue(),
+                      digest,
+                      hashlen,
+                      (unsigned char *)buf);
+    
+    C_BLOB temp;
+    temp.setBytes((const uint8_t *)buf, hashlen);
+    
+    switch (Param4.getIntValue())
+    {
+        case 1:
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
+        case 2:
+            temp.toB64Text(&returnValue, true);
+            break;
+        default:
+            temp.toHexText(&returnValue);
+            break;
+    }
+    
+    free(buf);
+}
+
+void PBKDF2_HMAC_MD5(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(16, EVP_md5(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA1(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(20, EVP_sha1(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA224(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(28, EVP_sha224(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA256(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(32, EVP_sha256(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA384(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(48, EVP_sha384(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+void PBKDF2_HMAC_SHA512(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(64, EVP_sha512(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA512_224(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(28, EVP_sha512_224(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA512_256(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(32, EVP_sha512_256(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA3_224(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(28, EVP_sha3_224(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA3_256(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(32, EVP_sha3_256(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA3_384(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(48, EVP_sha3_384(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
+void PBKDF2_HMAC_SHA3_512(PA_PluginParameters params) {
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+    PackagePtr pParams = (PackagePtr)params->fParameters;
+     
+    C_BLOB Param1;
+    C_BLOB Param2;
+    
+    Param1.fromParamAtIndex(pParams, 1);
+    Param2.fromParamAtIndex(pParams, 2);
+    
+    C_LONGINT Param3;
+    C_LONGINT Param4;
+    
+    Param3.fromParamAtIndex(pParams, 3);
+    Param4.fromParamAtIndex(pParams, 4);
+    
+    C_TEXT returnValue;
+        
+    CC_PBKDF2(64, EVP_sha3_512(), Param1, Param2, Param3, Param4, returnValue);
+    
+    returnValue.setReturn(pResult);
+}
+
 #pragma mark RIPEMD
 
 void RIPEMD160(PA_PluginParameters params) {
@@ -1035,14 +1413,17 @@ void RIPEMD160(PA_PluginParameters params) {
     switch (Param2.getIntValue())
     {
         case 1:
-        temp.toB64Text(&returnValue);
-        break;
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
         case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
+            temp.toB64Text(&returnValue, true);
+            break;
         default:
-        temp.toHexText(&returnValue);
-        break;
+            temp.toHexText(&returnValue);
+            break;
     }
     
     free(buf);
@@ -1078,14 +1459,17 @@ void CC_RSASHA(unsigned int hashlen, int nid, void (*CC)(const void *data, uint3
                 switch (Param3.getIntValue())
                 {
                     case 1:
-                    temp.toB64Text(&returnValue);
-                    break;
+                        temp.toB64Text(&returnValue);
+                        break;
+                    case 3:
+                        temp.toB32Text(&returnValue);
+                        break;
                     case 2:
-                    temp.toB64Text(&returnValue, true);
-                    break;
+                        temp.toB64Text(&returnValue, true);
+                        break;
                     default:
-                    temp.toHexText(&returnValue);
-                    break;
+                        temp.toHexText(&returnValue);
+                        break;
                 }
             }
             free(sgn);

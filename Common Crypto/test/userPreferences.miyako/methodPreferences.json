@@ -189,13 +189,13 @@
 		"stamp": "2019-07-07T00:13:49.000Z"
 	},
 	"Sources/Methods/TEST_SHA3.4dm": {
-		"startSelection": 13,
-		"endSelection": 13,
-		"firstSelectedLine": 7,
-		"lastSelectedLine": 7,
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2019-08-21T23:28:58.481Z"
+		"stamp": "2020-01-13T00:19:53.230Z"
 	},
 	"Sources/Methods/TEST_SHA2.4dm": {
 		"startSelection": 0,
@@ -205,5 +205,14 @@
 		"folding": [],
 		"bookmarks": [],
 		"stamp": "2019-08-16T04:39:14.000Z"
+	},
+	"Sources/Methods/TEST_PBKDF2.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2020-08-27T14:34:39.000Z"
 	}
 }

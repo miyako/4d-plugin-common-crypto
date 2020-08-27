@@ -159,12 +159,18 @@
 		"left": 482,
 		"top": 365,
 		"width": 1129,
-		"height": 787
+		"height": 757
 	},
 	"Sources/Methods/TEST_SHA2.4dm": {
 		"left": -303,
 		"top": 163,
 		"width": 1129,
 		"height": 787
+	},
+	"Sources/Methods/TEST_PBKDF2.4dm": {
+		"left": 375,
+		"top": 408,
+		"width": 1129,
+		"height": 757
 	}
 }

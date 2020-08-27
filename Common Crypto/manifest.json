@@ -191,6 +191,12 @@
             "theme": "Common Crypto HMAC",
             "syntax": "HMACSHA3_512(&O;&O;&L):T",
             "threadSafe": true
+        },
+        {
+            "theme": "Common Crypto PBKDF2",
+            "syntax": "PBKDF2_HMAC_SHA1(&O;&O;&L;&L):T",
+            "threadSafe": true
         }
+        
     ]
 }

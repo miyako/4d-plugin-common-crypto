@@ -1,81 +1,84 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <xliff version="1.0" xmlns:d4="http://www.4d.com/d4-ns">
     <header>
         <note>Common Crypto</note>
     </header>
     <group resname="themes">
-        <trans-unit id="" resname="94C32E6C112B469FAA9570531DE162A9" translate="no">
+        <trans-unit id="" resname="FCB8230B04EF4DEA8C71EA5F8BA46742" translate="no">
             <source>Crypto output format</source>
         </trans-unit>
     </group>
-    <group restype="x-4DK#" d4:groupName="94C32E6C112B469FAA9570531DE162A9">
-        <trans-unit d4:value="0:L" id="94C32E6C112B469FAA9570531DE162A9.1">
+    <group restype="x-4DK#" d4:groupName="FCB8230B04EF4DEA8C71EA5F8BA46742">
+        <trans-unit d4:value="0:L" id="FCB8230B04EF4DEA8C71EA5F8BA46742.1">
             <source>Crypto HEX</source>
         </trans-unit>
-        <trans-unit d4:value="1:L" id="94C32E6C112B469FAA9570531DE162A9.2">
+        <trans-unit d4:value="1:L" id="FCB8230B04EF4DEA8C71EA5F8BA46742.2">
             <source>Crypto BASE64</source>
         </trans-unit>
-        <trans-unit d4:value="2:L" id="94C32E6C112B469FAA9570531DE162A9.3">
+        <trans-unit d4:value="2:L" id="FCB8230B04EF4DEA8C71EA5F8BA46742.3">
             <source>Crypto BASE64 fold</source>
+        </trans-unit>
+        <trans-unit d4:value="3:L" id="FCB8230B04EF4DEA8C71EA5F8BA46742.4">
+            <source>Crypto BASE32</source>
         </trans-unit>
     </group>
     <group resname="themes">
-        <trans-unit id="" resname="14E7F408253A4DE7A4862ADB7FBA3C9C" translate="no">
+        <trans-unit id="" resname="C64FE45AD1AE4CA8AFA9DF190E27EDA7" translate="no">
             <source>Crypto AES operation</source>
         </trans-unit>
     </group>
-    <group restype="x-4DK#" d4:groupName="14E7F408253A4DE7A4862ADB7FBA3C9C">
-        <trans-unit d4:value="0:L" id="14E7F408253A4DE7A4862ADB7FBA3C9C.1">
+    <group restype="x-4DK#" d4:groupName="C64FE45AD1AE4CA8AFA9DF190E27EDA7">
+        <trans-unit d4:value="0:L" id="C64FE45AD1AE4CA8AFA9DF190E27EDA7.1">
             <source>Crypto Encrypt</source>
         </trans-unit>
-        <trans-unit d4:value="1:L" id="14E7F408253A4DE7A4862ADB7FBA3C9C.2">
+        <trans-unit d4:value="1:L" id="C64FE45AD1AE4CA8AFA9DF190E27EDA7.2">
             <source>Crypto Decrypt</source>
         </trans-unit>
     </group>
     <group resname="themes">
-        <trans-unit id="" resname="37437B756C6C44AFBDF81AFE318E5D74" translate="no">
+        <trans-unit id="" resname="970BE3FBF8A64FCF930B6860024C6622" translate="no">
             <source>Crypto AES mode</source>
         </trans-unit>
     </group>
-    <group restype="x-4DK#" d4:groupName="37437B756C6C44AFBDF81AFE318E5D74">
-        <trans-unit d4:value="0:L" id="37437B756C6C44AFBDF81AFE318E5D74.1">
+    <group restype="x-4DK#" d4:groupName="970BE3FBF8A64FCF930B6860024C6622">
+        <trans-unit d4:value="0:L" id="970BE3FBF8A64FCF930B6860024C6622.1">
             <source>Crypto AES ECB</source>
         </trans-unit>
-        <trans-unit d4:value="1:L" id="37437B756C6C44AFBDF81AFE318E5D74.2">
+        <trans-unit d4:value="1:L" id="970BE3FBF8A64FCF930B6860024C6622.2">
             <source>Crypto AES CBC</source>
         </trans-unit>
-        <trans-unit d4:value="2:L" id="37437B756C6C44AFBDF81AFE318E5D74.3">
+        <trans-unit d4:value="2:L" id="970BE3FBF8A64FCF930B6860024C6622.3">
             <source>Crypto AES CFB1</source>
         </trans-unit>
-        <trans-unit d4:value="3:L" id="37437B756C6C44AFBDF81AFE318E5D74.4">
+        <trans-unit d4:value="3:L" id="970BE3FBF8A64FCF930B6860024C6622.4">
             <source>Crypto AES CFB8</source>
         </trans-unit>
-        <trans-unit d4:value="4:L" id="37437B756C6C44AFBDF81AFE318E5D74.5">
+        <trans-unit d4:value="4:L" id="970BE3FBF8A64FCF930B6860024C6622.5">
             <source>Crypto AES CFB128</source>
         </trans-unit>
-        <trans-unit d4:value="5:L" id="37437B756C6C44AFBDF81AFE318E5D74.6">
+        <trans-unit d4:value="5:L" id="970BE3FBF8A64FCF930B6860024C6622.6">
             <source>Crypto AES OFB</source>
         </trans-unit>
-        <trans-unit d4:value="6:L" id="37437B756C6C44AFBDF81AFE318E5D74.7">
+        <trans-unit d4:value="6:L" id="970BE3FBF8A64FCF930B6860024C6622.7">
             <source>Crypto AES CTR</source>
         </trans-unit>
-        <trans-unit d4:value="7:L" id="37437B756C6C44AFBDF81AFE318E5D74.8">
+        <trans-unit d4:value="7:L" id="970BE3FBF8A64FCF930B6860024C6622.8">
             <source>Crypto AES GCM</source>
         </trans-unit>
-        <trans-unit d4:value="8:L" id="37437B756C6C44AFBDF81AFE318E5D74.9">
+        <trans-unit d4:value="8:L" id="970BE3FBF8A64FCF930B6860024C6622.9">
             <source>Crypto AES CCM</source>
         </trans-unit>
-        <trans-unit d4:value="9:L" id="37437B756C6C44AFBDF81AFE318E5D74.10">
+        <trans-unit d4:value="9:L" id="970BE3FBF8A64FCF930B6860024C6622.10">
             <source>Crypto AES XTS</source>
         </trans-unit>
     </group>
     <group resname="themes">
-        <trans-unit id="" resname="8A3076C403FD47F4BC4D4E3761118B17" translate="no">
+        <trans-unit id="" resname="139A2879EBCA41D8ACDB1905E1B7D871" translate="no">
             <source>Crypto AES padding option</source>
         </trans-unit>
     </group>
-    <group restype="x-4DK#" d4:groupName="8A3076C403FD47F4BC4D4E3761118B17">
-        <trans-unit d4:value="1:L" id="8A3076C403FD47F4BC4D4E3761118B17.1">
+    <group restype="x-4DK#" d4:groupName="139A2879EBCA41D8ACDB1905E1B7D871">
+        <trans-unit d4:value="1:L" id="139A2879EBCA41D8ACDB1905E1B7D871.1">
             <source>Crypto AES No padding</source>
         </trans-unit>
     </group>
