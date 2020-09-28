@@ -20,6 +20,8 @@ Collection of common hash algorithms based on native functions and some help fro
 1. Extract either the **Common Crypto.DMG** or the **Comon Crypto.zip** archives
 2. Add the **Common Crypto.bundle** to your database's **Plugins** folder.
 
+See also [discuss.4d.com](https://discuss.4d.com/t/crash-on-using-aes128-and-aes256-in-plugin-commoncrypto/15770/2)
+
 ### Syntax
 
 [miyako.github.io](https://miyako.github.io/2019/08/16/4d-plugin-common-crypto.html)
