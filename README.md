@@ -1,3 +1,7 @@
+![platform](https://img.shields.io/static/v1?label=platform&message=osx-64%20|%20win-32%20|%20win-64&color=blue)
+[![license](https://img.shields.io/github/license/miyako/4d-plugin-common-crypto)](LICENSE)
+![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-common-crypto/total)
+
 # 4d-plugin-common-crypto
 Collection of common hash algorithms based on native functions and some help from [OpenSSL](https://www.openssl.org).
 
@@ -5,12 +9,6 @@ Collection of common hash algorithms based on native functions and some help fro
 
 - thread safe
 - library update ``1.1.1c``
-
-### Platform
-
-| carbon | cocoa | win32 | win64 |
-|:------:|:-----:|:---------:|:---------:|
-||<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
 
 ### Version
 
