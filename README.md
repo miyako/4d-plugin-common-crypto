@@ -8,8 +8,7 @@ Collection of common hash algorithms based on native functions and some help fro
 
 ### News
 
-- thread safe
-- library update ``1.1.1c``
+- library update ``1.1.1c`` (``1.1.1j`` on Mac)
 
 ## Installation Instructions
 1. Extract either the **Common Crypto.DMG** or the **Comon Crypto.zip** archives
