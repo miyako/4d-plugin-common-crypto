@@ -8,7 +8,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZLcZK5e3MoIF/cNcx8MyPqfxnOk=
+			9EgReTf4Kq16gRjqQSEzWiLKvHw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -35,7 +35,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2j2llIIVhiOOqoB/xqt+KbGvtYWfGNXPWu1DqgDcJF0=
+			ZYzR1M9AjC6RFbEjaaQy9MCcLtIjfcV3l6fCzgkACXg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -52,13 +52,6 @@
 			<key>hash2</key>
 			<data>
 			BTr59ci+QVP1FgHJW311zXN69WVcSq8dTCAwFztBDok=
-			</data>
-		</dict>
-		<key>Windows/Common Crypto.4DX</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KaK6fKlzDxq7mrCtTmCGlvvzAjAEARzwGwFvxVBZRs0=
 			</data>
 		</dict>
 		<key>Windows64/Common Crypto.4DX</key>
