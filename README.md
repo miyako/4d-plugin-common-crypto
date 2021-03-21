@@ -1,7 +1,9 @@
-![version](https://img.shields.io/badge/version-18%2B-EB8E5F)
+![version](https://img.shields.io/badge/version-17%2B-3E8B93)
 ![platform](https://img.shields.io/static/v1?label=platform&message=mac-intel%20|%20mac-arm%20|%20win-64&color=blue)
 [![license](https://img.shields.io/github/license/miyako/4d-plugin-common-crypto)](LICENSE)
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-common-crypto/total)
+
+**Note**: for v17 and earlier, move `manifest.json` to `Contents`
 
 # 4d-plugin-common-crypto
 Collection of common hash algorithms based on native functions and some help from [OpenSSL](https://www.openssl.org).
@@ -162,4 +164,3 @@ $data64:=RSASHA1 ($data;$prvKey;Crypto BASE64)
 DOCUMENT TO BLOB(System folder(Desktop)+"pubkey.pem";$pubKey)
 $OK:=RSAVERIFYSHA1 ($data;$pubKey;$data64;Crypto BASE64)
 ```
-
