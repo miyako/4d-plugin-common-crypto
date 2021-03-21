@@ -26,7 +26,7 @@ See also [discuss.4d.com](https://discuss.4d.com/t/crash-on-using-aes128-and-aes
 
 * HASH
 
-```
+```4d
 $source:="Hello World!"
 $key:="my_secret_key"
 
@@ -61,7 +61,7 @@ ASSERT(HMACSHA512 ($keyData;$sourceData;Crypto HEX)="c77f0bfa63053c433e42a1ab3cc
 
 * RSA
 
-```
+```4d
 $filePath:=Get 4D folder(Current resources folder)+"95d6465982187ad13e7c5badb657f80dc3e7f925-privatekey.p12"
 DOCUMENT TO BLOB($filePath;$p12Data)
 
@@ -76,7 +76,7 @@ ASSERT(RSASHA256 ($someDataToSign;$pemData;Crypto BASE64)="SFoEVXo/EqSagiapclf0m
 
 * AES
  
-```
+```4d
 CONVERT FROM TEXT("4D4D";"utf-8";$password)
 CONVERT FROM TEXT("data"*4;"utf-8";$data)
 
@@ -90,7 +90,7 @@ $decrypted:=Convert to text($data;"utf-8")
 
 * AES with IV
 
-```
+```4d
 CONVERT FROM TEXT("data"*4;"utf-8";$data)
 
   //define key and iv instead of a password
@@ -144,7 +144,7 @@ ASSERT($decrypted=("data"*4))
 
 * RIPEMD160
 
-```
+```4d
 $source:="Hello World!"
 $key:="my_secret_key"
 
@@ -155,7 +155,7 @@ ASSERT(RIPEMD160 ($sourceData;Crypto BASE64)="hHbuRjG5swrCdUsO4MR+Fh0/ckw=")
 
 * Verify
 
-```
+```4d
 CONVERT FROM TEXT("abcde";"utf-8";$data)
 
 DOCUMENT TO BLOB(System folder(Desktop)+"prvkey.pem";$prvKey)
