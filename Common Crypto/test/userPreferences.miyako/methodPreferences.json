@@ -191,11 +191,11 @@
 	"Sources/Methods/TEST_SHA3.4dm": {
 		"startSelection": 0,
 		"endSelection": 0,
-		"firstSelectedLine": 0,
-		"lastSelectedLine": 0,
+		"firstSelectedLine": 10,
+		"lastSelectedLine": 10,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-01-13T00:19:53.230Z"
+		"stamp": "2021-03-21T13:58:31.391Z"
 	},
 	"Sources/Methods/TEST_SHA2.4dm": {
 		"startSelection": 0,
@@ -204,24 +204,24 @@
 		"lastSelectedLine": 0,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2019-08-16T04:39:14.000Z"
+		"stamp": "2020-01-13T00:19:53.000Z"
 	},
 	"Sources/Methods/TEST_PBKDF2.4dm": {
-		"startSelection": 0,
+		"startSelection": 37,
 		"endSelection": 0,
-		"firstSelectedLine": 0,
-		"lastSelectedLine": 0,
+		"firstSelectedLine": 5,
+		"lastSelectedLine": 5,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-08-27T14:34:39.000Z"
+		"stamp": "2021-03-21T14:08:46.432Z"
 	},
 	"Sources/Methods/TEST_AES.4dm": {
-		"startSelection": 33,
+		"startSelection": 0,
 		"endSelection": 0,
-		"firstSelectedLine": 3,
-		"lastSelectedLine": 3,
+		"firstSelectedLine": 18,
+		"lastSelectedLine": 18,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-09-26T00:57:34.525Z"
+		"stamp": "2021-03-21T14:14:49.693Z"
 	}
 }

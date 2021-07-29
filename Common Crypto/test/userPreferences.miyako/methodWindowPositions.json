@@ -156,27 +156,33 @@
 		"height": 662
 	},
 	"Sources/Methods/TEST_SHA3.4dm": {
-		"left": 482,
-		"top": 365,
+		"left": 206,
+		"top": 257,
 		"width": 1129,
-		"height": 757
+		"height": 731
 	},
 	"Sources/Methods/TEST_SHA2.4dm": {
-		"left": -303,
-		"top": 163,
+		"left": 206,
+		"top": 257,
 		"width": 1129,
-		"height": 787
+		"height": 731
 	},
 	"Sources/Methods/TEST_PBKDF2.4dm": {
-		"left": 375,
-		"top": 408,
+		"left": 150,
+		"top": 459,
 		"width": 1129,
-		"height": 757
+		"height": 731
 	},
 	"Sources/Methods/TEST_AES.4dm": {
-		"left": 206,
-		"top": 231,
+		"left": 150,
+		"top": 485,
 		"width": 1129,
-		"height": 757
+		"height": 705
+	},
+	"Trash/Methods/(TEST_T).4dm": {
+		"left": 144,
+		"top": 516,
+		"width": 1110,
+		"height": 655
 	}
 }

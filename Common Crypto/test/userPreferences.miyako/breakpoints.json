@@ -1,23 +1,9 @@
 ﻿[
 	{
-		"line": 11,
-		"method": {
-			"type": 1,
-			"methodName": "TEST_SHA3"
-		}
-	},
-	{
 		"line": 6,
 		"method": {
 			"type": 1,
 			"methodName": "TEST_PBKDF2"
-		}
-	},
-	{
-		"line": 13,
-		"method": {
-			"type": 1,
-			"methodName": "TEST_AES"
 		}
 	}
 ]

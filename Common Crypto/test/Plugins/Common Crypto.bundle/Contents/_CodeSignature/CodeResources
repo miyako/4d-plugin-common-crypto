@@ -8,7 +8,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9EgReTf4Kq16gRjqQSEzWiLKvHw=
+			8k12F6R2QtWQ3ygfCBYBRpkHOkU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -19,7 +19,7 @@
 		</data>
 		<key>Resources/manifest.json</key>
 		<data>
-		mmv68eFQg9poUwnFRt11sXAVF9M=
+		pRgGnhxXNwUEqDY42ow6uUYlmzU=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -35,7 +35,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZYzR1M9AjC6RFbEjaaQy9MCcLtIjfcV3l6fCzgkACXg=
+			EDFX7GdtTOKEgTEwrKyQKn6TYN+UA2mcQf71J/OFolA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -51,14 +51,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BTr59ci+QVP1FgHJW311zXN69WVcSq8dTCAwFztBDok=
+			py9+/UesRWab2TsIsf+Gl/wmUTPQ4llQZ4dfXElJmhA=
 			</data>
 		</dict>
 		<key>Windows64/Common Crypto.4DX</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			axnGV8SB59FyxfMT9vzBU2ZmlDoNK1Lhwg0z009cLHg=
+			GJHYdp5tLtOGjpC4zC5s3ZQUUDeFi+1Ca3pWB5co1N0=
 			</data>
 		</dict>
 	</dict>
