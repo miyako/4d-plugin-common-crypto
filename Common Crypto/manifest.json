@@ -4,7 +4,7 @@
     "commands": [
         {
             "theme": "Common Crypto",
-            "syntax": "PEM From P12(&O;&O;&T):T",
+            "syntax": "PEM From P12(&O;&O;&T;&L):T",
             "threadSafe": true
         },
         {
