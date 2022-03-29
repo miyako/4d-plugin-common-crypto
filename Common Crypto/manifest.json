@@ -1,202 +1,211 @@
 {
-    "name": "Common Crypto",
-    "id": 20000,
-    "commands": [
-        {
-            "theme": "Common Crypto",
-            "syntax": "PEM From P12(&O;&O;&T;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto",
-            "syntax": "Get timestamp:T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto",
-            "syntax": "Get timestring:T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto",
-            "syntax": "Get unixtime:T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto MD5",
-            "syntax": "MD5(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto RIPEMD",
-            "syntax": "RIPEMD160(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA1",
-            "syntax": "SHA1(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA2",
-            "syntax": "SHA224(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA2",
-            "syntax": "SHA256(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA2",
-            "syntax": "SHA384(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA2",
-            "syntax": "SHA512(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA2",
-            "syntax": "SHA512_224(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA2",
-            "syntax": "SHA512_256(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto RSA",
-            "syntax": "RSASHA1(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto RSA",
-            "syntax": "RSASHA256(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto RSA",
-            "syntax": "RSAVERIFYSHA1(&O;&O;&T;&L):L",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto RSA",
-            "syntax": "RSAVERIFYSHA256(&O;&O;&T;&L):L",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto AES",
-            "syntax": "AES128(&O;&O;&L;&L;&L;&L;&O;&O):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto AES",
-            "syntax": "AES192(&O;&O;&L;&L;&L;&L;&O;&O):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto AES",
-            "syntax": "AES256(&O;&O;&L;&L;&L;&L;&O;&O):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA3",
-            "syntax": "SHA3_224(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA3",
-            "syntax": "SHA3_256(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA3",
-            "syntax": "SHA3_384(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA3",
-            "syntax": "SHA3_512(&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA3",
-            "syntax": "SHAKE128(&O;&L;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto SHA3",
-            "syntax": "SHAKE256(&O;&L;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACMD5(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA1(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA224(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA256(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA384(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA512(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA512_224(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA512_256(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA3_224(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA3_256(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA3_384(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto HMAC",
-            "syntax": "HMACSHA3_512(&O;&O;&L):T",
-            "threadSafe": true
-        },
-        {
-            "theme": "Common Crypto PBKDF2",
-            "syntax": "PBKDF2_HMAC_SHA1(&O;&O;&L;&L):T",
-            "threadSafe": true
-        }
-        
-    ]
+  "name": "Common Crypto",
+  "id": 20000,
+  "commands": [
+    {
+      "theme": "Common Crypto",
+      "syntax": "PEM From P12(&O;&O;&T;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto",
+      "syntax": "Get timestamp:T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto",
+      "syntax": "Get timestring:T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto",
+      "syntax": "Get unixtime:T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto MD5",
+      "syntax": "MD5(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto RIPEMD",
+      "syntax": "RIPEMD160(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA1",
+      "syntax": "SHA1(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA2",
+      "syntax": "SHA224(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA2",
+      "syntax": "SHA256(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA2",
+      "syntax": "SHA384(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA2",
+      "syntax": "SHA512(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA2",
+      "syntax": "SHA512_224(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA2",
+      "syntax": "SHA512_256(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto RSA",
+      "syntax": "RSASHA1(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto RSA",
+      "syntax": "RSASHA256(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto RSA",
+      "syntax": "RSAVERIFYSHA1(&O;&O;&T;&L):L",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto RSA",
+      "syntax": "RSAVERIFYSHA256(&O;&O;&T;&L):L",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto AES",
+      "syntax": "AES128(&O;&O;&L;&L;&L;&L;&O;&O):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto AES",
+      "syntax": "AES192(&O;&O;&L;&L;&L;&L;&O;&O):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto AES",
+      "syntax": "AES256(&O;&O;&L;&L;&L;&L;&O;&O):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA3",
+      "syntax": "SHA3_224(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA3",
+      "syntax": "SHA3_256(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA3",
+      "syntax": "SHA3_384(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA3",
+      "syntax": "SHA3_512(&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA3",
+      "syntax": "SHAKE128(&O;&L;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto SHA3",
+      "syntax": "SHAKE256(&O;&L;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACMD5(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA1(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA224(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA256(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA384(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA512(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA512_224(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA512_256(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA3_224(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA3_256(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA3_384(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto HMAC",
+      "syntax": "HMACSHA3_512(&O;&O;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto PBKDF2",
+      "syntax": "PBKDF2_HMAC_SHA1(&O;&O;&L;&L):T",
+      "threadSafe": true
+    },
+    {
+      "theme": "Common Crypto",
+      "syntax": "PEMInfo(&O):T",
+      "threadsafe": true
+    },
+    {
+      "theme": "Common Crypto",
+      "syntax": "DERToPEM(&O;&O):T",
+      "threadsafe": true
+    }
+  ]
 }
