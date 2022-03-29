@@ -5,7 +5,7 @@
  #	Project : Common Crypto
  #	author : miyako
  #	2019/08/16
- #  
+ #
  # --------------------------------------------------------------------------------*/
 
 #ifndef PLUGIN_COMMON_CRYPTO_H
@@ -83,5 +83,6 @@ void PBKDF2_HMAC_SHA3_256(PA_PluginParameters params);
 void PBKDF2_HMAC_SHA3_384(PA_PluginParameters params);
 void PBKDF2_HMAC_SHA3_512(PA_PluginParameters params);
 
-
+void PEMInfo(PA_PluginParameters params);
+void DERToPEM(PA_PluginParameters params);
 #endif /* PLUGIN_COMMON_CRYPTO_H */
