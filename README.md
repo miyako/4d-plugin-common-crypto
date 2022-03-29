@@ -3,8 +3,6 @@
 [![license](https://img.shields.io/github/license/miyako/4d-plugin-common-crypto)](LICENSE)
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-common-crypto/total)
 
-**Note**: for v17 and earlier, move `manifest.json` to `Contents`
-
 # 4d-plugin-common-crypto
 Collection of common hash algorithms based on native functions and some help from [OpenSSL](https://www.openssl.org).
 
