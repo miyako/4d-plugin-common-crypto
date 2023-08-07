@@ -285,7 +285,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test \"$CONFIGURATION\" == 'Deployment'; then\n\n    USER_NAME=keisuke.miyako@4d.com\n    UUID=`uuidgen | tr -d - | tr -d '\\n' | tr '[:upper:]' '[:lower:]'`\n    DEVELOPER_ID=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\n    PRODUCT_PATH=\"$CODESIGNING_FOLDER_PATH\"\n    \n    #clean\n    xattr -cr \"$PRODUCT_PATH\"\n    codesign --remove-signature \"$PRODUCT_PATH\"\n    \n    #sign\n    codesign --verbose --deep --timestamp --force --sign \"$DEVELOPER_ID\" \"$PRODUCT_PATH\"\n    \n    #archive\n    DMG_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.dmg\"\n    ZIP_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.zip\" #for windows\n    rm -f \"$DMG_PATH\"\n    hdiutil create -format UDBZ -plist -srcfolder \"$PRODUCT_PATH\" \"$DMG_PATH\"\n    rm -f \"$ZIP_PATH\"\n    ditto -c -k --keepParent \"$PRODUCT_PATH\" \"$ZIP_PATH\"\n    \n    xcrun notarytool submit \"$ZIP_PATH\" --keychain-profile \"notarytool\" --wait\n    xcrun notarytool submit \"$DMG_PATH\" --keychain-profile \"notarytool\" --wait\n        \n    xcrun stapler staple \"$DMG_PATH\"\n\nelse\n    echo \"No notarization performed as this is not a release build.\"\nfi\n";
+			shellScript = "if test \"$CONFIGURATION\" == 'Deployment'; then\n\n    USER_NAME=keisuke.miyako@4d.com\n    UUID=`uuidgen | tr -d - | tr -d '\\n' | tr '[:upper:]' '[:lower:]'`\n    DEVELOPER_ID=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\n    PRODUCT_PATH=\"$CODESIGNING_FOLDER_PATH\"\n    \n    #clean\n    xattr -cr \"$PRODUCT_PATH\"\n    codesign --remove-signature \"$PRODUCT_PATH\"\n    \n    #sign\n    codesign --verbose --deep --timestamp --force --sign \"Developer ID Application: keisuke miyako (Y69CWUC25B)\" \"$PRODUCT_PATH\"\n    \n    #archive\n    DMG_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.dmg\"\n    ZIP_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.zip\" #for windows\n    rm -f \"$DMG_PATH\"\n    hdiutil create -format UDBZ -plist -srcfolder \"$PRODUCT_PATH\" \"$DMG_PATH\"\n    rm -f \"$ZIP_PATH\"\n    ditto -c -k --keepParent \"$PRODUCT_PATH\" \"$ZIP_PATH\"\n    \n    xcrun notarytool submit \"$ZIP_PATH\" --keychain-profile \"notarytool\" --wait\n    xcrun notarytool submit \"$DMG_PATH\" --keychain-profile \"notarytool\" --wait\n        \n    xcrun stapler staple \"$DMG_PATH\"\n\nelse\n    echo \"No notarization performed as this is not a release build.\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -351,7 +351,7 @@
 					"$(PROJECT_DIR)/a",
 				);
 				LIBRARY_STYLE = Bundle;
-				MARKETING_VERSION = 4.2.0;
+				MARKETING_VERSION = 4.3.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -402,7 +402,7 @@
 					"$(PROJECT_DIR)/a",
 				);
 				LIBRARY_STYLE = Bundle;
-				MARKETING_VERSION = 4.2.0;
+				MARKETING_VERSION = 4.3.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -451,7 +451,7 @@
 					"$(PROJECT_DIR)/a",
 				);
 				LIBRARY_STYLE = Bundle;
-				MARKETING_VERSION = 4.2.0;
+				MARKETING_VERSION = 4.3.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
