@@ -392,7 +392,25 @@ void PEM_From_P12(PA_PluginParameters params)
 
                     BIO_free(pem);
                 }
+
+                if (key)
+                {
+                    EVP_PKEY_free(key);
+                }
+                if (cert)
+                {
+                    X509_free(cert);
+                }
+                if (ca)
+                {
+                    sk_X509_pop_free(ca, X509_free);
+                }
             }
+        }
+
+        if (p12)
+        {
+            PKCS12_free(p12);
         }
 
         BIO_free(bio);
@@ -434,10 +452,16 @@ void PEMInfo(PA_PluginParameters params)
                 CUTF8String pemStr = CUTF8String((const uint8_t *)buf, len);
                 returnValue.setUTF8String(&pemStr);
             }
-            BIO_free(outBIO);
+
+            X509_free(cert);
         }
 
+        BIO_free(outBIO);
         BIO_free(pemBIO);
+    }
+    else
+    {
+        BIO_free(outBIO);
     }
 
     returnValue.setReturn(pResult);
@@ -489,10 +513,18 @@ void DERToPEM(PA_PluginParameters params)
                 pemBlob.setBytes((const uint8_t *)buf, len);
                 pemBlob.toParamAtIndex(pParams, 2);
             }
-            BIO_free(pemBIO);
         }
         BIO_free(outBIO);
+
+        X509_free(cert);
     }
+    else
+    {
+        BIO_free(outBIO);
+    }
+
+    BIO_free(pemBIO);
+    BIO_free(derBIO);
 
     pemBlob.toParamAtIndex(pParams, 2);
     returnValue.setReturn(pResult);
@@ -571,27 +603,30 @@ void CC_HMACHASH(uint32_t hashlen, const EVP_MD *(*EVP)(void),
 
     uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
 
-    HMAC(EVP(), (const void *)Param1.getBytesPtr(), (int)Param1.getBytesLength(), (const unsigned char *)Param2.getBytesPtr(), (int)Param2.getBytesLength(), buf, &hashlen);
-
-    C_BLOB temp;
-    temp.setBytes((const uint8_t *)buf, hashlen);
-    switch (Param3.getIntValue())
+    if (buf)
     {
-    case 1:
-        temp.toB64Text(&returnValue);
-        break;
-    case 3:
-        temp.toB32Text(&returnValue);
-        break;
-    case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
-    default:
-        temp.toHexText(&returnValue);
-        break;
-    }
+        HMAC(EVP(), (const void *)Param1.getBytesPtr(), (int)Param1.getBytesLength(), (const unsigned char *)Param2.getBytesPtr(), (int)Param2.getBytesLength(), buf, &hashlen);
 
-    free(buf);
+        C_BLOB temp;
+        temp.setBytes((const uint8_t *)buf, hashlen);
+        switch (Param3.getIntValue())
+        {
+        case 1:
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
+        case 2:
+            temp.toB64Text(&returnValue, true);
+            break;
+        default:
+            temp.toHexText(&returnValue);
+            break;
+        }
+
+        free(buf);
+    }
 }
 
 void HMACMD5(PA_PluginParameters params)
@@ -847,27 +882,30 @@ void CC_HASH(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, un
 
     uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
 
-    CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
-
-    C_BLOB temp;
-    temp.setBytes((const uint8_t *)buf, hashlen);
-    switch (Param2.getIntValue())
+    if (buf)
     {
-    case 1:
-        temp.toB64Text(&returnValue);
-        break;
-    case 3:
-        temp.toB32Text(&returnValue);
-        break;
-    case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
-    default:
-        temp.toHexText(&returnValue);
-        break;
-    }
+        CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
 
-    free(buf);
+        C_BLOB temp;
+        temp.setBytes((const uint8_t *)buf, hashlen);
+        switch (Param2.getIntValue())
+        {
+        case 1:
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
+        case 2:
+            temp.toB64Text(&returnValue, true);
+            break;
+        default:
+            temp.toHexText(&returnValue);
+            break;
+        }
+
+        free(buf);
+    }
 }
 
 void CC_HASH_XOF(unsigned int hashlen, void (*CC)(const void *data, uint32_t len, uint32_t mdlen, unsigned char *md),
@@ -878,27 +916,30 @@ void CC_HASH_XOF(unsigned int hashlen, void (*CC)(const void *data, uint32_t len
 
     uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
 
-    CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), hashlen, buf);
-
-    C_BLOB temp;
-    temp.setBytes((const uint8_t *)buf, hashlen);
-    switch (Param2.getIntValue())
+    if (buf)
     {
-    case 1:
-        temp.toB64Text(&returnValue);
-        break;
-    case 3:
-        temp.toB32Text(&returnValue);
-        break;
-    case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
-    default:
-        temp.toHexText(&returnValue);
-        break;
-    }
+        CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), hashlen, buf);
 
-    free(buf);
+        C_BLOB temp;
+        temp.setBytes((const uint8_t *)buf, hashlen);
+        switch (Param2.getIntValue())
+        {
+        case 1:
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
+        case 2:
+            temp.toB64Text(&returnValue, true);
+            break;
+        default:
+            temp.toHexText(&returnValue);
+            break;
+        }
+
+        free(buf);
+    }
 }
 
 void MD5(PA_PluginParameters params)
@@ -986,35 +1027,38 @@ void CC_AES(const EVP_CIPHER *cipher,
             }
             size_t buf_size = source_len + EVP_MAX_BLOCK_LENGTH;
             unsigned char *buf = (unsigned char *)calloc(buf_size, sizeof(unsigned char));
-            if (EVP_CipherUpdate(ctx, buf, &crypted_len, source, source_len))
+            if (buf)
             {
-                if (EVP_CipherFinal(ctx, (buf + crypted_len), &tail_len))
+                if (EVP_CipherUpdate(ctx, buf, &crypted_len, source, source_len))
                 {
-                    crypted_len += tail_len;
-                    C_BLOB temp;
-                    temp.setBytes((const uint8_t *)buf, crypted_len);
-
-                    switch (Param5.getIntValue())
+                    if (EVP_CipherFinal(ctx, (buf + crypted_len), &tail_len))
                     {
-                    case 1:
-                        temp.toB64Text(&returnValue);
-                        break;
-                    case 3:
-                        temp.toB32Text(&returnValue);
-                        break;
-                    case 2:
-                        temp.toB64Text(&returnValue, true);
-                        break;
-                    default:
-                        temp.toHexText(&returnValue);
-                        break;
+                        crypted_len += tail_len;
+                        C_BLOB temp;
+                        temp.setBytes((const uint8_t *)buf, crypted_len);
+
+                        switch (Param5.getIntValue())
+                        {
+                        case 1:
+                            temp.toB64Text(&returnValue);
+                            break;
+                        case 3:
+                            temp.toB32Text(&returnValue);
+                            break;
+                        case 2:
+                            temp.toB64Text(&returnValue, true);
+                            break;
+                        default:
+                            temp.toHexText(&returnValue);
+                            break;
+                        }
                     }
                 }
+                free(buf);
             }
-            free(buf);
         }
-        EVP_CIPHER_CTX_free(ctx);
     }
+    EVP_CIPHER_CTX_free(ctx);
 }
 
 void AES128(PA_PluginParameters params)
@@ -1231,35 +1275,38 @@ void CC_PBKDF2(unsigned int hashlen, const EVP_MD *digest,
 
     uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
 
-    PKCS5_PBKDF2_HMAC((const char *)Param1.getBytesPtr(),
-                      Param1.getBytesLength(),
-                      (const unsigned char *)Param2.getBytesPtr(),
-                      Param2.getBytesLength(),
-                      Param3.getIntValue(),
-                      digest,
-                      hashlen,
-                      (unsigned char *)buf);
-
-    C_BLOB temp;
-    temp.setBytes((const uint8_t *)buf, hashlen);
-
-    switch (Param4.getIntValue())
+    if (buf)
     {
-    case 1:
-        temp.toB64Text(&returnValue);
-        break;
-    case 3:
-        temp.toB32Text(&returnValue);
-        break;
-    case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
-    default:
-        temp.toHexText(&returnValue);
-        break;
-    }
+        PKCS5_PBKDF2_HMAC((const char *)Param1.getBytesPtr(),
+                          Param1.getBytesLength(),
+                          (const unsigned char *)Param2.getBytesPtr(),
+                          Param2.getBytesLength(),
+                          Param3.getIntValue(),
+                          digest,
+                          hashlen,
+                          (unsigned char *)buf);
 
-    free(buf);
+        C_BLOB temp;
+        temp.setBytes((const uint8_t *)buf, hashlen);
+
+        switch (Param4.getIntValue())
+        {
+        case 1:
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
+        case 2:
+            temp.toB64Text(&returnValue, true);
+            break;
+        default:
+            temp.toHexText(&returnValue);
+            break;
+        }
+
+        free(buf);
+    }
 }
 
 void PBKDF2_HMAC_MD5(PA_PluginParameters params)
@@ -1578,25 +1625,28 @@ void RIPEMD160(PA_PluginParameters params)
 
     uint8_t *buf = (uint8_t *)calloc(20, sizeof(uint8_t));
 
-    CC_RIPEMD160((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
-
-    C_BLOB temp;
-    temp.setBytes((const uint8_t *)buf, 20);
-
-    switch (Param2.getIntValue())
+    if (buf)
     {
-    case 1:
-        temp.toB64Text(&returnValue);
-        break;
-    case 3:
-        temp.toB32Text(&returnValue);
-        break;
-    case 2:
-        temp.toB64Text(&returnValue, true);
-        break;
-    default:
-        temp.toHexText(&returnValue);
-        break;
+        CC_RIPEMD160((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
+
+        C_BLOB temp;
+        temp.setBytes((const uint8_t *)buf, 20);
+
+        switch (Param2.getIntValue())
+        {
+        case 1:
+            temp.toB64Text(&returnValue);
+            break;
+        case 3:
+            temp.toB32Text(&returnValue);
+            break;
+        case 2:
+            temp.toB64Text(&returnValue, true);
+            break;
+        default:
+            temp.toHexText(&returnValue);
+            break;
+        }
     }
 
     free(buf);
@@ -1616,41 +1666,48 @@ void CC_RSASHA(unsigned int hashlen, int nid, void (*CC)(const void *data, uint3
     uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
     unsigned int signatureLength = 0;
 
-    CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
-    BIO *bio = BIO_new_mem_buf((void *)Param2.getBytesPtr(), Param2.getBytesLength());
-
-    if (bio)
+    if (buf)
     {
-        RSA *key = NULL;
-        key = PEM_read_bio_RSAPrivateKey(bio, NULL, NULL, NULL);
-        if (key)
+        CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
+        BIO *bio = BIO_new_mem_buf((void *)Param2.getBytesPtr(), Param2.getBytesLength());
+
+        if (bio)
         {
-            uint8_t *sgn = (uint8_t *)calloc(RSA_size(key), sizeof(uint8_t));
-            if (RSA_sign(nid, buf, hashlen, sgn, &signatureLength, key))
+            RSA *key = NULL;
+            key = PEM_read_bio_RSAPrivateKey(bio, NULL, NULL, NULL);
+            if (key)
             {
-                C_BLOB temp;
-                temp.setBytes((const uint8_t *)sgn, signatureLength);
-                switch (Param3.getIntValue())
+                uint8_t *sgn = (uint8_t *)calloc(RSA_size(key), sizeof(uint8_t));
+                if (sgn)
                 {
-                case 1:
-                    temp.toB64Text(&returnValue);
-                    break;
-                case 3:
-                    temp.toB32Text(&returnValue);
-                    break;
-                case 2:
-                    temp.toB64Text(&returnValue, true);
-                    break;
-                default:
-                    temp.toHexText(&returnValue);
-                    break;
+                    if (RSA_sign(nid, buf, hashlen, sgn, &signatureLength, key))
+                    {
+                        C_BLOB temp;
+                        temp.setBytes((const uint8_t *)sgn, signatureLength);
+                        switch (Param3.getIntValue())
+                        {
+                        case 1:
+                            temp.toB64Text(&returnValue);
+                            break;
+                        case 3:
+                            temp.toB32Text(&returnValue);
+                            break;
+                        case 2:
+                            temp.toB64Text(&returnValue, true);
+                            break;
+                        default:
+                            temp.toHexText(&returnValue);
+                            break;
+                        }
+                    }
+                    free(sgn);
                 }
+                RSA_free(key);
             }
-            free(sgn);
+            BIO_free(bio);
         }
-        BIO_free(bio);
+        free(buf);
     }
-    free(buf);
 }
 
 void RSASHA1(PA_PluginParameters params)
@@ -1703,35 +1760,39 @@ void CC_RSASHAVERIFY(unsigned int hashlen, int nid, void (*CC)(const void *data,
 
     uint8_t *buf = (uint8_t *)calloc(hashlen, sizeof(uint8_t));
 
-    CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
-    BIO *bio = BIO_new_mem_buf((void *)Param2.getBytesPtr(), Param2.getBytesLength());
-
-    if (bio)
+    if (buf)
     {
-        RSA *key = NULL;
-        key = PEM_read_bio_RSA_PUBKEY(bio, NULL, NULL, NULL);
-        if (key)
+        CC((unsigned char *)Param1.getBytesPtr(), Param1.getBytesLength(), buf);
+        BIO *bio = BIO_new_mem_buf((void *)Param2.getBytesPtr(), Param2.getBytesLength());
+
+        if (bio)
         {
-            C_BLOB temp;
-
-            switch (Param4.getIntValue())
+            RSA *key = NULL;
+            key = PEM_read_bio_RSA_PUBKEY(bio, NULL, NULL, NULL);
+            if (key)
             {
-            case 1:
-                temp.fromB64Text(&Param3);
-                break;
-            default:
-                temp.fromHexText(&Param3);
-                break;
-            }
+                C_BLOB temp;
 
-            if (RSA_verify(nid, buf, hashlen, (unsigned char *)temp.getBytesPtr(), temp.getBytesLength(), key))
-            {
-                returnValue.setIntValue(1);
+                switch (Param4.getIntValue())
+                {
+                case 1:
+                    temp.fromB64Text(&Param3);
+                    break;
+                default:
+                    temp.fromHexText(&Param3);
+                    break;
+                }
+
+                if (RSA_verify(nid, buf, hashlen, (unsigned char *)temp.getBytesPtr(), temp.getBytesLength(), key))
+                {
+                    returnValue.setIntValue(1);
+                }
+                RSA_free(key);
             }
+            BIO_free(bio);
         }
-        BIO_free(bio);
+        free(buf);
     }
-    free(buf);
 }
 
 void RSAVERIFYSHA1(PA_PluginParameters params)
@@ -1977,9 +2038,22 @@ void SHAKE128(PA_PluginParameters params)
     Param2.fromParamAtIndex(pParams, 2);
     Param3.fromParamAtIndex(pParams, 3);
 
-    unsigned int hashlen = Param2.getIntValue();
-    div_t d = div(hashlen, 4);
+    int requestedLen = Param2.getIntValue();
+    if (requestedLen < 0)
+    {
+        requestedLen = 0;
+    }
+
+    unsigned int hashlen = (unsigned int)requestedLen;
+    div_t d = div((int)hashlen, 4);
     hashlen = d.quot + (d.rem == 0 ? 0 : 1);
+
+    // guard against an unbounded output-length request driving a runaway allocation
+    const unsigned int kMaxShakeOutputBytes = 65536;
+    if (hashlen > kMaxShakeOutputBytes)
+    {
+        hashlen = kMaxShakeOutputBytes;
+    }
 
     CC_HASH_XOF(hashlen, CC_SHAKE128, Param1, Param2, returnValue);
 
@@ -2001,8 +2075,21 @@ void SHAKE256(PA_PluginParameters params)
     Param2.fromParamAtIndex(pParams, 2);
     Param3.fromParamAtIndex(pParams, 3);
 
-    unsigned int hashlen = Param2.getIntValue();
+    int requestedLen = Param2.getIntValue();
+    if (requestedLen < 0)
+    {
+        requestedLen = 0;
+    }
+
+    unsigned int hashlen = (unsigned int)requestedLen;
     hashlen = hashlen / 4 + ((hashlen % 4) == 0 ? 0 : 4);
+
+    // guard against an unbounded output-length request driving a runaway allocation
+    const unsigned int kMaxShakeOutputBytes = 65536;
+    if (hashlen > kMaxShakeOutputBytes)
+    {
+        hashlen = kMaxShakeOutputBytes;
+    }
 
     CC_HASH_XOF(hashlen, CC_SHAKE256, Param1, Param2, returnValue);
 
