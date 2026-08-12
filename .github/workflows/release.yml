@@ -1,0 +1,199 @@
+# Builds the plugin for Windows (x64) first, then macOS as a universal
+# (arm64 + x86_64) binary, merges both into the single cross-platform
+# .bundle, codesigns + notarizes the mac binary, and publishes a GitHub
+# Release with the zip and dmg attached.
+#
+# Trigger: push a tag matching v*.*.* (either by hand, or via bump-version.yml).
+# You can also run it manually against an existing tag with workflow_dispatch.
+
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to build (e.g. v2.3.0)
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  # ---- edit these per-project, everything else is generic ----
+  PRODUCT_NAME: Common Crypto
+  XCODE_PROJECT: Common Crypto.xcodeproj
+  VCX_SOLUTION: Common Crypto.sln
+  MACOS_DEPLOYMENT_TARGET: '10.13'
+  # --------------------------------------------------------------
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.set.outputs.tag }}
+      version: ${{ steps.set.outputs.version }}
+    steps:
+      - id: set
+        run: |
+          TAG="${{ inputs.tag || github.ref_name }}"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+  build-windows:
+    name: Build Windows (x64)
+    needs: version
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.version.outputs.tag }}
+
+      - name: setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      # GitHub-hosted windows-latest ships VS2022 (v143 toolset) but not the
+      # legacy v140 toolset the project is pinned to, so we override it on
+      # the command line rather than requiring an extra VS component install.
+      #
+      # The project also hardcodes WindowsTargetPlatformVersion=8.1 in
+      # TZ.vcxproj (<PropertyGroup Label="Globals">), and the Windows 8.1 SDK
+      # is no longer installed on current windows-latest images, which fails
+      # with MSB8036 ("The Windows SDK version 8.1 was not found"). Same class
+      # of fix as the toolset override above: override it on the command line
+      # rather than editing the vcxproj (which applies to all 4
+      # Debug/Release x Win32/x64 configurations, not just the one this job
+      # builds). "10.0" lets MSBuild resolve to whatever full 10.0.xxxxx.x SDK
+      # is actually installed on the runner, rather than pinning an exact
+      # build number that may not match the image.
+      - name: build x64
+        shell: cmd
+        run: msbuild "${{ env.VCX_SOLUTION }}" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0 /m
+
+      - name: upload windows binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-binaries
+          path: |
+            test/Plugins/${{ env.PRODUCT_NAME }}.bundle/Contents/Windows64/${{ env.PRODUCT_NAME }}.4DX
+          if-no-files-found: error
+
+  build-macos:
+    name: Build macOS, package, sign, notarize & release
+    needs: [version, build-windows]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.version.outputs.tag }}
+
+      - name: download windows binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-binaries
+          path: winbuild
+
+      - name: import Developer ID certificate
+        env:
+          CERT_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_CERTIFICATE }}
+          CERT_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          set -euo pipefail
+          KEYCHAIN_PATH="$RUNNER_TEMP/build.keychain-db"
+          CERT_PATH="$RUNNER_TEMP/certificate.p12"
+
+          echo -n "$CERT_BASE64" | base64 --decode -o "$CERT_PATH"
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$CERT_PATH" -P "$CERT_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security list-keychain -d user -s "$KEYCHAIN_PATH" login.keychain
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          echo "KEYCHAIN_PATH=$KEYCHAIN_PATH" >> "$GITHUB_ENV"
+
+      - name: store notarytool credentials
+        env:
+          APPLE_ID: ${{ secrets.NOTARYTOOL_APPLE_ID }}
+          TEAM_ID: ${{ secrets.NOTARYTOOL_TEAM_ID }}
+          APP_PASSWORD: ${{ secrets.NOTARYTOOL_PASSWORD }}
+        run: |
+          xcrun notarytool store-credentials "notarytool-profile" \
+            --apple-id "$APPLE_ID" \
+            --team-id "$TEAM_ID" \
+            --password "$APP_PASSWORD" \
+            --keychain "$KEYCHAIN_PATH"
+
+      - name: build macOS plugin (universal)
+        run: |
+          xcodebuild -project "${{ env.XCODE_PROJECT }}" \
+            -target "${{ env.PRODUCT_NAME }}" \
+            -configuration Default \
+            ARCHS="arm64 x86_64" \
+            ONLY_ACTIVE_ARCH=NO \
+            MACOSX_DEPLOYMENT_TARGET="${{ env.MACOS_DEPLOYMENT_TARGET }}" \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: verify universal binary
+        run: |
+          set -euo pipefail
+          BIN="test/Plugins/${{ env.PRODUCT_NAME }}.bundle/Contents/MacOS/${{ env.PRODUCT_NAME }}"
+          lipo -info "$BIN"
+          lipo -info "$BIN" | grep -q "arm64" && lipo -info "$BIN" | grep -q "x86_64"
+
+      - name: merge Windows binaries into the bundle
+        run: |
+          set -euo pipefail
+          BUNDLE="test/Plugins/${{ env.PRODUCT_NAME }}.bundle"
+          mkdir -p "$BUNDLE/Contents/Windows64"
+          cp "winbuild/${{ env.PRODUCT_NAME }}.4DX" "$BUNDLE/Contents/Windows64/${{ env.PRODUCT_NAME }}.4DX"
+          echo "BUNDLE_PATH=$BUNDLE" >> "$GITHUB_ENV"
+
+      - name: codesign
+        run: |
+          set -euo pipefail
+          IDENTITY=$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
+            | grep "Developer ID Application" | head -1 | sed -E 's/.*"(.*)".*/\1/')
+          echo "Signing with: $IDENTITY"
+          codesign --verbose --deep --timestamp --force --options=runtime \
+            --sign "$IDENTITY" "$BUNDLE_PATH"
+          codesign --verify --deep --strict --verbose=2 "$BUNDLE_PATH"
+
+      - name: package, notarize & staple
+        run: |
+          set -euo pipefail
+          VERSION="${{ needs.version.outputs.version }}"
+          ZIP_PATH="${{ env.PRODUCT_NAME }}-${VERSION}.zip"
+          DMG_PATH="${{ env.PRODUCT_NAME }}-${VERSION}.dmg"
+
+          # zip: cross-platform bundle (win + mac binaries together), what most users grab
+          ditto -c -k --keepParent "$BUNDLE_PATH" "$ZIP_PATH"
+
+          # dmg: mac-friendly, and the only format Apple lets us staple a ticket to
+          hdiutil create -format UDBZ -volname "${{ env.PRODUCT_NAME }}" -srcfolder "$BUNDLE_PATH" "$DMG_PATH"
+
+          xcrun notarytool submit "$ZIP_PATH" --keychain-profile "notarytool-profile" --keychain "$KEYCHAIN_PATH" --wait
+          xcrun notarytool submit "$DMG_PATH" --keychain-profile "notarytool-profile" --keychain "$KEYCHAIN_PATH" --wait
+          xcrun stapler staple "$DMG_PATH"
+
+          echo "ZIP_PATH=$ZIP_PATH" >> "$GITHUB_ENV"
+          echo "DMG_PATH=$DMG_PATH" >> "$GITHUB_ENV"
+
+      - name: create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.version.outputs.tag }}
+          name: ${{ needs.version.outputs.tag }}
+          files: |
+            ${{ env.ZIP_PATH }}
+            ${{ env.DMG_PATH }}
