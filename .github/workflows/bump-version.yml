@@ -1,8 +1,17 @@
-# Bumps the project's version key in the Xcode project (MARKETING_VERSION if
-# present, falling back to CURRENT_PROJECT_VERSION for older-style projects
-# that predate the MARKETING_VERSION/CURRENT_PROJECT_VERSION split), commits
-# it, and pushes a "vX.Y.Z" tag. That tag push is what triggers release.yml -
-# this workflow does NOT build or release anything itself.
+# Bumps the project's version, keeping the "vX.Y.Z" tag as the single
+# source of truth that everything else is written FROM:
+#   1. read the current version (validating it's consistent everywhere first)
+#   2. compute the bumped X.Y.Z
+#   3. force-write that exact string into every version field (pbxproj's
+#      MARKETING_VERSION/CURRENT_PROJECT_VERSION AND Info.plist's
+#      CFBundleShortVersionString/CFBundleVersion)
+#   4. commit, then tag "vX.Y.Z" from that same string
+# Step 3 pattern-matches each key rather than matching the old literal
+# value, so a field that already drifted out of sync gets pulled back
+# into line instead of being silently skipped.
+#
+# That tag push is what triggers release.yml - this workflow does NOT
+# build or release anything itself.
 #
 # Run it manually from the Actions tab whenever you're ready to cut a release.
 
@@ -25,9 +34,10 @@ permissions:
   contents: write
 
 env:
-  # ---- edit these two per-project ----
+  # ---- edit these per-project ----
   XCODE_PROJECT: Common Crypto.xcodeproj
-  # -------------------------------------
+  INFO_PLIST: Info.plist
+  # ---------------------------------
 
 jobs:
   bump:
@@ -38,23 +48,68 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: bump project version
-        id: bump
+      - name: read current version & check for drift
+        id: current
         run: |
           set -euo pipefail
           PBXPROJ="${XCODE_PROJECT}/project.pbxproj"
 
           KEY="MARKETING_VERSION"
-          CURRENT=$(grep -m1 "$KEY" "$PBXPROJ" | sed -E "s/.*${KEY} = ([0-9]+\.[0-9]+\.[0-9]+);.*/\1/") || true
-          if [ -z "$CURRENT" ]; then
+          VALUES=$(grep -oE "${KEY} = [0-9]+\.[0-9]+\.[0-9]+;" "$PBXPROJ" | sed -E "s/${KEY} = ([0-9]+\.[0-9]+\.[0-9]+);/\1/" || true)
+          if [ -z "$VALUES" ]; then
             KEY="CURRENT_PROJECT_VERSION"
-            CURRENT=$(grep -m1 "$KEY" "$PBXPROJ" | sed -E "s/.*${KEY} = ([0-9]+\.[0-9]+\.[0-9]+);.*/\1/") || true
+            VALUES=$(grep -oE "${KEY} = [0-9]+\.[0-9]+\.[0-9]+;" "$PBXPROJ" | sed -E "s/${KEY} = ([0-9]+\.[0-9]+\.[0-9]+);/\1/" || true)
           fi
-          if [ -z "$CURRENT" ]; then
+          if [ -z "$VALUES" ]; then
             echo "Could not find MARKETING_VERSION or CURRENT_PROJECT_VERSION in $PBXPROJ" >&2
             exit 1
           fi
-          echo "Using key: $KEY"
+
+          PLIST_VERSION=$(python3 -c "import plistlib, os; d = plistlib.load(open(os.environ['INFO_PLIST'], 'rb')); print(d.get('CFBundleShortVersionString', ''))")
+
+          # Info.plist may reference the pbxproj value via an Xcode build
+          # variable, e.g. "$(MARKETING_VERSION)", which Xcode substitutes
+          # automatically when it copies the plist into the built bundle.
+          # That form is in sync by construction - don't compare it as a
+          # literal version string, and never overwrite it later.
+          case "$PLIST_VERSION" in
+            '$('*')')
+              echo "Info.plist CFBundleShortVersionString is a build-variable reference (${PLIST_VERSION}) - Xcode keeps it in sync automatically."
+              PLIST_IS_VARIABLE=true
+              ;;
+            *)
+              PLIST_IS_VARIABLE=false
+              ;;
+          esac
+
+          if [ "$PLIST_IS_VARIABLE" = true ]; then
+            UNIQUE=$(printf '%s\n' "$VALUES" | sort -u)
+          else
+            UNIQUE=$(printf '%s\n%s\n' "$VALUES" "$PLIST_VERSION" | sort -u)
+          fi
+          COUNT=$(printf '%s\n' "$UNIQUE" | grep -c .)
+          if [ "$COUNT" -ne 1 ]; then
+            echo "Version fields have already drifted out of sync - fix manually before bumping:" >&2
+            echo "  ${PBXPROJ} (${KEY}): $(printf '%s' "$VALUES" | tr '\n' ' ')" >&2
+            echo "  ${INFO_PLIST} (CFBundleShortVersionString): ${PLIST_VERSION}" >&2
+            exit 1
+          fi
+
+          CURRENT=$(printf '%s' "$UNIQUE" | head -n1)
+          echo "Current version (consistent everywhere): $CURRENT"
+          echo "key=$KEY" >> "$GITHUB_OUTPUT"
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "plist_is_variable=$PLIST_IS_VARIABLE" >> "$GITHUB_OUTPUT"
+
+      - name: bump version everywhere & tag
+        id: bump
+        env:
+          KEY: ${{ steps.current.outputs.key }}
+          CURRENT: ${{ steps.current.outputs.current }}
+          PLIST_IS_VARIABLE: ${{ steps.current.outputs.plist_is_variable }}
+        run: |
+          set -euo pipefail
+          PBXPROJ="${XCODE_PROJECT}/project.pbxproj"
 
           IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
           case "${{ inputs.mode }}" in
@@ -63,13 +118,25 @@ jobs:
             patch) PATCH=$((PATCH+1)) ;;
           esac
           NEW="${MAJOR}.${MINOR}.${PATCH}"
-
           echo "Bumping ${CURRENT} -> ${NEW}"
-          sed -i "s/${KEY} = ${CURRENT};/${KEY} = ${NEW};/g" "$PBXPROJ"
+
+          # Pattern-match the key, not the old literal value, so every
+          # occurrence gets forced to NEW even if one had drifted.
+          sed -i -E "s/(${KEY} = )[0-9]+\.[0-9]+\.[0-9]+;/\1${NEW};/g" "$PBXPROJ"
+
+          if [ "$PLIST_IS_VARIABLE" = "true" ]; then
+            echo "Info.plist CFBundleShortVersionString is an Xcode build-variable reference - leaving it as-is, Xcode substitutes it at build time."
+          else
+            NEW="$NEW" python3 -c "import plistlib, os; path = os.environ['INFO_PLIST']; d = plistlib.load(open(path, 'rb')); new = os.environ['NEW']; d['CFBundleShortVersionString'] = new; d.update({'CFBundleVersion': new} if 'CFBundleVersion' in d else {}); plistlib.dump(d, open(path, 'wb'))"
+          fi
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "$PBXPROJ"
+          if [ "$PLIST_IS_VARIABLE" = "true" ]; then
+            git add "$PBXPROJ"
+          else
+            git add "$PBXPROJ" "$INFO_PLIST"
+          fi
           git commit -m "chore: bump version to ${NEW}"
           git tag "v${NEW}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
